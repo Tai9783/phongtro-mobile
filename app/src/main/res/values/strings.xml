@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">AppTimPhongTro</string>
+    <string name="decriptionImage">Motaanh</string>
+    <string name="Home_title">Tìm Phòng trọ</string>
+    <string name="Home_content">Tìm phòng ước mơ của bạn</string>
+    <string name="Home_search">Tìm theo địa điểm, giá, diện tích…</string>
+    <string name="Home_price">$ 2–5tr</string>
+    <string name="Home_address">Quận 10</string>
+    <string name="Home_Noibat">Phòng trọ nổi bật</string>
+    <string name="Home_Xemthem">Xem thêm</string>
+
+    <string name="itemPhongTro_title">Phòng trọ giá rẻ cho sinh viên</string>
+    <string name="itemPhongTro_address">Thủ Đức, Thành phố Hồ Chí Minh</string>
+    <string name="itemPhongTro_Area">25m²</string>
+    <string name="itemPhongTro_Price">3.000.000đ/tháng</string>
+    <string name="itemPhongTro_Detail">Xem chi tiết</string>
+</resources>
