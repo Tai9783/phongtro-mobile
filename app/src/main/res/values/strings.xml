@@ -10,8 +10,16 @@
     <string name="Home_Xemthem">Xem thêm</string>
 
     <string name="itemPhongTro_title">Phòng trọ giá rẻ cho sinh viên</string>
-    <string name="itemPhongTro_address">Thủ Đức, Thành phố Hồ Chí Minh</string>
+    <string name="itemPhongTro_ward">Thủ Đức</string>
+    <string name="itemPhongTro_city">Thành phố Hồ Chí Minh</string>
     <string name="itemPhongTro_Area">25m²</string>
     <string name="itemPhongTro_Price">3.000.000đ/tháng</string>
     <string name="itemPhongTro_Detail">Xem chi tiết</string>
+
+    <string name="iconHouse">Trang chủ</string>
+    <string name="iconSearch">Tìm kiếm</string>
+    <string name="iconFavorite">Yêu thích</string>
+    <string name="iconProfile">Cá nhân</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

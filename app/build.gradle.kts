@@ -33,9 +33,27 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures{
+        viewBinding= true
+    }
 }
 
 dependencies {
+    // Thư viện mạng chính: Retrofit
+    implementation(libs.retrofit)
+
+    // Thư viện chuyển đổi JSON (Gson)
+    implementation(libs.converter.gson)
+
+    // Coroutines (Quản lý các tác vụ bất đồng bộ)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+    // Glide: thư viện tải ảnh từ internet
+    implementation(libs.glide)
+
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
