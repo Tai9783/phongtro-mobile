@@ -1,5 +1,6 @@
 package com.example.apptimphongtro.ui
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -47,6 +48,16 @@ class HomeFragment : Fragment() {
         }
         rvPhong.adapter= roomAdapter
         rvPhong.layoutManager= LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+        rvPhong.addItemDecoration(object : RecyclerView.ItemDecoration(){
+            override fun getItemOffsets(
+                outRect: Rect,
+                view: View,
+                parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
+                outRect.bottom=40
+            }
+        })
     }
 
     private fun addControll(view: View?) {
