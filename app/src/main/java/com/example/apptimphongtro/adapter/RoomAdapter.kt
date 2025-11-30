@@ -33,14 +33,14 @@ class RoomAdapter: ListAdapter<RentalRoom, RoomAdapter.RoomViewHolder>(DiffCallB
             ward.text= room.ward+","
             city.text=room.city
             area.text= room.area.toString()+"m²"
-            price.text= FormatMoney().formatMoney(room.price*1000000)+"/tháng"
+            price.text= FormatMoney().formatMoney(room.price)+"/tháng"
 
             val imgJson= room.imagesJson
             val listType= object : TypeToken<List<String>>(){}.type
             val imageList:List<String> =Gson().fromJson(imgJson,listType)
 
             Glide.with(itemView.context)
-                .load(imageList[1])
+                .load(imageList[0])
                 .placeholder(R.drawable.anhdefault)
                 .error(R.drawable.anhdefault)
                 .into(image)

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/local_all"
+        android:title="@string/menu_local_tatca"/>
+    <item
+        android:id="@+id/local_hanoi"
+        android:title="@string/menu_local_hanoi"/>
+    <item
+        android:id="@+id/local_danang"
+        android:title="@string/menu_local_danang"/>
+    <item
+        android:id="@+id/local_hcm"
+        android:title="@string/menu_local_hcm"/>
+
+
+</menu>

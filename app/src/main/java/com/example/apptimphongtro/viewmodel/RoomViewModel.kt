@@ -9,10 +9,14 @@ import com.example.apptimphongtro.data.api.RoomApiService
 import com.example.apptimphongtro.data.repository.RoomRepository
 import com.example.apptimphongtro.model.RentalRoom
 import kotlinx.coroutines.launch
+import kotlin.math.min
 
 class RoomViewModel(private val repository: RoomRepository): ViewModel() {
     private val phongNoiBat= MutableLiveData<List<RentalRoom>>()
     val _phongNoiBat: LiveData<List<RentalRoom>> get()= phongNoiBat;
+
+    private val _roomByPrice= MutableLiveData<List<RentalRoom>>()
+    val roomByPrice : LiveData<List<RentalRoom>> get()=_roomByPrice
 
     fun fetchPhongNoiBat(){
         viewModelScope.launch{
@@ -25,5 +29,16 @@ class RoomViewModel(private val repository: RoomRepository): ViewModel() {
             }
         }
     }
+    fun filterByPriceAndCity(minPrice: Double?, maxPrice: Double?,city: String) {
+        viewModelScope.launch {
+            val result = repository.locRoomHome(minPrice,maxPrice,city)
+            result.fold(
+                onSuccess = { _roomByPrice.value = it },
+                onFailure = {   }
+            )
+        }
+    }
+
+
 
 }

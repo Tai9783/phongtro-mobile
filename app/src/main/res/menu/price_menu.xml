@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/price_all"
+        android:title="@string/menu_price_tatca" />
+    <item
+        android:id="@+id/price_less_than_2"
+        android:title="@string/menu_price_duoi2tr" />
+    <item
+        android:id="@+id/price_2_to_5"
+        android:title="@string/menu_price_2den5tr" />
+    <item
+        android:id="@+id/price_5_to_8"
+        android:title="@string/menu_price_5den8tr" />
+    <item
+        android:id="@+id/price_more_than_8"
+        android:title="@string/menu_price_tren8tr" />
+
+</menu>
