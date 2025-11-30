@@ -8,4 +8,16 @@ class RoomRepository(private val apiService: RoomApiService) {
         // Gọi hàm từ service
         return apiService.getPhongNoiBat()
     }
+
+    suspend fun locRoomHome(minPrice: Double?, maxPrice: Double?, city: String): Result<List<RentalRoom>> {
+        return try {
+            val list = apiService.getLocPhongHome(minPrice,maxPrice,city)
+            Result.success(list)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+
+
 }
