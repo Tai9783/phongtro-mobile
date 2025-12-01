@@ -35,6 +35,20 @@
 
     <string name="search_diadiem">Địa điểm</string>
     <string name="search_title">Bộ lọc tìm kiếm</string>
+    <string name="search_CityName">Thành phố Hồ Chí Minh</string>
+    <string name="search_Ward">Chọn phường/xã</string>
+    <string name="search_titlePrice">Khoảng giá</string>
+    <string name="search_titleTienNghi">Tiện nghi</string>
+    <string name="search_chip1">&lt;=2 triệu</string>
+    <string name="search_chip2">2 – 3 triệu</string>
+    <string name="search_chip3">3 – 4 triệu</string>
+    <string name="search_chip4">4 – 5 triệu</string>
+    <string name="search_chip5">5 – 6 triệu</string>
+    <string name="search_chip6">6 – 8 triệu</string>
+    <string name="search_chip7">8 – 10 triệu</string>
+    <string name="search_chip8">10 – 12 triệu</string>
+    <string name="search_chip9">>12 triệu</string>
+    <string name="search_ApDung">Áp dụng</string>
 
 
     <string name="menu_local_tatca">Tất cả</string>
