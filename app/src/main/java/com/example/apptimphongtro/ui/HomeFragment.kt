@@ -49,6 +49,7 @@ class HomeFragment : Fragment() {
 
 
         addControll(view)
+        getApiFilterLocationAndPrice()
         addEnvent()
 
     }
@@ -108,6 +109,12 @@ class HomeFragment : Fragment() {
 
     }
 
+    private fun getApiFilterLocationAndPrice() {
+        val money = filterPrice.text.toString()
+        val list = formatStringToMoney(money)
+        roomViewModel.filterByPriceAndCity(list[0], list[1], filterLocal.text.toString())
+    }
+
     private fun showLocalMenu(filterLocal: TextView) {
         val popupMenu = PopupMenu(context, filterLocal)
         popupMenu.menuInflater.inflate(R.menu.local_menu, popupMenu.menu)
@@ -116,31 +123,25 @@ class HomeFragment : Fragment() {
 
                 R.id.local_all -> {
                     filterLocal.text = menuItem.title.toString()
-                    val money = filterPrice.text.toString()
-                    val list = formatStringToMoney(money)
-                    roomViewModel.filterByPriceAndCity(list[0], list[1], menuItem.title.toString())
+                    getApiFilterLocationAndPrice()
                     true
                 }
 
-                R.id.local_hanoi->{
+                R.id.local_hanoi -> {
                     filterLocal.text = menuItem.title.toString()
-                    val money = filterPrice.text.toString()
-                    val list = formatStringToMoney(money)
-                    roomViewModel.filterByPriceAndCity(list[0], list[1], menuItem.title.toString())
+                    getApiFilterLocationAndPrice()
                     true
                 }
-                R.id.local_danang->{
+
+                R.id.local_danang -> {
                     filterLocal.text = menuItem.title.toString()
-                    val money = filterPrice.text.toString()
-                    val list = formatStringToMoney(money)
-                    roomViewModel.filterByPriceAndCity(list[0], list[1], menuItem.title.toString())
+                    getApiFilterLocationAndPrice()
                     true
                 }
+
                 R.id.local_hcm -> {
                     filterLocal.text = menuItem.title.toString()
-                    val money = filterPrice.text.toString()
-                    val list = formatStringToMoney(money)
-                    roomViewModel.filterByPriceAndCity(list[0], list[1], menuItem.title.toString())
+                    getApiFilterLocationAndPrice()
                     true
                 }
 
@@ -160,38 +161,33 @@ class HomeFragment : Fragment() {
         popupMenu.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.price_all -> {
-                    val currentLocation = filterLocal.text.toString()
-                    Log.d("HomeFragment", "ddiaj chir hien tai la $currentLocation")
                     filterPrice.text = menuItem.title
-                    roomViewModel.filterByPriceAndCity(0.0, 100000000.0, currentLocation)
+                    getApiFilterLocationAndPrice()
                     true
                 }
 
                 R.id.price_less_than_2 -> {
-                    val currentLocation = filterLocal.text.toString()
                     filterPrice.text = menuItem.title
-                    roomViewModel.filterByPriceAndCity(0.0, 2000000.0, currentLocation)
+                    getApiFilterLocationAndPrice()
                     true
                 }
 
                 R.id.price_2_to_5 -> {
-                    val currentLocation = filterLocal.text.toString()
                     filterPrice.text = menuItem.title
-                    roomViewModel.filterByPriceAndCity(2000000.0, 5000000.0, currentLocation)
+                    getApiFilterLocationAndPrice()
                     true
                 }
 
                 R.id.price_5_to_8 -> {
                     filterPrice.text = menuItem.title
-                    val currentLocation = filterLocal.text.toString()
-                    roomViewModel.filterByPriceAndCity(5000000.0, 8000000.0, currentLocation)
+                    getApiFilterLocationAndPrice()
                     true
                 }
 
                 R.id.price_more_than_8 -> {
-                    val currentLocation = filterLocal.text.toString()
-                    roomViewModel.filterByPriceAndCity(8000000.0, 100000000.0, currentLocation)
                     filterPrice.text = menuItem.title
+                    getApiFilterLocationAndPrice()
+
                     true
                 }
 
