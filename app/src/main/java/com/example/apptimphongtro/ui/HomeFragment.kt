@@ -21,8 +21,9 @@ import com.example.apptimphongtro.data.api.RetrofitClient
 import com.example.apptimphongtro.data.repository.RoomRepository
 import com.example.apptimphongtro.viewmodel.RoomViewModel
 import com.example.apptimphongtro.viewmodel.factory.RoomViewModelFactory
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class HomeFragment : Fragment() {
+class HomeFragment : BottomSheetDialogFragment() {
     private lateinit var roomAdapter: RoomAdapter
     private lateinit var roomViewModel: RoomViewModel
     private lateinit var rvPhong: RecyclerView
@@ -206,7 +207,7 @@ class HomeFragment : Fragment() {
             filterLocal = view.findViewById(R.id.filter_Local)
         }
         roomAdapter = RoomAdapter()
-        val apiServer = RetrofitClient.apiService
+        val apiServer = RetrofitClient.roomApiService
         repository = RoomRepository(apiServer)
         roomViewModelFactory = RoomViewModelFactory(repository)
         roomViewModel = ViewModelProvider(this, roomViewModelFactory)[RoomViewModel::class.java]

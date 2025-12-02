@@ -13,7 +13,4 @@
             @Query("minPrice") minPrice:Double?,
             @Query("maxPrice") maxPrice:Double?,
             @Query("city") city:String?
-        ):List<RentalRoom>
-
-
-    }
+        ):List<RentalRoom>    }
