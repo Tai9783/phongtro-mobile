@@ -5,12 +5,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
     private const val BASE_URL = "http://10.0.2.2:8080/"
-    val apiService: RoomApiService by lazy {
+    private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(RoomApiService::class.java)
+    }
+    val roomApiService: RoomApiService by lazy {
+        retrofit.create(RoomApiService::class.java)
+    }
+    val searchApiService: SearchApiService by lazy {
+        retrofit.create(SearchApiService::class.java)
     }
 }
 /*
@@ -36,4 +41,12 @@ object RetrofitClient {
     }
 
     // ... Có thể thêm UserApiService, v.v.
+
+    val apiService: RoomApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(RoomApiService::class.java)
+    }
 }*/

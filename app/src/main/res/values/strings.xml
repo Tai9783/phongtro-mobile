@@ -49,6 +49,17 @@
     <string name="search_chip8">10 – 12 triệu</string>
     <string name="search_chip9">>12 triệu</string>
     <string name="search_ApDung">Áp dụng</string>
+    <string name="search_amenity1">Có máy lạnh</string>
+    <string name="search_amenity2">Wifi</string>
+    <string name="search_amenity3">thang máy</string>
+    <string name="search_amenity4">Có gác</string>
+    <string name="search_amenity5">Giờ giấc tự do</string>
+    <string name="search_amenity6">Nuôi thú cưng</string>
+    <string name="search_amenity7">Có ban công</string>
+    <string name="search_amenity8">Có cửa sổ</string>
+    <string name="search_amenity9">Không máy lạnh</string>
+    <string name="searchChoice_City">Chọn tỉnh/thành phố</string>
+    <string name="searchChoiceItem_CountRoom">100 phòng trọ</string>
 
 
     <string name="menu_local_tatca">Tất cả</string>
