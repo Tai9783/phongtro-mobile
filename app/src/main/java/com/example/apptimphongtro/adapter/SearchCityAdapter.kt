@@ -19,13 +19,13 @@ class SearchCityAdapter: ListAdapter<CityRoomCount, SearchCityAdapter.SearchView
 
         fun bin(cityRoomCount: CityRoomCount){
             cityName.text=cityRoomCount.city
-            Log.d("SearchAdaper","laays duwojc thanh pho ${cityRoomCount.city} +${cityRoomCount.roomCout} so phongf")
-            coutRoom.text=cityRoomCount.roomCout.toString()+" Phòng trọ"
+            Log.d("SearchAdaper","laays duwojc thanh pho ${cityRoomCount.city} +${cityRoomCount.roomCount} so phongf")
+            coutRoom.text=cityRoomCount.roomCount.toString()+" Phòng trọ"
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHoder {
-        val view= LayoutInflater.from(parent.context).inflate(R.layout.layout_itemcity,parent,false)
+        val view= LayoutInflater.from(parent.context).inflate(R.layout.layout_itemsearchcity,parent,false)
         return SearchViewHoder(view)
     }
 

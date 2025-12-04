@@ -1,17 +1,20 @@
 package com.example.apptimphongtro.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 import com.example.apptimphongtro.R
 
 
 
 class SearchFragment : Fragment() {
     private lateinit var txtCity: TextView
+    private lateinit var txtWard: TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,10 +34,18 @@ class SearchFragment : Fragment() {
             val bottomSheet= BottomSearchCityyFragment()
             fragmentManager?.let { bottomSheet.show(it,bottomSheet.tag) }
         }
+
+        txtWard.setOnClickListener {
+            val cityName= txtCity.text.toString()
+            Log.d("SearchFragment","Dax truyen di city la $cityName")
+            val action= SearchFragmentDirections.actionFragmentSearchToBottomSearchWardFragment(city=cityName)
+            findNavController().navigate(action)
+        }
     }
 
     private fun addControll(view: View) {
         txtCity = view.findViewById(R.id.txtCity)
+        txtWard= view.findViewById(R.id.txtWard)
     }
 
 

@@ -13,7 +13,21 @@
         android:id="@+id/searchFragment"
         android:name="com.example.apptimphongtro.ui.SearchFragment"
         android:label="Tìm kiếm"
-        tools:layout="@layout/fragment_search"/>
+        tools:layout="@layout/fragment_search">
+        <action android:id="@+id/action_fragmentSearch_to_BottomSearchWardFragment"
+            app:destination="@+id/bottomSearchWard"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/bottomSearchWard"
+        android:name="com.example.apptimphongtro.ui.BottomSearchWardFragment"
+        android:label="Tìm kiếm phường xã"
+        tools:layout="@layout/fragment_bottom_search_ward">
+
+        <argument android:name="city"
+            app:argType="string"/>
+    </fragment>
+
     <fragment
         android:id="@+id/favotiteFragment"
         android:name="com.example.apptimphongtro.ui.FavoriteFragment"
