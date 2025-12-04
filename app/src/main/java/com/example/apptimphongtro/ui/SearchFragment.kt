@@ -37,9 +37,13 @@ class SearchFragment : Fragment() {
 
         txtWard.setOnClickListener {
             val cityName= txtCity.text.toString()
-            Log.d("SearchFragment","Dax truyen di city la $cityName")
-            val action= SearchFragmentDirections.actionFragmentSearchToBottomSearchWardFragment(city=cityName)
-            findNavController().navigate(action)
+            val bottomSheet= BottomSearchWardFragment().apply {
+                arguments= Bundle().apply {
+                    putString("city",cityName)
+
+                }
+            }
+            bottomSheet.show(parentFragmentManager,"WardBottomSheet")
         }
     }
 

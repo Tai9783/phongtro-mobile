@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +25,7 @@ class BottomSearchWardFragment : BottomSheetDialogFragment() {
     private lateinit var searchViewModel: SearchViewModel
     private lateinit var searchViewModelFactory: SearchViewModelFactory
     private lateinit var searchRepository: SearchRepository
+    private lateinit var imgThoat: ImageView
 
     override fun onStart() {
         super.onStart()
@@ -64,15 +66,19 @@ class BottomSearchWardFragment : BottomSheetDialogFragment() {
                 outRect.bottom=40
             }
         })
+
+        imgThoat.setOnClickListener {
+            dismiss()
+        }
     }
 
     private fun addControll(view: View) {
         //Lấy dữ tên city bên Search truyền qua
-        val args: BottomSearchWardFragmentArgs by navArgs()
-        val cityName= args.city
-        Log.d("SearchFragmentWard","Da lay duoc du lieu la $cityName")
+        val cityName= arguments?.getString("city")?:""
 
        rvWard= view.findViewById(R.id.rvWard)
+        imgThoat= view.findViewById(R.id.imgThoat)
+
         searchWardAdapter= SearchWardAdapter()
         val searchApi= RetrofitClient.searchApiService
         searchRepository= SearchRepository(searchApi)

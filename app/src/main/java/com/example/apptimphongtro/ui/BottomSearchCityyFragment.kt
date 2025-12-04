@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apptimphongtro.R
@@ -25,6 +27,7 @@ class BottomSearchCityyFragment : BottomSheetDialogFragment() {
   private lateinit var searchCityAdapter: SearchCityAdapter
   private lateinit var searchViewModel: SearchViewModel
   private lateinit var searchViewModelFactory: SearchViewModelFactory
+  private lateinit var imgThoat: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,11 +71,15 @@ class BottomSearchCityyFragment : BottomSheetDialogFragment() {
             })
 
         }
+        imgThoat.setOnClickListener {
+            dismiss()
+        }
 
     }
 
     private fun addControll(view: View) {
         rvCity= view.findViewById(R.id.rvCity)
+        imgThoat=view.findViewById(R.id.imgThoat)
 
         searchCityAdapter= SearchCityAdapter()
         val searchApi= RetrofitClient.searchApiService
