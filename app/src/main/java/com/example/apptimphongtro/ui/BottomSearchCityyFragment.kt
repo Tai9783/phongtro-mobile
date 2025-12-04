@@ -14,7 +14,7 @@ import com.example.apptimphongtro.adapter.SearchCityAdapter
 import com.example.apptimphongtro.data.api.RetrofitClient
 import com.example.apptimphongtro.data.repository.SearchRepository
 import com.example.apptimphongtro.viewmodel.SearchViewModel
-import com.example.apptimphongtro.viewmodel.factory.RoomViewModelFactory
+import com.google.android.material.R as MaterialR
 import com.example.apptimphongtro.viewmodel.factory.SearchViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -34,6 +34,13 @@ class BottomSearchCityyFragment : BottomSheetDialogFragment() {
         return inflater.inflate(R.layout.fragment_bottom_search_cityy, container, false)
     }
 
+    override fun onStart() {
+        super.onStart()
+        dialog?.let{dlg->
+            val bottomSheet=dlg.findViewById<View>(MaterialR.id.design_bottom_sheet)
+            bottomSheet?.layoutParams?.height=(resources.displayMetrics.heightPixels*0.7).toInt()
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
