@@ -10,12 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.apptimphongtro.R
 import com.example.apptimphongtro.adapter.diffcallback.DiffCallBackSearchWard
 import com.example.apptimphongtro.model.Ward
+import com.google.android.material.checkbox.MaterialCheckBox
 
 class SearchWardAdapter: ListAdapter<Ward,SearchWardAdapter.SearchWardHolder>(DiffCallBackSearchWard()) {
 
     inner class SearchWardHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         private val txtWard= itemView.findViewById<TextView>(R.id.txtWard)
-        private val checkbox= itemView.findViewById<CheckBox>(R.id.checkbox)
+        val checkbox= itemView.findViewById<MaterialCheckBox>(R.id.checkbox)
 
         fun bin(ward: Ward){
             txtWard.text=ward.wardName
@@ -30,5 +31,14 @@ class SearchWardAdapter: ListAdapter<Ward,SearchWardAdapter.SearchWardHolder>(Di
     override fun onBindViewHolder(holder: SearchWardHolder, position: Int) {
       val item= getItem(position)
         holder.bin(item)
+
+        holder.itemView.isSelected= item.isCheck
+        holder.checkbox.isChecked= item.isCheck
+
+        holder.itemView.setOnClickListener {
+           item.isCheck= !item.isCheck
+            holder.itemView.isSelected=item.isCheck
+            holder.checkbox.isChecked=item.isCheck
+        }
     }
 }

@@ -7,5 +7,5 @@ data class Ward(
 
     @SerializedName("ward")
     val wardName: String,
-    val isCheck: Boolean= false
+    var isCheck: Boolean= false
 )
