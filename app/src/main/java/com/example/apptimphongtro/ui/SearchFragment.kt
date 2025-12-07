@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import com.example.apptimphongtro.R
 
@@ -50,6 +51,16 @@ class SearchFragment : Fragment() {
     private fun addControll(view: View) {
         txtCity = view.findViewById(R.id.txtCity)
         txtWard= view.findViewById(R.id.txtWard)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setFragmentResultListener("key"){ _, bundle ->
+            val selectStringCityName= bundle.getString("cityName")
+            if (selectStringCityName!=null){
+                    txtCity.text= selectStringCityName
+            }
+        }
     }
 
 
