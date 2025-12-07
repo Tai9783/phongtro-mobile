@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -28,6 +29,7 @@ class BottomSearchCityyFragment : BottomSheetDialogFragment() {
   private lateinit var searchViewModel: SearchViewModel
   private lateinit var searchViewModelFactory: SearchViewModelFactory
   private lateinit var imgThoat: ImageView
+  private lateinit var btnXacNhan: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,13 +77,33 @@ class BottomSearchCityyFragment : BottomSheetDialogFragment() {
             dismiss()
         }
 
+        searchViewModel.selectedCity.observe(viewLifecycleOwner){city->
+            searchCityAdapter.updateSelectCity(city)
+        }
+
+        btnXacNhan.setOnClickListener {
+            val city= searchViewModel.selectedCity.value
+            sendResultAndDimiss(city)
+        }
+    }
+
+    private fun sendResultAndDimiss(city: String?) {
+        val result= Bundle().apply {
+            putString("cityName",city)
+        }
+        parentFragmentManager.setFragmentResult("key",result)
+        dismiss()
     }
 
     private fun addControll(view: View) {
         rvCity= view.findViewById(R.id.rvCity)
         imgThoat=view.findViewById(R.id.imgThoat)
+        btnXacNhan= view.findViewById(R.id.btnXacNhan)
 
-        searchCityAdapter= SearchCityAdapter()
+        searchCityAdapter= SearchCityAdapter{city->
+            searchViewModel.selectedCity.value=city
+        }
+
         val searchApi= RetrofitClient.searchApiService
         searchRepository= SearchRepository(searchApi)
         searchViewModelFactory= SearchViewModelFactory(searchRepository)

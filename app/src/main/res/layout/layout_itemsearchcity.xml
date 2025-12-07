@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="10dp"
-    android:background="@drawable/bo4goc_nenxam">
+    android:padding="15dp"
+    android:background="@drawable/item_city_selected">
 
-    <androidx.cardview.widget.CardView
+    <FrameLayout
         android:id="@+id/cvImgAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,21 +14,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:contentDescription="@string/decriptionImage"
-        app:cardCornerRadius="3dp"
-        android:padding="3dp">
+        android:background="@drawable/bogocimg"
+      >
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/imgLocation"
+            android:layout_width="43dp"
+            android:layout_height="44dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:contentDescription="@string/decriptionImage"
             android:src="@drawable/addresss"
-            android:background="@color/xamnhe"
-            android:padding="3dp"
+            android:padding="7dp"
             />
 
-    </androidx.cardview.widget.CardView>
+    </FrameLayout>
     <TextView
         android:id="@+id/txtCityName"
         android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
         android:text="@string/search_CityName"
         android:layout_marginStart="10dp"
         android:textStyle="bold"
-        android:textSize="16sp"
+        android:textSize="18sp"
         />
     <TextView
         android:id="@+id/txtCountRoom"
@@ -48,8 +48,8 @@
         app:layout_constraintTop_toBottomOf="@+id/txtCityName"
         android:text="@string/searchChoiceItem_CountRoom"
         android:layout_marginStart="10dp"
-
-        android:textSize="16sp"/>
+        android:layout_marginTop="3dp"
+        android:textSize="17sp"/>
 
 
 
