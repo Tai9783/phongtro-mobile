@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatButton
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +17,7 @@ import com.example.apptimphongtro.R
 import com.example.apptimphongtro.adapter.SearchWardAdapter
 import com.example.apptimphongtro.data.api.RetrofitClient
 import com.example.apptimphongtro.data.repository.SearchRepository
+import com.example.apptimphongtro.model.Ward
 import com.example.apptimphongtro.viewmodel.SearchViewModel
 import com.example.apptimphongtro.viewmodel.factory.SearchViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -26,6 +29,7 @@ class BottomSearchWardFragment : BottomSheetDialogFragment() {
     private lateinit var searchViewModelFactory: SearchViewModelFactory
     private lateinit var searchRepository: SearchRepository
     private lateinit var imgThoat: ImageView
+    private lateinit var btnXacNhan: AppCompatButton
 
     override fun onStart() {
         super.onStart()
@@ -70,6 +74,20 @@ class BottomSearchWardFragment : BottomSheetDialogFragment() {
         imgThoat.setOnClickListener {
             dismiss()
         }
+
+        btnXacNhan.setOnClickListener {
+            val selectedWards= searchWardAdapter.getSelectedWard()
+            sendResultAndDimiss(selectedWards)
+        }
+    }
+
+    private fun sendResultAndDimiss(selectedWards: List<Ward>) {
+        val listToBundle= ArrayList(selectedWards)
+        val resultBundle= Bundle().apply {
+            putParcelableArrayList("listWard",listToBundle)
+        }
+        setFragmentResult("KeyWard",resultBundle)
+        dismiss()
     }
 
     private fun addControll(view: View) {
@@ -78,6 +96,7 @@ class BottomSearchWardFragment : BottomSheetDialogFragment() {
 
        rvWard= view.findViewById(R.id.rvWard)
         imgThoat= view.findViewById(R.id.imgThoat)
+        btnXacNhan= view.findViewById(R.id.btnXacNhan)
 
         searchWardAdapter= SearchWardAdapter()
         val searchApi= RetrofitClient.searchApiService

@@ -7,10 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import com.example.apptimphongtro.R
-
+import com.example.apptimphongtro.model.Ward
 
 
 class SearchFragment : Fragment() {
@@ -59,6 +60,15 @@ class SearchFragment : Fragment() {
             val selectStringCityName= bundle.getString("cityName")
             if (selectStringCityName!=null){
                     txtCity.text= selectStringCityName
+            }
+        }
+
+        setFragmentResultListener("KeyWard"){ _, bundle ->
+                val selectedWard: List<Ward>?= bundle.getParcelableArrayList("listWard")
+            if (selectedWard != null) {
+                Log.d("Saerch","Da nhan duwoj listWard $selectedWard")
+                val listWard= selectedWard.map { it.wardName }.joinToString(separator = ", ")
+                txtWard.text = listWard
             }
         }
     }
