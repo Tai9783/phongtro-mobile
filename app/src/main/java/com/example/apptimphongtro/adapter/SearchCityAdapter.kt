@@ -22,14 +22,22 @@ class SearchCityAdapter(
 
     inner class SearchViewHoder(itemView: View): RecyclerView.ViewHolder(itemView){
          val cityName: TextView =itemView.findViewById(R.id.txtCityName)
-         val coutRoom=itemView.findViewById<TextView>(R.id.txtCountRoom)
+         val countRoom=itemView.findViewById<TextView>(R.id.txtCountRoom)
         val cvImgAddress: FrameLayout = itemView.findViewById(R.id.cvImgAddress)
         val imgLocation: ImageView= itemView.findViewById(R.id.imgLocation)
 
         fun bin(cityRoomCount: CityRoomCount){
             cityName.text=cityRoomCount.city
             Log.d("SearchAdaper","laays duwojc thanh pho ${cityRoomCount.city} +${cityRoomCount.roomCount} so phongf")
-            coutRoom.text=cityRoomCount.roomCount.toString()+" Phòng trọ"
+            countRoom.text=cityRoomCount.roomCount.toString()+" Phòng trọ"
+        }
+        fun updateSelectState(isSelected: Boolean){
+            imgLocation.isSelected= isSelected
+            cvImgAddress.isSelected=isSelected
+            itemView.isSelected= isSelected
+            cityName.isSelected= isSelected
+            countRoom.isSelected= isSelected
+
         }
     }
     fun updateSelectCity(city:String){
@@ -48,10 +56,7 @@ class SearchCityAdapter(
 
         val isSelected = currentCity.city == currentSelected
 
-
-        holder.imgLocation.isSelected= isSelected
-        holder.cvImgAddress.isSelected=isSelected
-        holder.itemView.isSelected= isSelected
+        holder.updateSelectState(isSelected)
 
         val iconColor= if(isSelected){
             Color.WHITE
@@ -63,16 +68,6 @@ class SearchCityAdapter(
         holder.itemView.setOnClickListener {
             oncitySelected(currentCity.city)
         }
-        holder.itemView.setBackgroundResource(R.drawable.item_city_selected)
-        if(currentCity.city==currentSelected)
-        {
-            holder.cityName.setTextColor(Color.WHITE)
-            holder.coutRoom.setTextColor(Color.WHITE)
-        }
-        else{
-            holder.cityName.setTextColor(Color.BLACK) // Trả về màu mặc định
-            holder.coutRoom.setTextColor(Color.BLACK) // Trả về màu mặc định
 
-        }
     }
 }
