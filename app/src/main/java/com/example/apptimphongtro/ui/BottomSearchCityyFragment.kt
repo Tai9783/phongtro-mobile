@@ -96,11 +96,15 @@ class BottomSearchCityyFragment : BottomSheetDialogFragment() {
     }
 
     private fun addControll(view: View) {
+        val citySelected= arguments?.getString("citySelected")?:""
+
+
+
         rvCity= view.findViewById(R.id.rvCity)
         imgThoat=view.findViewById(R.id.imgThoat)
         btnXacNhan= view.findViewById(R.id.btnXacNhan)
 
-        searchCityAdapter= SearchCityAdapter{city->
+        searchCityAdapter= SearchCityAdapter(citySelected){city->
             searchViewModel.selectedCity.value=city
         }
 

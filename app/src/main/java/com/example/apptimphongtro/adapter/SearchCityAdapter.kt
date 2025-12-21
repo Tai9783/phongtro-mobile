@@ -16,9 +16,10 @@ import com.example.apptimphongtro.adapter.diffcallback.DiffCallSearchCity
 import com.example.apptimphongtro.model.CityRoomCount
 
 class SearchCityAdapter(
+    cityNameSelect: String,
     private val oncitySelected: (String)-> Unit
 ): ListAdapter<CityRoomCount, SearchCityAdapter.SearchViewHoder>(DiffCallSearchCity()) {
-    private var currentSelected= ""
+    private var currentSelected= cityNameSelect
 
     inner class SearchViewHoder(itemView: View): RecyclerView.ViewHolder(itemView){
          val cityName: TextView =itemView.findViewById(R.id.txtCityName)
@@ -41,8 +42,16 @@ class SearchCityAdapter(
         }
     }
     fun updateSelectCity(city:String){
+        val old= currentSelected
         currentSelected= city
-        notifyDataSetChanged()
+
+        //update item cũ
+        val oldIndex=  currentList.indexOfFirst { it.city==old }
+        if(oldIndex !=-1) notifyItemChanged(oldIndex)
+
+        //update item mới
+        val newIndex= currentList.indexOfFirst { it.city==city }
+        if (newIndex !=-1) notifyItemChanged(newIndex)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHoder {
@@ -51,6 +60,7 @@ class SearchCityAdapter(
     }
 
     override fun onBindViewHolder(holder: SearchViewHoder, position: Int) {
+
        val currentCity= getItem(position)
         holder.bin(currentCity)
 
@@ -66,6 +76,7 @@ class SearchCityAdapter(
         holder.imgLocation.setColorFilter(iconColor)
 
         holder.itemView.setOnClickListener {
+            updateSelectCity(currentCity.city)
             oncitySelected(currentCity.city)
         }
 

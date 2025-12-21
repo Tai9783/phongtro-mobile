@@ -17,6 +17,13 @@ class SearchViewModel(private val searchRepository: SearchRepository): ViewModel
     private val _listWard=MutableLiveData<List<Ward>>()
     val listWard: LiveData<List<Ward>> get() = _listWard
 
+    private val _selectedCityName= MutableLiveData<String>("Tp Hồ Chí Minh")
+    val selectedCityName: LiveData<String> get()= _selectedCityName
+
+    fun updateSelectedCityName(city: String){
+        _selectedCityName.value= city
+    }
+
     val selectedCity= MutableLiveData<String>()
 
     fun fetchListCityRoomCount(){
