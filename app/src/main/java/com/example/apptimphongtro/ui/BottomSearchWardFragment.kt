@@ -8,16 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatButton
-import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apptimphongtro.R
 import com.example.apptimphongtro.adapter.SearchWardAdapter
 import com.example.apptimphongtro.data.api.RetrofitClient
 import com.example.apptimphongtro.data.repository.SearchRepository
-import com.example.apptimphongtro.model.Ward
 import com.example.apptimphongtro.viewmodel.SearchViewModel
 import com.example.apptimphongtro.viewmodel.factory.SearchViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -77,18 +74,11 @@ class BottomSearchWardFragment : BottomSheetDialogFragment() {
 
         btnXacNhan.setOnClickListener {
             val selectedWards= searchWardAdapter.getSelectedWard()
-            sendResultAndDimiss(selectedWards)
+            searchViewModel.updateSelectedWard(selectedWards)
+            dismiss()
         }
     }
 
-    private fun sendResultAndDimiss(selectedWards: List<Ward>) {
-        val listToBundle= ArrayList(selectedWards)
-        val resultBundle= Bundle().apply {
-            putParcelableArrayList("listWard",listToBundle)
-        }
-        setFragmentResult("KeyWard",resultBundle)
-        dismiss()
-    }
 
     private fun addControll(view: View) {
         //Lấy dữ tên city bên Search truyền qua
@@ -102,7 +92,7 @@ class BottomSearchWardFragment : BottomSheetDialogFragment() {
         val searchApi= RetrofitClient.searchApiService
         searchRepository= SearchRepository(searchApi)
         searchViewModelFactory= SearchViewModelFactory( searchRepository)
-        searchViewModel= ViewModelProvider(this,searchViewModelFactory)[SearchViewModel::class.java]
+        searchViewModel= ViewModelProvider(requireActivity(),searchViewModelFactory)[SearchViewModel::class.java]
        searchViewModel.fechListWardByCity(cityName)
 
     }

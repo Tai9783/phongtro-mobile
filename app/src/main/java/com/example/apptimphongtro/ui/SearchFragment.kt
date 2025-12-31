@@ -43,9 +43,22 @@ class SearchFragment : Fragment() {
 
     private fun addEvent() {
         viewModel.selectedCityName.observe(viewLifecycleOwner){cityName->
-            cityName.let {
-                txtCity.text= it
+            cityName?.let {
+                if(it.isNotEmpty()) {
+                    txtCity.text = it
+                    txtWard.text=getString(R.string.search_Ward)
+                }
             }
+        }
+        viewModel.selectedWard.observe(viewLifecycleOwner){listWard->
+            listWard.let { it ->
+                if(it.isNotEmpty())
+                    txtWard.text= it.joinToString(separator = ", ") { it.wardName }
+                else{
+                    txtWard.text=getString(R.string.search_Ward)
+                }
+            }
+
         }
 
         txtCity.setOnClickListener {
@@ -67,6 +80,9 @@ class SearchFragment : Fragment() {
 
                 }
             }
+            viewModel.selectedWard.observe(viewLifecycleOwner){lis->
+                Log.e("SearchFragment","$lis");
+            }
             bottomSheet.show(parentFragmentManager,"WardBottomSheet")
         }
     }
@@ -83,24 +99,6 @@ class SearchFragment : Fragment() {
 
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setFragmentResultListener("key"){ _, bundle ->
-            val selectStringCityName= bundle.getString("cityName")
-            selectStringCityName?.let {
-                viewModel.updateSelectedCityName(selectStringCityName)
-            }
-
-        }
-
-        setFragmentResultListener("KeyWard"){ _, bundle ->
-                val selectedWard: List<Ward>?= bundle.getParcelableArrayList("listWard")
-            if (selectedWard != null) {
-                val listWard= selectedWard.map { it.wardName }.joinToString(separator = ", ")
-                txtWard.text = listWard
-            }
-        }
-    }
 
 
 }

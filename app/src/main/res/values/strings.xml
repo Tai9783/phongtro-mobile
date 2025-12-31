@@ -36,7 +36,9 @@
     <string name="search_diadiem">Địa điểm</string>
     <string name="search_title">Bộ lọc tìm kiếm</string>
     <string name="search_CityName">Tp Hồ Chí Minh</string>
+
     <string name="search_Ward">Chọn phường/xã</string>
+
     <string name="search_titlePrice">Khoảng giá</string>
     <string name="search_titleTienNghi">Tiện nghi</string>
     <string name="search_chip1">&lt;=2 triệu</string>

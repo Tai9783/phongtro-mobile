@@ -83,17 +83,16 @@ class BottomSearchCityyFragment : BottomSheetDialogFragment() {
 
         btnXacNhan.setOnClickListener {
             val city= searchViewModel.selectedCity.value
-            sendResultAndDimiss(city)
+            val nameCityOld= searchViewModel.selectedCityName.value
+            if (city!=nameCityOld){
+                searchViewModel.updateSelectedCityName(city)
+                searchViewModel.clearSelectedWard()
+            }
+            dismiss()
+
         }
     }
 
-    private fun sendResultAndDimiss(city: String?) {
-        val result= Bundle().apply {
-            putString("cityName",city)
-        }
-        parentFragmentManager.setFragmentResult("key",result)
-        dismiss()
-    }
 
     private fun addControll(view: View) {
         val citySelected= arguments?.getString("citySelected")?:""
@@ -111,7 +110,7 @@ class BottomSearchCityyFragment : BottomSheetDialogFragment() {
         val searchApi= RetrofitClient.searchApiService
         searchRepository= SearchRepository(searchApi)
         searchViewModelFactory= SearchViewModelFactory(searchRepository)
-        searchViewModel= ViewModelProvider(this,searchViewModelFactory)[SearchViewModel::class.java]
+        searchViewModel= ViewModelProvider(requireActivity(),searchViewModelFactory)[SearchViewModel::class.java]
         searchViewModel.fetchListCityRoomCount()
     }
 
