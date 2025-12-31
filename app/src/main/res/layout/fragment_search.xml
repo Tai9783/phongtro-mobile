@@ -100,11 +100,13 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/search_chip1"
+                    android:tag="@string/search_chip1"
                     android:textAlignment="center"
-
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/xam"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="@color/chip_bg_selector"
+                    app:chipStrokeColor="@color/chip_stroke_selector"
+                    app:chipStrokeWidth="1.5dp"
+                    android:textColor="@color/chip_text_selector"
+               />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip2"
@@ -115,11 +117,12 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/search_chip2"
+                    android:tag="@string/search_chip2"
                     android:textAlignment="center"
-
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/xam"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="@color/chip_bg_selector"
+                    app:chipStrokeColor="@color/chip_stroke_selector"
+                    app:chipStrokeWidth="1.5dp"
+                    android:textColor="@color/chip_text_selector"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip3"
@@ -130,11 +133,12 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/search_chip3"
+                    android:tag="@string/search_chip3"
                     android:textAlignment="center"
-
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/xam"
-                    app:chipStrokeWidth="1dp" />
+                    android:textColor="@color/chip_text_selector"
+                    app:chipBackgroundColor="@color/chip_bg_selector"
+                    app:chipStrokeColor="@color/chip_stroke_selector"
+                    app:chipStrokeWidth="1.5dp"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip4"
@@ -145,11 +149,12 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/search_chip4"
+                    android:tag="@string/search_chip4"
                     android:textAlignment="center"
-
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/xam"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="@color/chip_bg_selector"
+                    app:chipStrokeColor="@color/chip_stroke_selector"
+                    app:chipStrokeWidth="1.5dp"
+                    android:textColor="@color/chip_text_selector"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip5"
@@ -160,11 +165,12 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/search_chip5"
+                    android:tag="@string/search_chip5"
                     android:textAlignment="center"
-
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/xam"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="@color/chip_bg_selector"
+                    app:chipStrokeColor="@color/chip_stroke_selector"
+                    app:chipStrokeWidth="1.5dp"
+                    android:textColor="@color/chip_text_selector"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip6"
@@ -175,11 +181,12 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/search_chip6"
+                    android:tag="@string/search_chip6"
                     android:textAlignment="center"
-
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/xam"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="@color/chip_bg_selector"
+                    app:chipStrokeColor="@color/chip_stroke_selector"
+                    app:chipStrokeWidth="1.5dp"
+                    android:textColor="@color/chip_text_selector"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip7"
@@ -190,10 +197,12 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/search_chip7"
+                    android:tag="@string/search_chip7"
                     android:textAlignment="center"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/xam"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="@color/chip_bg_selector"
+                    app:chipStrokeColor="@color/chip_stroke_selector"
+                    app:chipStrokeWidth="1.5dp"
+                    android:textColor="@color/chip_text_selector"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip8"
@@ -204,10 +213,12 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/search_chip8"
+                    android:tag="@string/search_chip8"
                     android:textAlignment="center"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/xam"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="@color/chip_bg_selector"
+                    app:chipStrokeColor="@color/chip_stroke_selector"
+                    app:chipStrokeWidth="1.5dp"
+                    android:textColor="@color/chip_text_selector"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip9"
@@ -218,10 +229,12 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/search_chip9"
+                    android:tag="@string/search_chip9"
                     android:textAlignment="center"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/xam"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="@color/chip_bg_selector"
+                    app:chipStrokeColor="@color/chip_stroke_selector"
+                    app:chipStrokeWidth="1.5dp"
+                    android:textColor="@color/chip_text_selector"/>
 
             </GridLayout>
 
@@ -252,11 +265,12 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/search_amenity1"
+                    android:tag="@string/search_amenity1"
                     android:textAlignment="center"
-
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/xam"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="@color/chip_bg_selector"
+                    app:chipStrokeColor="@color/chip_stroke_selector"
+                    app:chipStrokeWidth="1.5dp"
+                    android:textColor="@color/chip_text_selector" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip11"
@@ -269,10 +283,12 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/search_amenity2"
+                    android:tag="@string/search_amenity2"
                     android:textAlignment="center"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/xam"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="@color/chip_bg_selector"
+                    app:chipStrokeColor="@color/chip_stroke_selector"
+                    app:chipStrokeWidth="1.5dp"
+                    android:textColor="@color/chip_text_selector"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip12"
@@ -283,10 +299,12 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/search_amenity3"
+                    android:tag="@string/search_amenity3"
                     android:textAlignment="center"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/xam"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="@color/chip_bg_selector"
+                    app:chipStrokeColor="@color/chip_stroke_selector"
+                    app:chipStrokeWidth="1.5dp"
+                    android:textColor="@color/chip_text_selector"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip13"
@@ -297,10 +315,12 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/search_amenity4"
+                    android:tag="@string/search_amenity4"
                     android:textAlignment="center"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/xam"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="@color/chip_bg_selector"
+                    app:chipStrokeColor="@color/chip_stroke_selector"
+                    app:chipStrokeWidth="1.5dp"
+                    android:textColor="@color/chip_text_selector"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip14"
@@ -311,10 +331,12 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/search_amenity5"
+                    android:tag="@string/search_amenity5"
                     android:textAlignment="center"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/xam"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="@color/chip_bg_selector"
+                    app:chipStrokeColor="@color/chip_stroke_selector"
+                    app:chipStrokeWidth="1.5dp"
+                    android:textColor="@color/chip_text_selector" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip15"
@@ -325,10 +347,12 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/search_amenity6"
+                    android:tag="@string/search_amenity6"
                     android:textAlignment="center"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/xam"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="@color/chip_bg_selector"
+                    app:chipStrokeColor="@color/chip_stroke_selector"
+                    app:chipStrokeWidth="1.5dp"
+                    android:textColor="@color/chip_text_selector"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip16"
@@ -339,10 +363,12 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/search_amenity7"
+                    android:tag="@string/search_amenity7"
                     android:textAlignment="center"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/xam"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="@color/chip_bg_selector"
+                    app:chipStrokeColor="@color/chip_stroke_selector"
+                    app:chipStrokeWidth="1.5dp"
+                    android:textColor="@color/chip_text_selector" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip17"
@@ -353,10 +379,12 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/search_amenity8"
+                    android:tag="@string/search_amenity8"
                     android:textAlignment="center"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/xam"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="@color/chip_bg_selector"
+                    app:chipStrokeColor="@color/chip_stroke_selector"
+                    app:chipStrokeWidth="1.5dp"
+                    android:textColor="@color/chip_text_selector"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip18"
@@ -367,10 +395,12 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/search_amenity9"
+                    android:tag="@string/search_amenity9"
                     android:textAlignment="center"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/xam"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="@color/chip_bg_selector"
+                    app:chipStrokeColor="@color/chip_stroke_selector"
+                    app:chipStrokeWidth="1.5dp"
+                    android:textColor="@color/chip_text_selector"/>
 
             </GridLayout>
 

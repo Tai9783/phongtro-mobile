@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.apptimphongtro.data.repository.SearchRepository
 import com.example.apptimphongtro.model.CityRoomCount
 import com.example.apptimphongtro.model.Ward
+import com.google.android.material.chip.Chip
 import kotlinx.coroutines.launch
 
 class SearchViewModel(private val searchRepository: SearchRepository): ViewModel() {
@@ -17,11 +18,26 @@ class SearchViewModel(private val searchRepository: SearchRepository): ViewModel
     private val _listWard=MutableLiveData<List<Ward>>()
     val listWard: LiveData<List<Ward>> get() = _listWard
 
-    private val _selectedCityName= MutableLiveData<String?>("Tp Hồ Chí Minh")
+    private val _selectedCityName= MutableLiveData("Tp Hồ Chí Minh")
     val selectedCityName: LiveData<String?> get()= _selectedCityName
 
     private val _selectedWard= MutableLiveData<List<Ward>>(emptyList())
     val selectedWard: LiveData<List<Ward>> get()= _selectedWard
+
+    private val _selectedPrice= MutableLiveData<Set<String>>()
+    val selectedPrice: LiveData<Set<String>> get()= _selectedPrice
+
+    private val _selectedAmenity= MutableLiveData<Set<String>>()
+    val selectedAmenity: LiveData<Set<String>> get()= _selectedAmenity
+
+    fun updateSelectedAmenity(listAmenity: Set<String>){
+        _selectedAmenity.value= listAmenity
+    }
+
+    fun updateSelectedPrice(listChip: Set<String>){
+        _selectedPrice.value= listChip
+    }
+
 
     fun updateSelectedWard(listWard: List<Ward>){
         _selectedWard.value= listWard
