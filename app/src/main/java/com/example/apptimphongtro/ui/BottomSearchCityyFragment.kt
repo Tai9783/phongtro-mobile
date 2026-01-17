@@ -8,26 +8,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apptimphongtro.R
 import com.example.apptimphongtro.adapter.SearchCityAdapter
-import com.example.apptimphongtro.data.api.RetrofitClient
-import com.example.apptimphongtro.data.repository.SearchRepository
+import com.example.apptimphongtro.util.InitSearchViewModel
 import com.example.apptimphongtro.viewmodel.SearchViewModel
 import com.google.android.material.R as MaterialR
-import com.example.apptimphongtro.viewmodel.factory.SearchViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
 class BottomSearchCityyFragment : BottomSheetDialogFragment() {
   private lateinit var rvCity: RecyclerView
-  private lateinit var searchRepository: SearchRepository
   private lateinit var searchCityAdapter: SearchCityAdapter
-  private lateinit var searchViewModel: SearchViewModel
-  private lateinit var searchViewModelFactory: SearchViewModelFactory
+  //khởi tạo searchViewModel
+  private val searchViewModel: SearchViewModel  by activityViewModels {
+      InitSearchViewModel.factory
+  }
   private lateinit var imgThoat: ImageView
   private lateinit var btnXacNhan: Button
 
@@ -106,11 +106,6 @@ class BottomSearchCityyFragment : BottomSheetDialogFragment() {
         searchCityAdapter= SearchCityAdapter(citySelected){city->
             searchViewModel.selectedCity.value=city
         }
-
-        val searchApi= RetrofitClient.searchApiService
-        searchRepository= SearchRepository(searchApi)
-        searchViewModelFactory= SearchViewModelFactory(searchRepository)
-        searchViewModel= ViewModelProvider(requireActivity(),searchViewModelFactory)[SearchViewModel::class.java]
         searchViewModel.fetchListCityRoomCount()
     }
 

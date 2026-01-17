@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatButton
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,7 @@ import com.example.apptimphongtro.R
 import com.example.apptimphongtro.adapter.SearchWardAdapter
 import com.example.apptimphongtro.data.api.RetrofitClient
 import com.example.apptimphongtro.data.repository.SearchRepository
+import com.example.apptimphongtro.util.InitSearchViewModel
 import com.example.apptimphongtro.viewmodel.SearchViewModel
 import com.example.apptimphongtro.viewmodel.factory.SearchViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -22,9 +24,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class BottomSearchWardFragment : BottomSheetDialogFragment() {
     private lateinit var rvWard: RecyclerView
     private lateinit var searchWardAdapter: SearchWardAdapter
-    private lateinit var searchViewModel: SearchViewModel
-    private lateinit var searchViewModelFactory: SearchViewModelFactory
-    private lateinit var searchRepository: SearchRepository
+    private val searchViewModel: SearchViewModel  by activityViewModels {
+        InitSearchViewModel.factory
+    }
     private lateinit var imgThoat: ImageView
     private lateinit var btnXacNhan: AppCompatButton
 
@@ -89,10 +91,6 @@ class BottomSearchWardFragment : BottomSheetDialogFragment() {
         btnXacNhan= view.findViewById(R.id.btnXacNhan)
 
         searchWardAdapter= SearchWardAdapter()
-        val searchApi= RetrofitClient.searchApiService
-        searchRepository= SearchRepository(searchApi)
-        searchViewModelFactory= SearchViewModelFactory( searchRepository)
-        searchViewModel= ViewModelProvider(requireActivity(),searchViewModelFactory)[SearchViewModel::class.java]
        searchViewModel.fechListWardByCity(cityName)
 
     }
