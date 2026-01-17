@@ -7,7 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.apptimphongtro.R
 import com.example.apptimphongtro.data.api.RetrofitClient
 import com.example.apptimphongtro.data.repository.SearchRepository
@@ -43,6 +46,7 @@ class SearchFragment : Fragment() {
     private lateinit var chip18: Chip
     private lateinit var listPrice: List<Chip>
     private lateinit var listAmenity: List<Chip>
+    private lateinit var btnApDung: AppCompatButton
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -111,18 +115,27 @@ class SearchFragment : Fragment() {
             }
         }
 
-        viewModel.selectedPrice.observe(viewLifecycleOwner){listPrice->
-            listPrice.also {
-                Log.d("SearchFragmentnnn","ds chonj $it")
-            }
-        }
-        viewModel.selectedAmenity.observe(viewLifecycleOwner){listAmenity->
-            listAmenity.also {
-                Log.d("SearchFragmentnnn","ds chonj Amenity $it")
-            }
+
+        btnApDung.setOnClickListener {
+            findNavController().navigate(R.id.resultSearchFragment)
         }
 
+        //Giữ trạng thái Price và amenities khi fragment bi pop/destroy/tạo mới
+        viewModel.filterState.observe(viewLifecycleOwner){status->
 
+            status.prices.let { it1->
+                listPrice.forEach {
+                    val key= it.tag.toString().trim()
+                        it.isChecked=it1.contains(key)
+                }
+            }
+            status.aminities.let {it1->
+                listAmenity.forEach {
+                    val key= it.tag.toString().trim()
+                    it.isChecked= it1.contains(key)
+                }
+            }
+        }
     }
 
     private fun handleAmenitySelected() {
@@ -174,6 +187,7 @@ class SearchFragment : Fragment() {
         chip18=view.findViewById(R.id.chip18)
         listPrice= mutableListOf(chip1,chip2,chip3,chip4,chip5,chip6,chip7,chip8,chip9)
         listAmenity= mutableListOf(chip10,chip11,chip12,chip13,chip14,chip15,chip16,chip17,chip18)
+        btnApDung= view.findViewById(R.id.btnApDung)
 
         val apiServer= RetrofitClient.searchApiService
         repository= SearchRepository(apiServer)

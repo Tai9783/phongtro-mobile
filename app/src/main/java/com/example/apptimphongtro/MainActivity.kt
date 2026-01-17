@@ -10,7 +10,6 @@ import androidx.core.view.setPadding
 import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.example.apptimphongtro.util.AvoidBottomNav
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
     class   MainActivity : AppCompatActivity() {

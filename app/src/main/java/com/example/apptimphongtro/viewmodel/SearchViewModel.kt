@@ -2,12 +2,16 @@ package com.example.apptimphongtro.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apptimphongtro.data.repository.SearchRepository
 import com.example.apptimphongtro.model.CityRoomCount
+import com.example.apptimphongtro.model.FilterState
+import com.example.apptimphongtro.model.RentalRoom
 import com.example.apptimphongtro.model.Ward
+import com.example.apptimphongtro.util.PriceRange
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.launch
 
@@ -25,10 +29,36 @@ class SearchViewModel(private val searchRepository: SearchRepository): ViewModel
     val selectedWard: LiveData<List<Ward>> get()= _selectedWard
 
     private val _selectedPrice= MutableLiveData<Set<String>>()
-    val selectedPrice: LiveData<Set<String>> get()= _selectedPrice
 
     private val _selectedAmenity= MutableLiveData<Set<String>>()
-    val selectedAmenity: LiveData<Set<String>> get()= _selectedAmenity
+
+    //lấy ds phòng khi lọc chuyên sâu bằng màn hình tìm kiếm
+    private val _getListRoomFilter= MutableLiveData<List<RentalRoom>>()
+    val getListRoomFilter: MutableLiveData<List<RentalRoom>> get()= _getListRoomFilter
+
+    fun fecthListRoomFilter(nameCity: String, nameWard: List<String>, listPrice: List<PriceRange>, listAmenity: List<String>){
+        viewModelScope.launch {
+            val result= searchRepository.getResultListRoomFillter(nameCity,nameWard,listPrice,listAmenity)
+            _getListRoomFilter.value= result
+        }
+    }
+
+
+    //Gộp các livedata lại để gọi qua màn hình trả ResultSearchFragment
+    val filterState= MediatorLiveData<FilterState>().apply{
+        fun rebuild(){
+            value= FilterState(
+                city = _selectedCityName.value?: "Tp Hồ Chí Minh",
+                wards = _selectedWard.value?: emptyList(),
+                prices = _selectedPrice.value?: emptySet(),
+                aminities = _selectedAmenity.value?: emptySet()
+            )
+        }
+        addSource(_selectedCityName){rebuild()}
+        addSource(_selectedWard){rebuild()}
+        addSource(_selectedPrice) {rebuild()}
+        addSource(_selectedAmenity){rebuild()}
+    }
 
     fun updateSelectedAmenity(listAmenity: Set<String>){
         _selectedAmenity.value= listAmenity

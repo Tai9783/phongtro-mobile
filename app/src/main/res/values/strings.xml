@@ -10,7 +10,7 @@
     <string name="Home_Xemthem">Xem thêm</string>
 
     <string name="itemPhongTro_title">Phòng trọ giá rẻ cho sinh viên</string>
-    <string name="itemPhongTro_ward">Thủ Đức</string>
+    <string name="itemPhongTro_ward">Thủ Đức,</string>
     <string name="itemPhongTro_city">Thành phố Hồ Chí Minh</string>
     <string name="itemPhongTro_Area">25m²</string>
     <string name="itemPhongTro_Price">3.000.000đ/tháng</string>
@@ -53,7 +53,7 @@
     <string name="search_ApDung">Áp dụng</string>
     <string name="search_amenity1">Có máy lạnh</string>
     <string name="search_amenity2">Wifi</string>
-    <string name="search_amenity3">thang máy</string>
+    <string name="search_amenity3">Thang máy</string>
     <string name="search_amenity4">Có gác</string>
     <string name="search_amenity5">Giờ giấc tự do</string>
     <string name="search_amenity6">Nuôi thú cưng</string>
@@ -65,14 +65,22 @@
     <string name="searchBottomfragment_City">Xác nhận</string>
 
     <string name="layoutItemSearch_Ward">Phường Tân Sơn Hòa</string>
-        <string name="searchBottomFragment_WardTitle">Chọn Phường/xã</string>
+    <string name="searchBottomFragment_WardTitle">Chọn Phường/xã</string>
 
     <string name="menu_local_tatca">Tất cả</string>
     <string name="menu_local_hanoi">Hà Nội</string>
     <string name="menu_local_danang">Đà nẵng</string>
     <string name="menu_local_hcm">Tp HCM</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="resultSearch_tiltle">Kết quả tìm kiếm</string>
+    <string name="resultSearch_NameCity">Tp Hồ Chí Minh</string>
+    <string name="resultSearch_lienket">-</string>
+    <string name="resultSearch_Price">2 – 3 triệu</string>
+    <string name="resultSearch_Amenity">Có máy lạnh, Wifi</string>
+    <string name="resultSearch_textFilter">Bộ lọc</string>
+    <string name="resultSearch_SortPrice">Sắp xếp</string>
+    <string name="resultSearch_SortDistance">Gần tôi nhất</string>
+    <string name="resultSearch_textQuantityRoom">Tìm thấy</string>
+    <string name="resultSearch_txtResultQuantity">0 phòng trọ</string>
 
 </resources>
