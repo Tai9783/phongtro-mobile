@@ -63,7 +63,7 @@ class ResultSearchFragment : Fragment() {
             } else {
                 lienket.visibility = View.VISIBLE
                 txtNameWard.visibility = View.VISIBLE
-                txtNameWard.text = wardNames.joinToString(", ")
+                txtNameWard.text = shortListWithDots(wardNames)
             }
             val listPrice: List<PriceRange> = state.prices.mapNotNull { parsePriceLabel(it) }
             if (state.prices.isEmpty()) {
@@ -72,7 +72,7 @@ class ResultSearchFragment : Fragment() {
             } else {
                 lienket2.visibility = View.VISIBLE
                 txtPrice.visibility = View.VISIBLE
-                txtPrice.text = state.prices.joinToString(", ")
+                txtPrice.text =  shortListWithDots(state.prices.toList())
 
             }
             val amenities = state.aminities.toList()
@@ -81,7 +81,7 @@ class ResultSearchFragment : Fragment() {
                 txtAmenity.visibility=View.GONE
             }else{
                 txtAmenity.visibility=View.VISIBLE
-                txtAmenity.text=amenities.joinToString(separator = ",")
+                txtAmenity.text=shortListWithDots(amenities)
             }
             val key= buildString {
                 append(nameCity)
@@ -114,6 +114,14 @@ class ResultSearchFragment : Fragment() {
 
 
 
+    }
+    private fun shortListWithDots(item: List<String>, maxCount: Int=2):String{
+        val list= item.map { it.trim() }.filter { it.isNotBlank() }
+        return when{
+            list.isEmpty()->""
+            list.size<=maxCount-> list.joinToString(", ")
+            else -> list.take(maxCount).joinToString(", ")+" …"
+        }
     }
 
     private fun addControll(view: View) {
