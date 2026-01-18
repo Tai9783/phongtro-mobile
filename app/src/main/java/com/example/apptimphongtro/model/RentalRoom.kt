@@ -9,8 +9,9 @@ data class RentalRoom(
     val area: Double,
     val imagesJson: String?,
     val status: Int,
-    val createdAt: String, // Hoặc LocalDateTime nếu bạn xử lý bằng thư viện phụ
+    val createdAt: String,
     val address: String,
     val city: String,
-    val ward: String
+    val ward: String,
+    val amenities: List<Amenity> = emptyList()
 )

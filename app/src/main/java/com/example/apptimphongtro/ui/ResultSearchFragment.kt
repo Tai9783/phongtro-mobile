@@ -1,5 +1,6 @@
 package com.example.apptimphongtro.ui
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 
@@ -9,7 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.apptimphongtro.R
+import com.example.apptimphongtro.adapter.ResultSearchAdapter
 import com.example.apptimphongtro.util.InitSearchViewModel
 import com.example.apptimphongtro.util.PriceRange
 import com.example.apptimphongtro.util.parsePriceLabel
@@ -24,7 +28,9 @@ class ResultSearchFragment : Fragment() {
     private lateinit var txtNameWard: TextView
     private lateinit var txtPrice: TextView
     private lateinit var txtAmenity: TextView
-
+    private lateinit var lvRoom: RecyclerView
+    private lateinit var resultSearchAdapter: ResultSearchAdapter
+    private lateinit var txtResultQuantity: TextView
     //khởi tạo searchViewModel
     private val searchViewModel: SearchViewModel  by activityViewModels {
         InitSearchViewModel.factory
@@ -88,13 +94,24 @@ class ResultSearchFragment : Fragment() {
 
             searchViewModel.fecthListRoomFilter(nameCity,wardNames,listPrice,amenities)
             searchViewModel.getListRoomFilter.observe(viewLifecycleOwner){listRoom->
-                listRoom.also {
-                    Log.d("skjhdgf","Ds Phong la $listRoom")
-                }
-
+                Log.d("kjshdf","hgasvd$listRoom")
+                resultSearchAdapter.submitList(listRoom)
+                txtResultQuantity.text= listRoom.size.toString()+" phòng trọ"
             }
-
+            lvRoom.adapter= resultSearchAdapter
+            lvRoom.layoutManager= LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+            lvRoom.addItemDecoration(object : RecyclerView.ItemDecoration(){
+                override fun getItemOffsets(
+                    outRect: Rect,
+                    view: View,
+                    parent: RecyclerView,
+                    state: RecyclerView.State
+                ) {
+                    outRect.bottom=50
+                }
+            })
         }
+
 
 
     }
@@ -106,6 +123,9 @@ class ResultSearchFragment : Fragment() {
         txtAmenity= view.findViewById(R.id.txtAmenity)
         lienket= view.findViewById(R.id.lienket)
         lienket2= view.findViewById(R.id.lienket2)
+        lvRoom= view.findViewById(R.id.lvRoom)
+        resultSearchAdapter= ResultSearchAdapter()
+        txtResultQuantity= view.findViewById(R.id.txtResultQuantity)
 
 
 
