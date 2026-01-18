@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/bo4goc_nen"
-    android:backgroundTint="@color/white"
-    android:padding="10dp">
+    android:background="@drawable/bo4goc_vien"
+    android:padding="3dp"
+  >
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgRoom"
@@ -28,7 +28,6 @@
         android:text="@string/itemPhongTro_title"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:layout_marginTop="5dp"
         />
     <TextView
         android:id="@+id/txtPrice"
@@ -51,7 +50,7 @@
             android:contentDescription="@string/decriptionImage"
             android:src="@drawable/addresss"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="2dp"
             app:layout_constraintStart_toEndOf="@+id/imgRoom"
             app:layout_constraintTop_toBottomOf="@+id/txtPrice" />
             <TextView
@@ -60,8 +59,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/itemPhongTro_ward"
                 android:layout_marginTop="10dp"
-                android:textSize="15sp"
-                android:layout_marginStart="5dp"
+                android:textSize="13sp"
+                android:layout_marginStart="1dp"
                 app:layout_constraintStart_toEndOf="@+id/iconAdress"
                 app:layout_constraintTop_toBottomOf="@+id/txtPrice"
                 />
@@ -71,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/menu_local_hcm"
                 android:layout_marginTop="10dp"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:layout_marginStart="3dp"
                 app:layout_constraintStart_toEndOf="@+id/txtWard"
                 app:layout_constraintTop_toBottomOf="@+id/txtPrice"
@@ -86,17 +85,7 @@
         android:contentDescription="@string/decriptionImage"
         android:src="@drawable/favorite"
         app:tint="#A4A4A4" />
-    <TextView
-        android:id="@+id/txtArea"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/itemPhongTro_Area"
-        android:layout_marginTop="15dp"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/txtCity"
-        android:layout_marginEnd="15dp"
-        />
+
     <!-- ChipGroup - DYNAMIC, sẽ add chips từ code -->
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroup"

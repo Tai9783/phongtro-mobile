@@ -8,10 +8,6 @@
     android:scrollbars="none"
     android:orientation="vertical"
     tools:context=".ui.SearchFragment">
-
-
-
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -31,8 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp">
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
