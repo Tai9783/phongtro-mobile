@@ -2,15 +2,12 @@ package com.example.apptimphongtro.ui
 
 import android.graphics.Rect
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apptimphongtro.R
@@ -77,9 +74,6 @@ class BottomSearchCityyFragment : BottomSheetDialogFragment() {
             dismiss()
         }
 
-        searchViewModel.selectedCity.observe(viewLifecycleOwner){city->
-            searchCityAdapter.updateSelectCity(city)
-        }
 
         btnXacNhan.setOnClickListener {
             val city= searchViewModel.selectedCity.value
