@@ -22,11 +22,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right,0)
             insets
-
         }
         addControll()
         addEvent()
-
     }
 
         private fun addEvent() {
@@ -36,8 +34,21 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
         private fun addControll() {
             navHostFragment= supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
             val navController= navHostFragment.navController
+
             bottomNav = findViewById(R.id.bottomNav)
             bottomNav.setupWithNavController(navController)
+
+            //setup BottomNav chỉ được hiển thị lên khi ở các màn hình này
+            val showBottomNav= setOf(
+                R.id.homeFragment,
+                R.id.searchFragment,
+                R.id.favotiteFragment,
+                R.id.profileFragment
+            )
+
+            navController.addOnDestinationChangedListener{_,destination,_->
+                bottomNav.visibility= if (destination.id in showBottomNav) View.VISIBLE else View.GONE
+            }
 
         }
 
