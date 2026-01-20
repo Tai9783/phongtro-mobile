@@ -32,6 +32,23 @@ class SearchViewModel(private val searchRepository: SearchRepository): ViewModel
 
     private val _selectedAmenity= MutableLiveData<Set<String>>()
 
+    private val _selectedSort= MutableLiveData<String>() // lưu trữ loại sắp xếp để xử lý khi ng dùng muốn sắp xếp
+    val selectedSort: MutableLiveData<String> get()= _selectedSort
+
+    fun updateTypeSort(typeSort: String){
+        _selectedSort.value= typeSort
+    }
+    fun getSortedList(list: List<RentalRoom>, sortType: String):List<RentalRoom>{
+        return when(sortType){
+            "PRICE_ASC"->list.sortedBy { it.price } // thấp đến cao
+            "PRICE_DESC"-> list.sortedByDescending { it.price }// cao đến thấp
+            "NEWEST"->list.sortedByDescending { it.createdAt }// bài đăng mới nhất
+            "NEAREST"->list // gần tôi nhất
+            else-> list
+        }
+    }
+
+
     //lấy ds phòng khi lọc chuyên sâu bằng màn hình tìm kiếm
     private val _getListRoomFilter= MutableLiveData<List<RentalRoom>>()
     val getListRoomFilter: MutableLiveData<List<RentalRoom>> get()= _getListRoomFilter

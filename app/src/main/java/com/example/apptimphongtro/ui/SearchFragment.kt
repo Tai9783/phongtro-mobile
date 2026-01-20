@@ -117,7 +117,7 @@ class SearchFragment : Fragment() {
 
 
         btnApDung.setOnClickListener {
-            findNavController().navigate(R.id.resultSearchFragment)
+            findNavController().navigate(R.id.action_seachFragment_to_resultSearchFragment)
         }
 
         //Giữ trạng thái Price và amenities khi fragment bi pop/destroy/tạo mới

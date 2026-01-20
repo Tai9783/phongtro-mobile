@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bo2goctren_nentrang"
+    android:orientation="vertical"
+    tools:context=".ui.BottomSortFragment">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/bottomSort_title"
+        android:textSize="19sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="#DCDCDC" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sortByNearest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/item_ward_selected"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/iconDiaDiem"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="@string/decriptionImage"
+            android:src="@drawable/icon_diadiem"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtDiaDiem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/bottomSort_txtDiaDiem"
+            android:textSize="17sp"
+            app:layout_constraintStart_toEndOf="@+id/iconDiaDiem"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iconCheck1"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="15dp"
+            android:contentDescription="@string/decriptionImage"
+            android:src="@drawable/icon_check_24px"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#2E69FF" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sortByPriceAsc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/item_ward_selected"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/iconTang"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="@string/decriptionImage"
+            android:src="@drawable/icon_tang"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtSortTang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/bottomSort_SortTang"
+            android:textSize="17sp"
+            app:layout_constraintStart_toEndOf="@+id/iconTang"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iconCheck2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="15dp"
+            android:contentDescription="@string/decriptionImage"
+            android:src="@drawable/icon_check_24px"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#2E69FF" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sortByPriceDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/item_ward_selected"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/iconGiam"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="@string/decriptionImage"
+            android:src="@drawable/icon_giam"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtSortGiam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/bottomSort_SortGiam"
+            android:textSize="17sp"
+            app:layout_constraintStart_toEndOf="@+id/iconGiam"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iconCheck3"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="15dp"
+            android:contentDescription="@string/decriptionImage"
+            android:src="@drawable/icon_check_24px"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#2E69FF" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sortByNewest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/item_ward_selected"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/iconNew"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="@string/decriptionImage"
+            android:src="@drawable/icon_new"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtSortNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/bottomSort_New"
+            android:textSize="17sp"
+            app:layout_constraintStart_toEndOf="@+id/iconNew"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iconCheck4"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="15dp"
+            android:contentDescription="@string/decriptionImage"
+            android:src="@drawable/icon_check_24px"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#2E69FF" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
