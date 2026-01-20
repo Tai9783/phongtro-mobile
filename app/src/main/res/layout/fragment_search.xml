@@ -405,7 +405,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/bo4goc_nen"
+                android:background="@drawable/button_xanh"
                 android:text="@string/search_ApDung"
                 android:textAllCaps="false"
                 android:textColor="@color/white"

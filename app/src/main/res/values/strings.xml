@@ -82,5 +82,19 @@
     <string name="resultSearch_SortDistance">Gần tôi nhất</string>
     <string name="resultSearch_textQuantityRoom">Tìm thấy</string>
     <string name="resultSearch_txtResultQuantity">0 phòng trọ</string>
+    <string name="resultSearch_txtTilteNote">Gợi ý cho bạn:</string>
+    <string name="resultSearch_txtContentNote1">Thử mở rộng khu vực tìm kiếm</string>
+    <string name="resultSearch_txtContentNote2">Điều chỉnh khoảng giá cho phù hợp</string>
+    <string name="resultSearch_txtContentNote3">Giảm bớt các tiêu chí lọc</string>
+    <string name="resultSearch_txtContentNote4">Thử tìm kiếm các phường/xã lân cận</string>
+    <string name="resultSearch_btnDieuChinh">Điều chỉnh bộ lộc</string>
+    <string name="resultSearch_txtInformation">Rất tiếc, chúng tôi không tìm thấy phòng trọ nào phù hợp với tiêu chí của bạn.</string>
+
+
+    <string name="bottomSort_title">Sắp xếp theo</string>
+    <string name="bottomSort_txtDiaDiem">Gần tôi nhất</string>
+    <string name="bottomSort_SortTang">Giá tăng dần</string>
+    <string name="bottomSort_SortGiam">Giá giảm dần</string>
+    <string name="bottomSort_New">Mới nhất</string>
 
 </resources>

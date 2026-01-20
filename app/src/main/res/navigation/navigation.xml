@@ -16,7 +16,9 @@
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_seachFragment_to_resultSearchFragment"
-            app:destination="@+id/resultSearchFragment"/>
+            app:destination="@+id/resultSearchFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_bottom"/>
     </fragment>
 
 
