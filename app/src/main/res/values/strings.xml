@@ -27,8 +27,24 @@
     <string name="menu_price_5den8tr">$5–8tr</string>
     <string name="menu_price_tren8tr">Trên 8tr</string>
 
-    <string name="profile_userName">User Name</string>
-    <string name="profile_sdt">0911628451</string>
+    <string name="profile_txtTilte">Chào mừng bạn!</string>
+    <string name="profile_txtContent">Đăng nhập để trải nghiệm đầy đủ tính năng</string>
+    <string name="profile_txtLogin">Đăng nhập</string>
+    <string name="profile_txtSignUp">Đăng ký</string>
+    <string name="profile_txtTilteLogin">Đăng nhập để sử dụng</string>
+    <string name="profile_txtContent1">Lưu phòng yêu thích</string>
+    <string name="profile_txtContent2">Nhận thông báo phòng mới</string>
+    <string name="profile_txtContent3">Đăng tin cho thuê phòng</string>
+    <string name="profile_txtContent4">Quản lý tin đăng của bạn</string>
+    <string name="profile_txtHotro">Trung tâm hỗ trợ</string>
+    <string name="profile_txtCauhoi">Câu hỏi thường gặp</string>
+    <string name="profile_txtLienHe">Liên hệ</string>
+    <string name="profile_txtHotline">Hotline: 0397 589 xxx</string>
+    <string name="profile_txtDieuKhoan">Điều khoản và chính sách</string>
+    <string name="profile_txtQuyDinh">Quy định sử dụng</string>
+
+
+
     <string name="profile_lienhe">Liên hệ hỗ trợ</string>
     <string name="profile_doimk">Đổi mật khẩu</string>
     <string name="profile_dangxuat">Đăng xuất</string>
