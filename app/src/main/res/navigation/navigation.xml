@@ -31,11 +31,20 @@
         android:id="@+id/profileFragment"
         android:name="com.example.apptimphongtro.ui.ProfileFragment"
         tools:layout="@layout/fragment_profile"
-        android:label="Cá nhân"/>
+        android:label="Cá nhân">
+        <action
+            android:id="@+id/action_profileFragment_to_LoginFragment"
+            app:destination="@+id/LoginFragment"/>
+    </fragment>
     <fragment
         android:id="@+id/resultSearchFragment"
         android:name="com.example.apptimphongtro.ui.ResultSearchFragment"
         tools:layout="@layout/fragment_result_search"
         android:label="Kết quả tìm kiếm"/>
+    <fragment
+        android:id="@+id/LoginFragment"
+        android:name="com.example.apptimphongtro.ui.LoginFragment"
+        tools:layout="@layout/fragment_login"
+        android:label="Màn hình login"/>
 
 </navigation>

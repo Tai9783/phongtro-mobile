@@ -42,6 +42,23 @@
     <string name="profile_txtHotline">Hotline: 0397 589 xxx</string>
     <string name="profile_txtDieuKhoan">Điều khoản và chính sách</string>
     <string name="profile_txtQuyDinh">Quy định sử dụng</string>
+    <string name="profile_txtDangXuat">Đăng xuất</string>
+
+    <string name="layout_profile_login_user_txtInforUser">Thông tin cá nhân</string>
+    <string name="layout_profile_login_user_txtUpdateInfor">Cập nhật hồ sơ</string>
+    <string name="layout_profile_login_user_txtNotication">Thông báo</string>
+    <string name="layout_profile_login_user_txtSettingNotication">Cài đặt nhận thông báo</string>
+    <string name="layout_profile_login_user_txtSecurity">Bảo mật</string>
+    <string name="layout_profile_login_user_txtChangePassword">Đổi mật khẩu</string>
+    <string name="layout_profile_login_user_txtTilteDangTin">Bạn có phòng cho thuê?</string>
+    <string name="layout_profile_login_user_txtContentDangTin">Đăng tin miễn phí, tiếp cận hàng nghìn khách thuê</string>
+    <string name="layout_profile_login_user_txtDangTin">Đăng tin ngay</string>
+    <string name="layout_profile_login_chutro_txtTinDang">Tin đăng của tôi </string>
+    <string name="layout_profile_login_chutro_txtSoTinDangHoatDong">0 tin đang hoạt động </string>
+    <string name="layout_profile_login_chutro_txtAllRoom">Quản lý phòng </string>
+    <string name="layout_profile_login_chutro_txtContent">Bao gồm tin đăng và tin nháp</string>
+    <string name="layout_profile_login_chutro_txtTinHetHan">Tin đã hết hạn</string>
+    <string name="layout_profile_login_chutro_txtGiaiPhap">Gia hạn hoặc xóa</string>
 
 
 
@@ -112,5 +129,22 @@
     <string name="bottomSort_SortTang">Giá tăng dần</string>
     <string name="bottomSort_SortGiam">Giá giảm dần</string>
     <string name="bottomSort_New">Mới nhất</string>
+
+    <string name="loginframent_txtTilte">Chào mừng bạn trở lại!</string>
+    <string name="loginframent_txtContent">Đăng nhập để tiếp tục khám phá</string>
+    <string name="loginframent_txtTitleNhap1">Số điện thoại hoặc Email</string>
+    <string name="loginframent_txtTitleNhap2">Mật khẩu</string>
+    <string name="loginframent_txtContentNhap1">Nhập số điện thoại hoặc Email</string>
+    <string name="loginframent_txtContentNhap2">Nhập mật khẩu</string>
+    <string name="loginframent_txtForgotPass">Quên mật khẩu?</string>
+    <string name="loginframent_txtContent3">Bạn chưa có tài khoản?</string>
+    <string name="loginframent_txtDK">Đăng ký ngay</string>
+    <string name="loginframent_txtQuayLai">Quay Lại</string>
+    <string name="loginframent_txtTaiKhoan">Tài khoản</string>
+    <string name="loginframent_txtTenUser">VT</string>
+    <string name="loginframent_txtFullNameUser">Văn Tài</string>
+    <string name="loginframent_txtFullRoleName">Chủ trọ</string>
+    <string name="loginframent_txtPhoneNumber">0900288077</string>
+
 
 </resources>
