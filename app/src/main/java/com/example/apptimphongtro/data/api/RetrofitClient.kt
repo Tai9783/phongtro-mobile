@@ -17,5 +17,8 @@ object RetrofitClient {
     val searchApiService: SearchApiService by lazy {
         retrofit.create(SearchApiService::class.java)
     }
+    val userApiService: UserApiService by lazy {
+        retrofit.create((UserApiService::class.java))
+    }
 }
 

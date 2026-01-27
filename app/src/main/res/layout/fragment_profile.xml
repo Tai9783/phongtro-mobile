@@ -5,116 +5,100 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".ui.ProfileFragment"
+    android:fillViewport="true"
     android:scrollbars="none"
-    android:fillViewport="true">
+    tools:context=".ui.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/profileHeadder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bo2gocduoi"
-            android:backgroundTint="#1D5FFB"
-            android:paddingBottom="60dp"
+            android:background="#1D5FFB"
+            android:paddingBottom="80dp"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imageUser"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="25dp"
-                android:contentDescription="@string/decriptionImage"
-                android:src="@drawable/ic_user_profile"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="#FFFFFF" />
-
             <TextView
-                android:id="@+id/txtTitle"
+                android:id="@+id/txtTaiKhoan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/profile_txtTilte"
-                android:textColor="@color/white"
-                android:textSize="18sp"
+                android:layout_margin="20dp"
+                android:text="@string/loginframent_txtTaiKhoan"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageUser" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/txtContent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/profile_txtContent"
-                android:textColor="#F2F2F2"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtTitle" />
-
-            <LinearLayout
+            <include
+                android:id="@+id/layoutLoggedOut"
+                layout="@layout/layout_profile_logged_out"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtContent">
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnLogin"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bo4goc_nenxam"
-                    android:backgroundTint="#FFFFFF"
-                    android:elevation="8dp"
-                    android:gravity="center"
-                    android:text="@string/profile_txtLogin"
-                    android:textAllCaps="false"
-                    android:textColor="#074EFF"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnSignUp"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bo4goc_nenxam"
-                    android:backgroundTint="#023EE2"
-                    android:gravity="center"
-                    android:text="@string/profile_txtSignUp"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
+                android:visibility="visible" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/layoutLoggedIn"
+            layout="@layout/layout_profile_logged_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="-50dp"
+            android:layout_marginEnd="20dp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileHeadder" />
+        <include
+            android:id="@+id/layoutQuanLyTin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/layout_profile_loggedin_chutro"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutLoggedIn"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:visibility="gone"/>
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/profileBarrier0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="layoutLoggedIn,layoutQuanLyTin"/>
+
+
+        <include
+            android:id="@+id/layoutTaiKhoanUser"
+            layout="@layout/layout_profile_loggin_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileBarrier0" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutInformation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="-40dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/bo4goc_nenxam"
             android:backgroundTint="#FFFFFF"
             android:elevation="10dp"
             android:padding="15dp"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileHeadder">
@@ -230,19 +214,27 @@
                 app:layout_constraintTop_toBottomOf="@+id/imgHouse" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/profileBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="layoutInformation,layoutTaiKhoanUser" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutHotro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/bo4goc_nenxam"
             android:backgroundTint="#FFFFFF"
             android:elevation="10dp"
             android:paddingBottom="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutInformation">
+            app:layout_constraintTop_toBottomOf="@+id/profileBarrier">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ctHotro"
@@ -453,6 +445,28 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnDangXuat"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/bo4goc_nenxam"
+            android:backgroundTint="#E0E0E0"
+            android:text="@string/profile_txtDangXuat"
+            android:textAllCaps="false"
+            android:textColor="#CA4343"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutHotro"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
