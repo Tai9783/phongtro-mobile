@@ -18,6 +18,7 @@
 
     <string name="iconHouse">Trang chủ</string>
     <string name="iconSearch">Tìm kiếm</string>
+    <string name="iconAddPost">Đăng tin</string>
     <string name="iconFavorite">Yêu thích</string>
     <string name="iconProfile">Cá nhân</string>
 
@@ -145,6 +146,8 @@
     <string name="loginframent_txtFullNameUser">Văn Tài</string>
     <string name="loginframent_txtFullRoleName">Chủ trọ</string>
     <string name="loginframent_txtPhoneNumber">0900288077</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

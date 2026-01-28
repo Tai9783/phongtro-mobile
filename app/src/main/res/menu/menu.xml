@@ -9,6 +9,11 @@
         android:title="@string/iconSearch"
         android:icon="@drawable/iconsearch"/>
     <item
+        android:id="@+id/addPostFrgament"
+        android:title="@string/iconAddPost"
+        android:icon="@drawable/icon_addpost"
+        />
+    <item
         android:id="@+id/favotiteFragment"
         android:title="@string/iconFavorite"
         android:icon="@drawable/iconfavorite"/>

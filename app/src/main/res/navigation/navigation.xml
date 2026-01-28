@@ -20,6 +20,11 @@
             app:enterAnim="@anim/slide_in_bottom"
             app:popExitAnim="@anim/slide_out_bottom"/>
     </fragment>
+    <fragment
+        android:id="@+id/addPostFrgament"
+        android:name="com.example.apptimphongtro.ui.AddPostFragment"
+        android:label="Đăng tin"
+        tools:layout="@layout/fragment_add_post"/>
 
 
     <fragment

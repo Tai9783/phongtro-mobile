@@ -43,7 +43,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
                 R.id.homeFragment,
                 R.id.searchFragment,
                 R.id.favotiteFragment,
-                R.id.profileFragment
+                R.id.profileFragment,
+                R.id.addPostFrgament
             )
 
             navController.addOnDestinationChangedListener{_,destination,_->
