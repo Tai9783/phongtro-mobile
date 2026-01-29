@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.apptimphongtro.R
@@ -16,6 +17,7 @@ import com.example.apptimphongtro.data.local.SharedPrefManager
 import com.example.apptimphongtro.data.repository.UserRepository
 import com.example.apptimphongtro.databinding.FragmentProfileBinding
 import com.example.apptimphongtro.model.User
+import com.example.apptimphongtro.util.InitUserViewModel
 import com.example.apptimphongtro.viewmodel.UserViewModel
 import com.example.apptimphongtro.viewmodel.factory.UserViewModelFactory
 
@@ -23,9 +25,10 @@ import com.example.apptimphongtro.viewmodel.factory.UserViewModelFactory
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding?=null
     private val binding get()= _binding!!
-    private lateinit var userRepository: UserRepository
-    private lateinit var userViewModelFactory: UserViewModelFactory
-    private lateinit var userViewModel: UserViewModel
+
+    private val userViewModel: UserViewModel by activityViewModels {
+        InitUserViewModel.factory
+    }
     private lateinit var sharedPrefManager: SharedPrefManager
 
 
@@ -125,10 +128,7 @@ class ProfileFragment : Fragment() {
 
     private fun addControll(view: View) {
         sharedPrefManager= SharedPrefManager(requireActivity())
-        val api= RetrofitClient.userApiService
-        userRepository= UserRepository(api)
-        userViewModelFactory= UserViewModelFactory(userRepository)
-        userViewModel= ViewModelProvider(requireActivity(),userViewModelFactory)[UserViewModel::class.java]
+
     }
 
     //giải phóng bộ nhớ

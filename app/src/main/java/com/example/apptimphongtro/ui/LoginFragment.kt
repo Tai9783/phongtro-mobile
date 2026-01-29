@@ -8,12 +8,14 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.apptimphongtro.R
 import com.example.apptimphongtro.data.api.RetrofitClient
 import com.example.apptimphongtro.data.local.SharedPrefManager
 import com.example.apptimphongtro.data.repository.UserRepository
+import com.example.apptimphongtro.util.InitUserViewModel
 import com.example.apptimphongtro.viewmodel.UserViewModel
 import com.example.apptimphongtro.viewmodel.factory.UserViewModelFactory
 
@@ -22,9 +24,11 @@ class LoginFragment : Fragment() {
     private lateinit var edtSdtorEmail : EditText
     private lateinit var edtPass : EditText
     private lateinit var btnApDung : AppCompatButton
-    private lateinit var userRepository: UserRepository
-    private lateinit var userViewModel: UserViewModel
-    private lateinit var userViewModelFactory: UserViewModelFactory
+
+    private val userViewModel: UserViewModel by activityViewModels {
+        InitUserViewModel.factory
+    }
+
 
 
 
@@ -67,10 +71,6 @@ class LoginFragment : Fragment() {
         edtSdtorEmail= view.findViewById(R.id.edtContent1)
         edtPass= view.findViewById(R.id.edtPass)
         btnApDung= view.findViewById(R.id.btnApDung)
-        val api= RetrofitClient.userApiService
-        userRepository= UserRepository(api)
-        userViewModelFactory= UserViewModelFactory(userRepository)
-        userViewModel= ViewModelProvider(requireActivity(),userViewModelFactory)[UserViewModel::class.java]
     }
 
 }

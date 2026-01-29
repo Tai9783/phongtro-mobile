@@ -2,19 +2,24 @@
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.setPadding
-import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.apptimphongtro.data.local.SharedPrefManager
+import com.example.apptimphongtro.util.InitUserViewModel
+import com.example.apptimphongtro.viewmodel.UserViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
     class   MainActivity : AppCompatActivity() {
         private lateinit var navHostFragment: NavHostFragment
         private lateinit var bottomNav:BottomNavigationView
+        private lateinit var sharedPrefManager: SharedPrefManager
+        private val userViewModel: UserViewModel by viewModels{
+            InitUserViewModel.factory
+        }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -28,10 +33,27 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
     }
 
         private fun addEvent() {
+            checkLoginAuto()
+        }
 
+        private fun checkLoginAuto() {
+            val userId= sharedPrefManager.getUser()
+            if(userId!=null){
+                userViewModel.fetchUser(userId)
+            }
+            val navMenu= bottomNav.menu
+            val addPostItem= navMenu.findItem(R.id.addPostFrgament)
+            addPostItem.isVisible= false
+            userViewModel.user.observe(this){inforUser->
+                //hiện icon đăng tin nếu tài khoản là chủ trọ
+                addPostItem.isVisible = inforUser!=null && inforUser.role=="landlord"
+            }
         }
 
         private fun addControll() {
+            sharedPrefManager= SharedPrefManager(this)
+
+
             navHostFragment= supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
             val navController= navHostFragment.navController
 
