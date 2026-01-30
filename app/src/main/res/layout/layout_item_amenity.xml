@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:background="@drawable/bg_amenity_selector"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp">
+
+    <ImageView
+        android:id="@+id/img_icon"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/icon_wifi"
+        android:layout_marginEnd="6dp"
+        android:contentDescription="@string/decriptionImage"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/itemaminity_name"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:layout_marginStart="2dp"
+        android:gravity="center"/>
+</LinearLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.Step2AddressFragment"
+    android:background="@drawable/bo4goc_nenxam"
+    android:backgroundTint="#FFFFFF"
+    android:padding="20dp"
+    android:elevation="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="15dp"
+        android:background="@drawable/bo4goc_nenxam"
+        android:backgroundTint="#F8F1EE">
+
+        <ImageView
+            android:id="@+id/imgAddress"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/decriptionImage"
+            android:src="@drawable/addresss"
+            app:tint="#F27303"/>
+        <TextView
+            android:id="@+id/txtNotication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/imgAddress"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/step2Infor_txtNotication"
+            android:layout_marginStart="5dp"
+            android:textColor="#F27303"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/txtContentNotication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/imgAddress"
+            app:layout_constraintTop_toBottomOf="@+id/txtNotication"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/step2Infor_txtContentNotication"
+            android:layout_marginStart="5dp"
+            android:textColor="#F27303"
+            android:textSize="16sp"
+            android:layout_marginTop="7dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
