@@ -160,6 +160,17 @@
     <string name="step1Infor_txtAmenity">Tiện ích *</string>
     <string name="step1Infor_btnTiepTuc">Tiếp tục</string>
 
+
+    <string name="step2Address_txtTilteProvince">Tỉnh/Thành phố *</string>
+    <string name="step2Address_txtTilteWard">Phường/Xã *</string>
+    <string name="step2Address_txtTilteAddress">Địa chỉ cụ thể *</string>
+    <string name="step2Address_txtProvince">Chọn Tỉnh/Thành phố</string>
+    <string name="step2Address_txtWard">Chọn Phường/Xã</string>
+    <string name="step2Address_txtAddress">Số nhà, tên đường…</string>
+    <string name="step2Address_btnXacNhanVitri">Xác nhận vị trí trên bản đồ</string>
+
+
+
     <string name="itemaminity_name">wifi</string>
 
     <string name="step2Infor_txtNotication">Xác định vị trí chính xác</string>

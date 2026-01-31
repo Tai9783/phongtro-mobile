@@ -11,6 +11,7 @@
     android:elevation="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutNotication"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,6 +54,108 @@
             android:textSize="16sp"
             android:layout_marginTop="7dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/txtTilteProvince"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutNotication"
+        android:text="@string/step2Address_txtTilteProvince"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:layout_marginTop="15dp"/>
+    <TextView
+        android:id="@+id/txtProvince"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTilteProvince"
+        android:text="@string/step2Address_txtProvince"
+        android:textSize="18sp"
+        android:background="@drawable/bo4goc_nenxam"
+        android:paddingStart="15dp"
+        android:paddingEnd="5dp"
+        android:backgroundTint="#F4F4F4"
+        android:layout_marginTop="10dp"
+        android:gravity="center|start"
+        app:drawableEndCompat="@drawable/arrow_drop_down"
+        />
+    <TextView
+    android:id="@+id/txtTilteWard"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/txtProvince"
+    android:text="@string/step2Address_txtTilteWard"
+    android:textStyle="bold"
+    android:textSize="18sp"
+    android:textColor="#000000"
+    android:layout_marginTop="15dp"/>
+    <TextView
+        android:id="@+id/txtWard"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTilteWard"
+        android:text="@string/step2Address_txtWard"
+        android:textSize="18sp"
+        android:background="@drawable/bo4goc_nenxam"
+        android:paddingStart="15dp"
+        android:paddingEnd="5dp"
+        android:backgroundTint="#F4F4F4"
+        android:layout_marginTop="10dp"
+        android:gravity="center|start"
+        app:drawableEndCompat="@drawable/arrow_drop_down"
+        />
+    <TextView
+        android:id="@+id/txtTilteAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtWard"
+        android:text="@string/step2Address_txtTilteAddress"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:layout_marginTop="15dp"/>
+    <EditText
+        android:id="@+id/edtAddress"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:autofillHints=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTilteAddress"
+        android:hint="@string/step2Address_txtAddress"
+        android:textSize="18sp"
+        android:background="@drawable/bo4goc_nenxam"
+        android:paddingStart="15dp"
+        android:paddingEnd="5dp"
+        android:backgroundTint="#F4F4F4"
+        android:layout_marginTop="10dp"
+        android:gravity="center|start"
+        android:inputType="text"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_xanhmo_vien"
+        android:text="@string/step2Address_btnXacNhanVitri"
+        android:textAllCaps="false"
+        android:textColor="#C85A17"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtAddress"
+        android:drawableStart="@drawable/addresss"
+        android:drawableTint="#C85A17"
+        android:paddingStart="75dp"
+        android:paddingEnd="75dp"
+        />
+
 
 
 
