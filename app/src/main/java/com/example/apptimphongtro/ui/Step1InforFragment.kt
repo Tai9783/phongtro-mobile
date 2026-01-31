@@ -74,6 +74,10 @@ class Step1InforFragment : Fragment() {
         }
 
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
 
 
 }

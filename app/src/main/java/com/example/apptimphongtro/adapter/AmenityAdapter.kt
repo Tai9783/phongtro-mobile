@@ -16,20 +16,19 @@ import com.example.apptimphongtro.model.Amenity
 class AmenityAdapter( private val onClickAmenity: OnClick) : ListAdapter<Amenity,AmenityAdapter.AmenityHolder>(
     DiffCallBackAmenityAddPost()
 ) {
-    inner class AmenityHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        private val imageIcon: ImageView= itemView.findViewById(R.id.img_icon)
-        private val nameAmenity: TextView=itemView.findViewById(R.id.tv_name)
-        private val layoutContraint: LinearLayout= itemView.findViewById(R.id.layout_container)
-        fun bin(item: Amenity){
-           nameAmenity.text= item.amenityName
+    inner class AmenityHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val imageIcon: ImageView = itemView.findViewById(R.id.img_icon)
+        private val nameAmenity: TextView = itemView.findViewById(R.id.tv_name)
+        private val layoutContraint: LinearLayout = itemView.findViewById(R.id.layout_container)
+        fun bin(item: Amenity) {
+            nameAmenity.text = item.amenityName
             imageIcon.setImageResource(item.icon)
-            layoutContraint.isSelected= item.isSelected
+            layoutContraint.isSelected = item.isSelected
 
-            if(item.isSelected){
+            if (item.isSelected) {
                 nameAmenity.setTextColor(Color.parseColor("#1A1A1A"))
                 imageIcon.setColorFilter(Color.parseColor("#2D5BFF"))
-            }
-            else{
+            } else {
                 nameAmenity.setTextColor(Color.parseColor("#000000"))
                 imageIcon.setColorFilter(Color.parseColor("#000000"))
             }
@@ -41,20 +40,21 @@ class AmenityAdapter( private val onClickAmenity: OnClick) : ListAdapter<Amenity
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AmenityHolder {
-        val view= LayoutInflater.from(parent.context).inflate(R.layout.layout_item_amenity,parent,false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.layout_item_amenity, parent, false)
         return AmenityHolder(view)
     }
 
     override fun onBindViewHolder(holder: AmenityHolder, position: Int) {
-        val item= getItem(position)
+        val item = getItem(position)
         holder.bin(item)
     }
 
-    fun listSelected():List<Amenity>{
-        return currentList.filter { it.isSelected   }
+    fun listSelected(): List<Amenity> {
+        return currentList.filter { it.isSelected }
     }
-
 }
-interface OnClick{
+
+ interface OnClick{
     fun onClickItem(postion: Int)
 }
