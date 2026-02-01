@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.apptimphongtro.R
@@ -39,12 +40,38 @@ class Step2AddressFragment : Fragment() {
 
     private fun addEvent() {
         binding.txtProvince.setOnClickListener {
-            val bottomSheet = BottomAddressFragment()
+            val key= "fragmentProvice"
+            val bottomSheet = BottomAddressFragment().apply {
+               arguments= Bundle().apply {
+                   putString("keyy",key)
+               }
+            }
             bottomSheet.show(parentFragmentManager, "listCity")
         }
        addPostAdressViewModel.selectedCity.observe(viewLifecycleOwner){city->
            if (city!=null)
-                binding.txtProvince.text=city.city
+               binding.txtProvince.text = city.city
        }
+        addPostAdressViewModel.selectedWard.observe(viewLifecycleOwner){ward->
+            if(ward!=null){
+                binding.txtWard.text= ward.wardName
+            }
+            else
+                binding.txtWard.text= getString(R.string.step2Address_txtWard)
+        }
+        binding.txtWard.setOnClickListener {
+            val selectCity= addPostAdressViewModel.selectedCity.value
+            if (selectCity==null){
+                Toast.makeText(requireContext(), "Vui lòng chọn Tỉnh/Thành phố trước", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            val key= "fragmentWard"
+            val bottomSheet = BottomAddressFragment().apply {
+                arguments= Bundle().apply {
+                    putString("keyy",key)
+                }
+            }
+            bottomSheet.show(parentFragmentManager, "listWard")
+        }
     }
 }

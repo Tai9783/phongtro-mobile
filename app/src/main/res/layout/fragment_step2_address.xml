@@ -107,6 +107,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center|start"
         app:drawableEndCompat="@drawable/arrow_drop_down"
+
         />
     <TextView
         android:id="@+id/txtTilteAddress"
