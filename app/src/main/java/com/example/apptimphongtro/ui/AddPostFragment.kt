@@ -12,7 +12,7 @@ import com.example.apptimphongtro.databinding.FragmentProfileBinding
 
 class AddPostFragment : Fragment() {
     private var _binding: FragmentAddPostBinding? =null
-    private val binding get()= _binding!!
+    val binding get()= _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -20,12 +20,18 @@ class AddPostAdressViewModel: ViewModel() {
     private var _selectedWard= MutableLiveData<Ward?>(null)
     val selectedWard : LiveData<Ward?> get()= _selectedWard
 
-    fun initWartList(listWard: List<Ward>){
-            //chỗ này ko ktra null rồi mới gán list mới là vì khi user chọn city khác thì _allWard nó về emtyList chứ ko về null nên dẫn đến ko hiển thị ds
-            _allWard.value= listWard
-            _selectedWard.value= listWard.firstOrNull{it.isCheck}
+    var wardScrollPos: Int = 0
+    var wardScrollOffset: Int = 0
 
+    fun initWartList(listWard: List<Ward>) {
+        val selectedName = _selectedWard.value?.wardName
+        val newList = listWard.map { w ->
+            w.copy(isCheck = (w.wardName == selectedName))
+        }
+        _allWard.value = newList
+        _selectedWard.value = newList.firstOrNull { it.isCheck }
     }
+
 
 
     fun initCityList(listCity: List<CityRoomCount>){

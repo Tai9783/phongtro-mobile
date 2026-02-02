@@ -1,5 +1,7 @@
 package com.example.apptimphongtro.ui
 
+import android.content.Intent
+import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,10 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.apptimphongtro.R
 import com.example.apptimphongtro.databinding.FragmentStep2AddressBinding
 import com.example.apptimphongtro.viewmodel.AddPostAdressViewModel
+import java.util.Locale
 
 
 class Step2AddressFragment : Fragment() {
@@ -48,10 +52,12 @@ class Step2AddressFragment : Fragment() {
             }
             bottomSheet.show(parentFragmentManager, "listCity")
         }
+        //hiển thị nameCity lên ô TextView
        addPostAdressViewModel.selectedCity.observe(viewLifecycleOwner){city->
            if (city!=null)
                binding.txtProvince.text = city.city
        }
+        //Hiển thị wardName lên ô TextView
         addPostAdressViewModel.selectedWard.observe(viewLifecycleOwner){ward->
             if(ward!=null){
                 binding.txtWard.text= ward.wardName
@@ -72,6 +78,39 @@ class Step2AddressFragment : Fragment() {
                 }
             }
             bottomSheet.show(parentFragmentManager, "listWard")
+        }
+
+        binding.btnContinue.setOnClickListener {
+            val cityName= addPostAdressViewModel.selectedCity.value
+            val wardName=addPostAdressViewModel.selectedWard.value
+            val address=binding.edtAddress.text.toString()
+            if (cityName == null || wardName == null || address.isEmpty()) {
+                Toast.makeText(requireContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            val addressFull= "$address, $wardName, $cityName"
+            val geocoder = Geocoder(requireContext(), Locale.getDefault())
+            try {
+                // Thực hiện Geocoding để lấy tọa độ
+                val addresses = geocoder.getFromLocationName(addressFull, 1)
+                if (!addresses.isNullOrEmpty()) {
+                    val location = addresses[0]
+
+                    // Tạo bundle chứa dữ liệu để truyền đi
+                    val bundle = Bundle().apply {
+                        putString("LAT", location.latitude.toString())
+                        putString("LNG", location.longitude.toString())
+                        putString("ADDRESS", addressFull)
+                    }
+                    requireActivity().findNavController(R.id.nav_host_fragment) // Thay bằng ID của Fragment Container chính ở MainActivity
+                        .navigate(R.id.action_global_to_CofirmMapFragment, bundle)
+                } else {
+                    Toast.makeText(context, "Không tìm thấy địa chỉ này trên bản đồ", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Log.e("GEO_ERROR", e.message.toString())
+            }
+
         }
     }
 }

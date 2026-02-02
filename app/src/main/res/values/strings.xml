@@ -167,7 +167,7 @@
     <string name="step2Address_txtProvince">Chọn Tỉnh/Thành phố</string>
     <string name="step2Address_txtWard">Chọn Phường/Xã</string>
     <string name="step2Address_txtAddress">Số nhà, tên đường…</string>
-    <string name="step2Address_btnXacNhanVitri">Xác nhận vị trí trên bản đồ</string>
+    <string name="step2Address_btnXacNhanVitri">Xác nhận vị trí</string>
 
 
     <string name="itemaminity_name">wifi</string>
@@ -176,7 +176,7 @@
     <string name="step2Infor_txtContentNotication">Nhập địa chỉ và xác nhận trên bản đồ để người thuê dễ tìm thấy</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Màn hinhf này để người dùng đưa ảnh phòng trọ lên</string>
 
 
 </resources>

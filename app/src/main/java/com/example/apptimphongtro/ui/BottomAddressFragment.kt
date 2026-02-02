@@ -31,6 +31,8 @@ class BottomAddressFragment : BottomSheetDialogFragment() {
     private lateinit var addPostAdressViewModel:AddPostAdressViewModel
     private lateinit var keyContent: String
     private lateinit var listWard: List<Ward>
+    private var restored = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -116,7 +118,18 @@ class BottomAddressFragment : BottomSheetDialogFragment() {
             binding.rvAddress.adapter= addPostAddressWardAdapter
             binding.rvAddress.layoutManager= LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
             addPostAdressViewModel.allWard.observe(viewLifecycleOwner){dsWard->
-                addPostAddressWardAdapter.submitList(dsWard)
+                addPostAddressWardAdapter.submitList(dsWard){
+                    if (!restored && keyContent == "fragmentWard") {
+                        restored = true
+                        binding.rvAddress.post {
+                            val lm = binding.rvAddress.layoutManager as LinearLayoutManager
+                            lm.scrollToPositionWithOffset(
+                                addPostAdressViewModel.wardScrollPos,
+                                addPostAdressViewModel.wardScrollOffset
+                            )
+                        }
+                    }
+                }
             }
             binding.rvAddress.addItemDecoration(object : RecyclerView.ItemDecoration(){
                 override fun getItemOffsets(
@@ -145,6 +158,16 @@ class BottomAddressFragment : BottomSheetDialogFragment() {
     }
 
     override fun onDestroyView() {
+        val lm = binding.rvAddress.layoutManager as? LinearLayoutManager
+        if (lm != null && keyContent == "fragmentWard") {
+            val firstPos = lm.findFirstVisibleItemPosition()
+            if (firstPos != RecyclerView.NO_POSITION) {
+                val top = binding.rvAddress.getChildAt(0)?.top ?: 0
+                addPostAdressViewModel.wardScrollPos = firstPos
+                addPostAdressViewModel.wardScrollOffset = top
+            }
+        }
+
         super.onDestroyView()
         _binding=null
     }
