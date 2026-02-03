@@ -30,7 +30,9 @@
         tools:layout="@layout/fragment_add_post">
         <action
             android:id="@+id/action_addPost_to_implementAddPostFragment"
-            app:destination="@id/ImplementAddPostFragment" />
+            app:destination="@id/ImplementAddPostFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
 
