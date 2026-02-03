@@ -16,6 +16,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // Thêm dòng này để Android Studio có thể tải thư viện TrackAsia
+        maven { url = uri("https://jitpack.io") }
     }
 }
 

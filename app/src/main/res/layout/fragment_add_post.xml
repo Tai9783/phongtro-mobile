@@ -5,111 +5,264 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.AddPostFragment"
-    >
+    android:background="#FFFFFF"
+    android:scrollbars="none">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="15dp">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/bannerAddPost"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="#1D5FFB"
-        android:padding="20dp">
-
+        <ImageView
+            android:id="@+id/imgAdd"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:padding="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/decriptionImage"
+            android:src="@drawable/icon_add"
+            android:background="@drawable/bg_icon_add"
+            app:tint="#FFFFFF"
+            android:layout_marginTop="25dp"
+            />
         <TextView
             android:id="@+id/txtTilte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/addpostfragment_txtTilte"
-            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgAdd"
+            android:text="@string/addpostfragment_txtTiltePost"
             android:textStyle="bold"
-            android:textColor="#FFFFFF"/>
-        <TextView
-            android:id="@+id/txtStep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtTilte"
-            android:text="@string/addpostfragment_txtStep"
-            android:textSize="18sp"
-            android:textColor="#FFFFFF"
-            />
-        <TextView
-            android:id="@+id/txtContentStep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/txtStep"
-            app:layout_constraintTop_toBottomOf="@+id/txtTilte"
-            android:text="@string/addpostfragment_txtContenStep"
-            android:textSize="18sp"
-            android:textColor="#FFFFFF"
-            android:layout_marginStart="5dp"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtContentStep"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:orientation="horizontal"
+            android:textSize="23sp"
+            android:textColor="#000000"
             android:layout_marginTop="15dp"
-            >
-            <View
-                android:id="@+id/view1"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/bo4goc_nenxam"
-                android:backgroundTint="#FFFFFF"
-                android:layout_marginEnd="5dp"
-                />
-            <View
-                android:id="@+id/view2"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/bo4goc_nenxam"
-                android:layout_marginEnd="5dp"
-
-                />
-            <View
-                android:id="@+id/view3"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/bo4goc_nenxam"
-                />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bannerAddPost"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="-60dp"
-        android:background="@drawable/bo4goc_nenxam"
-        android:backgroundTint="#FFFFFF"
-        android:elevation="10dp">
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
+        <TextView
+            android:id="@+id/txtContent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTilte"
+            android:text="@string/addpostfragment_txtContentPost"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctXacMinh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtContent"
+            android:padding="15dp"
+            android:background="@drawable/bo4goc_nenxam"
+            android:backgroundTint="#F4F7FF">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvXacMinh"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                app:cardBackgroundColor="#6F81E8"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/decriptionImage"
+                    android:src="@drawable/icon_verified"
+                    app:tint="#FFFFFF" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/txtTilteNotication1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/addpostfragment_txtTilteNotication1"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/cvXacMinh"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtContentNotication1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:text="@string/addpostfragment_txtContentNotication1"
+                android:textColor="#7C7C7C"
+                android:textSize="13sp"
+                app:layout_constraintStart_toEndOf="@+id/cvXacMinh"
+                app:layout_constraintTop_toBottomOf="@+id/txtTilteNotication1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctDangTin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ctXacMinh"
+            android:padding="15dp"
+            android:background="@drawable/bo4goc_nenxam"
+            android:backgroundTint="#F4F7FF">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvDangTin"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                app:cardBackgroundColor="#6F81E8"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/decriptionImage"
+                    android:src="@drawable/icon_history"
+                    app:tint="#FFFFFF" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/txtTilteNotication2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/addpostfragment_txtTilteNotication2"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/cvDangTin"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtContentNotication2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:text="@string/addpostfragment_txtContentNotication2"
+                android:textColor="#7C7C7C"
+                android:textSize="13sp"
+                app:layout_constraintStart_toEndOf="@+id/cvDangTin"
+                app:layout_constraintTop_toBottomOf="@+id/txtTilteNotication2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctMienPhi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ctDangTin"
+            android:padding="15dp"
+            android:background="@drawable/bo4goc_nenxam"
+            android:backgroundTint="#F4F7FF">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvMienPhi"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                app:cardBackgroundColor="#6F81E8"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/decriptionImage"
+                    android:src="@drawable/icon_check_circle"
+                    app:tint="#FFFFFF" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/txtTilteNotication3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/addpostfragment_txtTilteNotication3"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/cvMienPhi"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtContentNotication3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:text="@string/addpostfragment_txtContentNotication3"
+                android:textColor="#7C7C7C"
+                android:textSize="13sp"
+                app:layout_constraintStart_toEndOf="@+id/cvMienPhi"
+                app:layout_constraintTop_toBottomOf="@+id/txtTilteNotication3" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnStart"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="25dp"
+           android:backgroundTint="#074EFF"
+            app:cornerRadius="8dp"
+
+            android:text="@string/addpostfragment_btnStartAddPost"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ctMienPhi"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+
+            app:icon="@drawable/icon_arrow_forward"
+            app:iconGravity="textEnd"
+           app:iconPadding="8dp"
+
+
             />
-    </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

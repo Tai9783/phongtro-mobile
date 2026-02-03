@@ -1,80 +1,91 @@
 package com.example.apptimphongtro.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.apptimphongtro.R
-import com.example.apptimphongtro.adapter.AddPostAdapter
-import com.example.apptimphongtro.databinding.FragmentAddPostBinding
-import com.example.apptimphongtro.databinding.FragmentConfirmMapBinding
-import com.example.apptimphongtro.databinding.FragmentProfileBinding
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import androidx.fragment.app.Fragment
 
-class ConfirmMapFragment : Fragment(), OnMapReadyCallback {
+import com.example.apptimphongtro.databinding.FragmentConfirmMapBinding
+import com.example.apptimphongtro.BuildConfig as AppBuildConfig
+
+import com.trackasia.android.Trackasia
+import com.trackasia.android.maps.TrackasiaMap
+import com.trackasia.android.maps.Style
+import com.trackasia.android.camera.CameraUpdateFactory
+import com.trackasia.android.geometry.LatLng
+import com.trackasia.android.annotations.Marker
+import com.trackasia.android.annotations.MarkerOptions
+
+
+class ConfirmMapFragment : Fragment() {
     private var _binding: FragmentConfirmMapBinding? = null
     private val binding get() = _binding!!
-    private lateinit var mMap: GoogleMap
-    private var currentLatLng: LatLng? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    private lateinit var map: TrackasiaMap
+    private var currentLatLng: LatLng? = null
+    private var marker: Marker? = null
+
+    private val styleUrl by lazy {
+        "https://maps.track-asia.com/styles/v2/streets.json?key=${AppBuildConfig.TRACK_ASIA_KEY}"
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        // TrackAsia init (bản demo họ dùng getInstance(context) không truyền key) :contentReference[oaicite:1]{index=1}
+        Trackasia.getInstance(requireContext())
         _binding = FragmentConfirmMapBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Khởi tạo MapFragment
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+        binding.map.onCreate(savedInstanceState)
+        binding.map.getMapAsync { m ->
+            map = m
+            map.setStyle(Style.Builder().fromUri(styleUrl)) {
+                setupMap()
+            }
+        }
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-
-        // Lấy dữ liệu từ argument
-        val lat = arguments?.getString("LAT")?.toDouble() ?: 0.0
-        val lng = arguments?.getString("LNG")?.toDouble() ?: 0.0
-        val address = arguments?.getString("ADDRESS")
+    private fun setupMap() {
+        val lat = arguments?.getString("LAT")?.toDouble() ?: 10.8231
+        val lng = arguments?.getString("LNG")?.toDouble() ?: 106.6297
         currentLatLng = LatLng(lat, lng)
 
-        // Cắm ghim cho phép kéo thả
-        mMap.addMarker(
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng!!, 15.0))
+
+        marker = map.addMarker(
             MarkerOptions()
-            .position(currentLatLng!!)
-            .title("Vị trí phòng trọ")
-            .draggable(true))
+                .position(currentLatLng!!)
+                .title("Vị trí phòng trọ")
+        )
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng!!, 17f))
+        map.addOnMapClickListener { point ->
+            marker?.position = point
+            currentLatLng = point
+            true
+        }
 
-        // Lắng nghe sự kiện kéo ghim để cập nhật tọa độ mới
-        mMap.setOnMarkerDragListener(object : GoogleMap.OnMarkerDragListener {
-            override fun onMarkerDragStart(marker: Marker) {
-                // Khóa ViewPager2 lại để không bị nhảy trang khi đang kéo ghim
-                // Lưu ý: Bạn cần truy cập vào ViewPager2 ở Fragment cha hoặc Activity
-                (parentFragment?.parentFragment as? AddPostFragment)?.binding?.viewPager?.isUserInputEnabled = false
-            }
+        binding.btnContinue.setOnClickListener {
+            // currentLatLng?.let { saveToDatabase(it.latitude, it.longitude) }
+        }
+    }
 
-            override fun onMarkerDragEnd(marker: Marker) {
-                currentLatLng = marker.position
-                // Mở khóa lại sau khi kéo xong
-                (parentFragment?.parentFragment as? AddPostFragment)?.binding?.viewPager?.isUserInputEnabled = true
-            }
-
-            override fun onMarkerDrag(p0: Marker) {}
-        })
-
-       /* binding.btnConfirm.setOnClickListener {
-            // Đây là lúc bạn lưu latitude, longitude và address vào Database
-            saveToDatabase(currentLatLng!!.latitude, currentLatLng!!.longitude)
-        }*/
+    //Quản lý vòng đời của MapView
+    override fun onStart() { super.onStart(); binding.map.onStart() }
+    override fun onResume() { super.onResume(); binding.map.onResume() }
+    override fun onPause() { binding.map.onPause(); super.onPause() }
+    override fun onStop() { binding.map.onStop(); super.onStop() }
+    override fun onLowMemory() { super.onLowMemory(); binding.map.onLowMemory() }
+    override fun onDestroyView() { binding.map.onDestroy(); _binding = null; super.onDestroyView() }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        binding.map.onSaveInstanceState(outState)
     }
 }

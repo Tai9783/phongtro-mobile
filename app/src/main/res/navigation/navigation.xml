@@ -29,8 +29,8 @@
         android:label="Đăng tin"
         tools:layout="@layout/fragment_add_post">
         <action
-            android:id="@+id/action_addPost_to_step2Address"
-            app:destination="@id/Step2AddressFragment" />
+            android:id="@+id/action_addPost_to_implementAddPostFragment"
+            app:destination="@id/ImplementAddPostFragment" />
     </fragment>
 
 
@@ -78,5 +78,15 @@
         <action android:id="@+id/action_Step2AddressFragment_to_CofirmMapFragment"
                 app:destination="@+id/CofirmMapFragment">
         </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/ImplementAddPostFragment"
+        android:name="com.example.apptimphongtro.ui.ImplementAddPostFragment"
+       tools:layout="@layout/fragment_implement_add_post"
+        android:label="trang gioi thieu dang tin">
+        <action
+            android:id="@+id/action_addPost_to_step2Address"
+            app:destination="@id/Step2AddressFragment" />
     </fragment>
 </navigation>

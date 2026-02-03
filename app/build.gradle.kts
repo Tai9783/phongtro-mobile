@@ -1,10 +1,15 @@
 import java.util.Properties
+import java.io.FileInputStream
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-parcelize")
     alias(libs.plugins.navigation.safe.args)
 
+}
+val localProps = Properties().apply {
+    val f = rootProject.file("local.properties")
+    if (f.exists()) load(FileInputStream(f))
 }
 
 android {
@@ -19,17 +24,15 @@ android {
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-
-        val localProperties = Properties()
-        val localPropertiesFile = rootProject.file("local.properties")
-        if (localPropertiesFile.exists()) {
-            localProperties.load(localPropertiesFile.inputStream())
-        }
-
-        manifestPlaceholders["MAPS_API_KEY"] = localProperties.getProperty("MAPS_API_KEY") ?: ""
+        buildConfigField(
+            "String",
+            "TRACK_ASIA_KEY",
+            "\"${localProps.getProperty("TRACK_ASIA_KEY", "")}\""
+        )
     }
 
     buildTypes {
+
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -47,6 +50,7 @@ android {
     }
     buildFeatures{
         viewBinding= true
+        buildConfig = true
     }
 }
 
@@ -63,9 +67,8 @@ dependencies {
 
     // Glide: thư viện tải ảnh từ internet
     implementation(libs.glide)
-
-    // Thư viện Google Maps dành cho Android
-    implementation(libs.play.services.maps)
+    //Thư viện bản đồ của TrackAsia
+    implementation(libs.track.asia.android.sdk)
     // Thư viện lấy tọa độ và vị trí (cho bước sắp xếp gần tôi nhất)
     implementation(libs.play.services.location)
 

@@ -149,6 +149,16 @@
     <string name="addpostfragment_txtTilte">Đăng tin mới</string>
     <string name="addpostfragment_txtStep">Bước 1/3:</string>
     <string name="addpostfragment_txtContenStep">Thông tin cơ bản</string>
+    <string name="addpostfragment_txtTiltePost">Đăng tin cho thuê phòng trọ</string>
+    <string name="addpostfragment_txtContentPost">Tiếp cận hàng ngàn người thuê trọ mỗi ngày. Quy trình đơn giản, nhanh chóng chỉ trong vài bước.</string>
+    <string name="addpostfragment_txtTilteNotication1">Xác minh chủ trọ</string>
+    <string name="addpostfragment_txtTilteNotication2">Đăng tin nhanh chóng</string>
+    <string name="addpostfragment_txtTilteNotication3">Miễn phí đăng tin</string>
+    <string name="addpostfragment_txtContentNotication1">Tin đăng được kiểm duyệt kỹ lưỡng</string>
+    <string name="addpostfragment_txtContentNotication2">Chỉ mất 3–5 phút để hoàn thành</string>
+    <string name="addpostfragment_txtContentNotication3">Không tốn bất kỳ chi phí nào</string>
+    <string name="addpostfragment_btnStartAddPost">Bắt đầu đăng tin</string>
+
     <string name="step1Infor_txtTitle">Tiêu đề tin đăng *</string>
     <string name="step1Infor_edtTitle">VD: Phòng trọ giá rẻ gần ĐH STU</string>
     <string name="step1Infor_txtContent">Mô tả chi tiết *</string>

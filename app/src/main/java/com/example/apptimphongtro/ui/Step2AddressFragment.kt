@@ -81,28 +81,31 @@ class Step2AddressFragment : Fragment() {
         }
 
         binding.btnContinue.setOnClickListener {
-            val cityName= addPostAdressViewModel.selectedCity.value
-            val wardName=addPostAdressViewModel.selectedWard.value
-            val address=binding.edtAddress.text.toString()
+            val cityName = addPostAdressViewModel.selectedCity.value?.city
+            val wardName = addPostAdressViewModel.selectedWard.value?.wardName
+            val address = binding.edtAddress.text.toString()
+
             if (cityName == null || wardName == null || address.isEmpty()) {
                 Toast.makeText(requireContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            val addressFull= "$address, $wardName, $cityName"
+
+            // Thêm "Việt Nam" để Geocoder tìm chính xác hơn
+            val addressFull = "$address, $wardName, $cityName, Việt Nam"
             val geocoder = Geocoder(requireContext(), Locale.getDefault())
+
             try {
-                // Thực hiện Geocoding để lấy tọa độ
                 val addresses = geocoder.getFromLocationName(addressFull, 1)
                 if (!addresses.isNullOrEmpty()) {
                     val location = addresses[0]
-
-                    // Tạo bundle chứa dữ liệu để truyền đi
                     val bundle = Bundle().apply {
                         putString("LAT", location.latitude.toString())
                         putString("LNG", location.longitude.toString())
                         putString("ADDRESS", addressFull)
                     }
-                    requireActivity().findNavController(R.id.nav_host_fragment) // Thay bằng ID của Fragment Container chính ở MainActivity
+
+                    // Sử dụng Global Action để thoát khỏi ViewPager2
+                    requireActivity().findNavController(R.id.nav_host_fragment)
                         .navigate(R.id.action_global_to_CofirmMapFragment, bundle)
                 } else {
                     Toast.makeText(context, "Không tìm thấy địa chỉ này trên bản đồ", Toast.LENGTH_SHORT).show()
@@ -110,7 +113,6 @@ class Step2AddressFragment : Fragment() {
             } catch (e: Exception) {
                 Log.e("GEO_ERROR", e.message.toString())
             }
-
         }
     }
 }
