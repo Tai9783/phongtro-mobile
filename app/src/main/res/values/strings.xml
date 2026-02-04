@@ -169,6 +169,7 @@
     <string name="step1Infor_edtPrice">3000000</string>
     <string name="step1Infor_txtAmenity">Tiện ích *</string>
     <string name="step1Infor_btnTiepTuc">Tiếp tục</string>
+    <string name="step1Infor_btnQuayLai">Quay Lại</string>
 
 
     <string name="step2Address_txtTilteProvince">Tỉnh/Thành phố *</string>
@@ -185,8 +186,15 @@
     <string name="step2Infor_txtNotication">Xác định vị trí chính xác</string>
     <string name="step2Infor_txtContentNotication">Nhập địa chỉ và xác nhận trên bản đồ để người thuê dễ tìm thấy</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Màn hinhf này để người dùng đưa ảnh phòng trọ lên</string>
+   <string name="step3Image_txtNotication">Mẹo chụp ảnh tốt</string>
+   <string name="step3Image_txtContentNotication1">• Chụp đủ ánh sáng, không bị mờ</string>
+   <string name="step3Image_txtContentNotication2">• Chụp nhiều góc khác nhau</string>
+   <string name="step3Image_txtContentNotication3">• Tối thiểu 3 ảnh, tối đa 10 ảnh</string>
+   <string name="step3Image_txtContentNotication4">Ảnh phòng trọ * (Tối thiểu 3 ảnh)</string>
+   <string name="step3Image_txtCountImage">Đã tải %1$d/10 ảnh</string>
+   <string name="step3Image_txtCountImag">Đã tải 0/10 ảnh</string>
 
+   <string name="step3Image_txtAddImage">Thêm ảnh</string>
+   <string name="txt_item_image">Ảnh bìa</string>
 
 </resources>

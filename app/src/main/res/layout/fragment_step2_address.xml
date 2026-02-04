@@ -151,7 +151,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bo4goc_viennen_xam"
-            android:text="@string/step1Infor_btnTiepTuc"
+            android:text="@string/step1Infor_btnQuayLai"
             android:textAllCaps="false"
             android:textColor="#000000"
             android:textSize="16sp"
