@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.apptimphongtro.R
@@ -30,15 +32,21 @@ class Step1InforFragment : Fragment() {
        _binding= FragmentStep1InforBinding.inflate(inflater, container, false)
         return binding.root
     }
-
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addControll()
-
         showAmenity()
+        addEvent()
+    }
 
+    private fun addEvent() {
+        binding.btnContinue.setOnClickListener {
+            val parent = parentFragment as? ImplementAddPostFragment
+            parent?.nextStep()
+        }
+        binding.btnQuaylai.setOnClickListener {
+            requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_to_addPostFrgament)
+        }
 
     }
 
@@ -58,13 +66,10 @@ class Step1InforFragment : Fragment() {
         addPostViewModel.initAmenityList(list)
         adapter= AmenityAdapter( object : OnClick{
             override fun onClickItem(postion: Int) {
-              addPostViewModel.updateItemClick(postion)
+              addPostViewModel. updateItemClickAmenity(postion)
             }
         })
     }
-
-
-
     private fun showAmenity() {
         binding.rvAmenity.adapter= adapter
         binding.rvAmenity.layoutManager= GridLayoutManager(context, 3)
@@ -72,7 +77,6 @@ class Step1InforFragment : Fragment() {
             if(ds!=null)
                 adapter.submitList(ds)
         }
-
     }
     override fun onDestroyView() {
         super.onDestroyView()

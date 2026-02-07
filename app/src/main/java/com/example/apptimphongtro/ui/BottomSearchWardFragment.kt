@@ -21,7 +21,7 @@ import com.example.apptimphongtro.viewmodel.SearchViewModel
 import com.example.apptimphongtro.viewmodel.factory.SearchViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSearchWardFragment : BottomSheetDialogFragment() {
+class   BottomSearchWardFragment : BottomSheetDialogFragment() {
     private lateinit var rvWard: RecyclerView
     private lateinit var searchWardAdapter: SearchWardAdapter
     private val searchViewModel: SearchViewModel  by activityViewModels {

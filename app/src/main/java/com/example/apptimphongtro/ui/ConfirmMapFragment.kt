@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 
 import com.example.apptimphongtro.databinding.FragmentConfirmMapBinding
 import com.example.apptimphongtro.BuildConfig as AppBuildConfig
@@ -74,6 +75,12 @@ class ConfirmMapFragment : Fragment() {
 
         binding.btnContinue.setOnClickListener {
             // currentLatLng?.let { saveToDatabase(it.latitude, it.longitude) }
+            // 1. (Tùy chọn) Gửi dữ liệu về trước khi đóng
+            val locationData= 1
+            findNavController().previousBackStackEntry?.savedStateHandle?.set("key_location", locationData)
+
+            // 2. Lệnh để quay lại màn hình trước đó
+            findNavController().popBackStack()
         }
     }
 

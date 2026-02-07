@@ -6,6 +6,10 @@
     app:startDestination="@id/homeFragment">
     <action android:id="@+id/action_global_to_CofirmMapFragment"
         app:destination="@id/CofirmMapFragment" />
+    <action
+        android:id="@+id/action_global_to_addPostFrgament"
+        app:destination="@+id/addPostFrgament"
+        />
 
     <fragment
         android:id="@+id/homeFragment"
@@ -72,6 +76,12 @@
         <argument android:name="ADDRESS"
             app:argType="string"/>
     </fragment>
+    <fragment
+        android:id="@+id/Step1InforFragment"
+        android:name="com.example.apptimphongtro.ui.Step1InforFragment"
+        tools:layout="@layout/fragment_step1_infor"
+        android:label="Nhập thôn tin cơ bản"
+        />
     <fragment
         android:id="@+id/Step2AddressFragment"
         android:name="com.example.apptimphongtro.ui.Step2AddressFragment"

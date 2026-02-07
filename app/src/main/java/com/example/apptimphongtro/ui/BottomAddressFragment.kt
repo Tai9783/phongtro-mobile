@@ -17,7 +17,7 @@ import com.example.apptimphongtro.adapter.OnClickItem
 import com.example.apptimphongtro.databinding.FragmentBottomAddressBinding
 import com.example.apptimphongtro.model.CityRoomCount
 import com.example.apptimphongtro.model.Ward
-import com.example.apptimphongtro.viewmodel.AddPostAdressViewModel
+import com.example.apptimphongtro.viewmodel.AddPostViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
@@ -28,7 +28,7 @@ class BottomAddressFragment : BottomSheetDialogFragment() {
     private lateinit var listCity: List<CityRoomCount>
     private lateinit var addPostAdressCityAdapter: AddPostAdressCityAdapter
     private lateinit var addPostAddressWardAdapter: AddPostAddressWardAdapter
-    private lateinit var addPostAdressViewModel:AddPostAdressViewModel
+    private lateinit var addPostViewModel: AddPostViewModel
     private lateinit var keyContent: String
     private lateinit var listWard: List<Ward>
     private var restored = false
@@ -59,34 +59,34 @@ class BottomAddressFragment : BottomSheetDialogFragment() {
     private fun addControll() {
          keyContent= arguments?.getString("keyy")?:"" //key để phân biệt user chọn City hay Ward
 
+        addPostViewModel= ViewModelProvider(requireActivity())[AddPostViewModel::class.java]
+
         //khởi tạo các thành phần để hiển thị và giữ trangj thái của các item trong dsCity
-            addPostAdressViewModel =
-                ViewModelProvider(requireActivity())[AddPostAdressViewModel::class.java]
             listCity = listOf(
                 CityRoomCount(1, "Tp Hồ Chí Minh"),
                 CityRoomCount(2, "Hà Nội"),
                 CityRoomCount(3, "Đà Nẵng")
             )
-            addPostAdressViewModel.initCityList(listCity)
+        addPostViewModel.initCityList(listCity)
             addPostAdressCityAdapter = AddPostAdressCityAdapter(object : OnClickItem {
                 override fun onclick(idCity: Int) {
-                    addPostAdressViewModel.updateItemClick(idCity)
+                    addPostViewModel.updateItemClick(idCity)
                     binding.rvAddress.postDelayed({ dismiss() }, 450)
                 }
             })
 
         addPostAddressWardAdapter= AddPostAddressWardAdapter(object: AddPostAddressWardAdapter.OnClickItemWard {
             override fun onclick(wardName: String) {
-                addPostAdressViewModel.updateItemWardClick(wardName)
+                addPostViewModel.updateItemWardClick(wardName)
                 binding.rvAddress.postDelayed({dismiss()},450)
             }
 
         })
 
-        addPostAdressViewModel.selectedCity.observe(viewLifecycleOwner){cityName->
+        addPostViewModel.selectedCity.observe(viewLifecycleOwner){cityName->
             if (cityName!=null) {
                 listWard = context?.let { getWardLocal(it, cityName.idCity) }!! // lấy ds Ward theo city
-                addPostAdressViewModel.initWartList(listWard)//khởi tạo list ward và lưu ds vào livedata
+                addPostViewModel.initWartList(listWard)//khởi tạo list ward và lưu ds vào livedata
             }
         }
 
@@ -99,7 +99,7 @@ class BottomAddressFragment : BottomSheetDialogFragment() {
             binding.rvAddress.adapter = addPostAdressCityAdapter
             binding.rvAddress.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            addPostAdressViewModel.allCity.observe(viewLifecycleOwner) { newList ->
+            addPostViewModel.allCity.observe(viewLifecycleOwner) { newList ->
                 addPostAdressCityAdapter.submitList(newList)
             }
             binding.rvAddress.addItemDecoration(object : RecyclerView.ItemDecoration() {
@@ -117,15 +117,15 @@ class BottomAddressFragment : BottomSheetDialogFragment() {
             binding.txtTitle.text= getString(R.string.searchBottomFragment_WardTitle)
             binding.rvAddress.adapter= addPostAddressWardAdapter
             binding.rvAddress.layoutManager= LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-            addPostAdressViewModel.allWard.observe(viewLifecycleOwner){dsWard->
+            addPostViewModel.allWard.observe(viewLifecycleOwner){dsWard->
                 addPostAddressWardAdapter.submitList(dsWard){
                     if (!restored && keyContent == "fragmentWard") {
                         restored = true
                         binding.rvAddress.post {
                             val lm = binding.rvAddress.layoutManager as LinearLayoutManager
                             lm.scrollToPositionWithOffset(
-                                addPostAdressViewModel.wardScrollPos,
-                                addPostAdressViewModel.wardScrollOffset
+                                addPostViewModel.wardScrollPos,
+                                addPostViewModel.wardScrollOffset
                             )
                         }
                     }
@@ -163,8 +163,8 @@ class BottomAddressFragment : BottomSheetDialogFragment() {
             val firstPos = lm.findFirstVisibleItemPosition()
             if (firstPos != RecyclerView.NO_POSITION) {
                 val top = binding.rvAddress.getChildAt(0)?.top ?: 0
-                addPostAdressViewModel.wardScrollPos = firstPos
-                addPostAdressViewModel.wardScrollOffset = top
+                addPostViewModel.wardScrollPos = firstPos
+                addPostViewModel.wardScrollOffset = top
             }
         }
 

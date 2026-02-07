@@ -108,6 +108,10 @@ class Step3ImageFragment : Fragment() {
                 Toast.makeText(requireContext(),"Vui lòng tải ít nhất 3 ảnh",Toast.LENGTH_SHORT).show()
 
         }
+        binding.btnQuaylai.setOnClickListener {
+            val parent= parentFragment as? ImplementAddPostFragment
+            parent?.preStep()
+        }
     }
 
     override fun onDestroyView() {
