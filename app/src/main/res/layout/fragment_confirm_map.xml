@@ -38,6 +38,20 @@
         app:trackasia_uiScrollGestures="true"
         app:trackasia_uiTiltGestures="true"
         app:trackasia_uiZoomGestures="true" />
+    <TextView
+        android:id="@+id/txtAddress"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnContinue"
+        android:layout_margin="15dp"
+        android:background="@drawable/bo4goc_vienxanh"
+        android:textSize="18sp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:gravity="center|start"
+        />
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnContinue"
         android:layout_width="match_parent"
