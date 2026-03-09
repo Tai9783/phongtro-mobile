@@ -37,27 +37,39 @@ class Step2AddressFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         addControll()
         addEvent()
-        val navController= Navigation.findNavController(requireActivity(),R.id.nav_host_fragment)
-        navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>("key_address")
-            ?.observe(viewLifecycleOwner){address->
-                // Khi Map trả về địa chỉ:
-
-                // a. Điền địa chỉ vào EditText/TextView
-               // binding.edtAddress.setText(address)
-
-                // b. Tự động chuyển sang màn hình con 3
-                // Ép kiểu parentFragment về Fragment tổng để gọi hàm chuyển trang
-                if (address!=null)
-                (parentFragment as? ImplementAddPostFragment)?.nextStep()
-
-                // c. (Tùy chọn) Xóa dữ liệu sau khi dùng để tránh quay lại bị nhảy trang lần nữa
-               // navController.currentBackStackEntry?.savedStateHandle?.remove<String>("key_address")
-            }
 
     }
 
     private fun addControll() {
         addPostViewModel= ViewModelProvider(requireActivity())[AddPostViewModel::class.java]
+
+        addPostViewModel.addPost.observe(viewLifecycleOwner){post->
+            if(post.lag!=0.0 && post.lng!=0.0&&post.address!=""&&!addPostViewModel.isHandle()){
+                val address=post.address
+                val addressArray= address.split(",")
+                val size = addressArray.size
+                if(size>=2) {
+                    addPostViewModel.updateSelectCity(addressArray.last().trim())
+                    addPostViewModel.updateSelectWard(addressArray[size-2].trim())
+                    if(size>2){
+                        binding.edtAddress.setText(addressArray[0].trim())
+                    }
+                    else {
+                        binding.edtAddress.setText("")
+                    }
+                }
+                addPostViewModel.markAsHandled()
+                binding.progress.visibility= View.VISIBLE
+
+                view?.postDelayed({
+                    if(isAdded) {// Kiểm tra fragment trước còn tồn tại hay không trước khi chuyển để tránh crash
+                      (parentFragment as? ImplementAddPostFragment)?.nextStep()
+                        binding.progress.visibility= View.INVISIBLE
+                    }
+                },1500)
+
+            }
+        }
     }
 
     private fun addEvent() {
@@ -119,9 +131,7 @@ class Step2AddressFragment : Fragment() {
                     val bundle = Bundle().apply {
                         putString("LAT", location.latitude.toString())
                         putString("LNG", location.longitude.toString())
-                        putString("ADDRESS", addressFull)
                     }
-
                     // Sử dụng Global Action để thoát khỏi ViewPager2
                     requireActivity().findNavController(R.id.nav_host_fragment)
                         .navigate(R.id.action_global_to_CofirmMapFragment, bundle)

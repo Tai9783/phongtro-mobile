@@ -12,15 +12,20 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.apptimphongtro.R
 import com.example.apptimphongtro.databinding.FragmentStep3ImageBinding
+import com.example.apptimphongtro.viewmodel.AddPostViewModel
 import com.google.android.material.imageview.ShapeableImageView
+import okhttp3.MultipartBody
+import retrofit2.http.Multipart
 
 
 class Step3ImageFragment : Fragment() {
     private var _binding: FragmentStep3ImageBinding?=null
     private val binding get()= _binding!!
+    private lateinit var addPostViewModel: AddPostViewModel
     //Khai báo chọn bộ ảnh
     private var pickMedia= registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)){ uris->
         val currentCount= binding.layoutImageContainer.childCount
@@ -30,9 +35,11 @@ class Step3ImageFragment : Fragment() {
             Toast.makeText(requireContext(),"Chỉ lấy thêm $limitPhoto ảnh vì đã vượt số lượng cho phép",Toast.LENGTH_SHORT).show()
 
         if(uris.isNotEmpty()){
-            uris.take(limitPhoto).forEach {uri-> // chỉ lấy số lượng còn thiếu cho đủ 10 ảnh
+            val limitedUris= uris.take(limitPhoto)
+            limitedUris.forEach {uri-> // chỉ lấy số lượng còn thiếu cho đủ 10 ảnh
                 addNewImageToLayout(uri)
             }
+            addPostViewModel.addImage(limitedUris)
         }
         else{
             Log.d("Photo","Người dùng không chọn ảnh nào!!")
@@ -55,6 +62,7 @@ class Step3ImageFragment : Fragment() {
     }
 
     private fun addControll() {
+        addPostViewModel= ViewModelProvider(requireActivity())[AddPostViewModel::class.java]
     }
 
     private fun addNewImageToLayout(uri: Uri) {
@@ -70,7 +78,8 @@ class Step3ImageFragment : Fragment() {
         refreshImage()
         icClose.setOnClickListener {
             binding.layoutImageContainer.removeView(itemView)
-           refreshImage(    )
+           refreshImage()
+            addPostViewModel.removeImage(uri)
         }
     }
 
@@ -106,7 +115,6 @@ class Step3ImageFragment : Fragment() {
             val countRoom= binding.layoutImageContainer.childCount
             if (countRoom<3)
                 Toast.makeText(requireContext(),"Vui lòng tải ít nhất 3 ảnh",Toast.LENGTH_SHORT).show()
-
         }
         binding.btnQuaylai.setOnClickListener {
             val parent= parentFragment as? ImplementAddPostFragment

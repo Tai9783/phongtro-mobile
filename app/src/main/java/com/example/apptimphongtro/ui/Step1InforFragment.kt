@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -41,6 +42,32 @@ class Step1InforFragment : Fragment() {
 
     private fun addEvent() {
         binding.btnContinue.setOnClickListener {
+            val title= binding.edtTitle.text.toString()
+            val description= binding.edtContent.text.toString()
+            val areaStr= binding.edtArea.text.toString()
+            val priceStr= binding.edtPrice.text.toString()
+
+            val area= areaStr.toDoubleOrNull()
+            val price= priceStr.toDoubleOrNull()
+
+            val amenities= addPostViewModel.allAmenities.value.orEmpty()
+            if (title.isBlank()|| description.isBlank()||area==null|| price==null) {
+                Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin và đúng định dang", Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
+            if (area<=0 || price<=0){
+                Toast.makeText(context,"Diện tích và giá phải lớn hơn 0!",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (amenities.isEmpty()) {
+                Toast.makeText(context, "Vui lòng chọn tiện ích cho phòng trọ!", Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
+            addPostViewModel.updateStep1Infor(title,description,area, price, amenities)
+
+
             val parent = parentFragment as? ImplementAddPostFragment
             parent?.nextStep()
         }
