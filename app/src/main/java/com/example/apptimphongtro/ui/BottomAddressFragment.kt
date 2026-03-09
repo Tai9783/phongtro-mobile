@@ -63,9 +63,9 @@ class BottomAddressFragment : BottomSheetDialogFragment() {
 
         //khởi tạo các thành phần để hiển thị và giữ trangj thái của các item trong dsCity
             listCity = listOf(
-                CityRoomCount(1, "Tp Hồ Chí Minh"),
-                CityRoomCount(2, "Hà Nội"),
-                CityRoomCount(3, "Đà Nẵng")
+                CityRoomCount(1, "Thành phố Hồ Chí Minh"),
+                CityRoomCount(2, "Thành phố Hà Nội"),
+                CityRoomCount(3, "Thành phố Đà Nẵng")
             )
         addPostViewModel.initCityList(listCity)
             addPostAdressCityAdapter = AddPostAdressCityAdapter(object : OnClickItem {
@@ -83,9 +83,9 @@ class BottomAddressFragment : BottomSheetDialogFragment() {
 
         })
 
-        addPostViewModel.selectedCity.observe(viewLifecycleOwner){cityName->
-            if (cityName!=null) {
-                listWard = context?.let { getWardLocal(it, cityName.idCity) }!! // lấy ds Ward theo city
+        addPostViewModel.selectedCity.observe(viewLifecycleOwner){city->
+            if (city!=null&& city.idCity != -1) {
+                listWard = context?.let { getWardLocal(it, city.idCity) } ?: emptyList() // lấy ds Ward theo city
                 addPostViewModel.initWartList(listWard)//khởi tạo list ward và lưu ds vào livedata
             }
         }
