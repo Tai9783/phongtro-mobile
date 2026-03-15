@@ -20,5 +20,8 @@ object RetrofitClient {
     val userApiService: UserApiService by lazy {
         retrofit.create((UserApiService::class.java))
     }
+    val cloudinaryApiService: CloudinaryApiService by lazy {
+        retrofit.create(CloudinaryApiService::class.java)
+    }
 }
 
