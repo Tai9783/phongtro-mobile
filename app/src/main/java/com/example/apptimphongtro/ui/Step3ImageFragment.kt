@@ -1,5 +1,6 @@
 package com.example.apptimphongtro.ui
 
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -13,19 +14,36 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.apptimphongtro.R
+import com.example.apptimphongtro.data.api.CloudinaryUploadService
+import com.example.apptimphongtro.data.api.RetrofitClient
+import com.example.apptimphongtro.data.api.RetrofitClient.cloudinaryUploadService
+import com.example.apptimphongtro.data.repository.CloudinaryRepository
 import com.example.apptimphongtro.databinding.FragmentStep3ImageBinding
+import com.example.apptimphongtro.model.CloudinarySignatureResponse
 import com.example.apptimphongtro.viewmodel.AddPostViewModel
+import com.example.apptimphongtro.viewmodel.CloudinaryViewModel
+import com.example.apptimphongtro.viewmodel.factory.CloudinaryViewModelFactory
 import com.google.android.material.imageview.ShapeableImageView
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import retrofit2.http.Multipart
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody
 
 
 class Step3ImageFragment : Fragment() {
     private var _binding: FragmentStep3ImageBinding?=null
     private val binding get()= _binding!!
     private lateinit var addPostViewModel: AddPostViewModel
+    private lateinit var cloudinaryViewModel: CloudinaryViewModel
+    private lateinit var cloudinaryRepository: CloudinaryRepository
+    private lateinit var cloudinaryViewModelFactory: CloudinaryViewModelFactory
+    private lateinit var currentCloudinary: CloudinarySignatureResponse
+
     //Khai báo chọn bộ ảnh
     private var pickMedia= registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)){ uris->
         val currentCount= binding.layoutImageContainer.childCount
@@ -59,10 +77,21 @@ class Step3ImageFragment : Fragment() {
         addControll()
         addEvent()
         refreshImage()
+        cloudinaryViewModel.clodinary.observe(viewLifecycleOwner){cloudinary->
+            Log.d("STEP3","CHU KY LA $cloudinary")
+            currentCloudinary= cloudinary
+        }
+
     }
 
     private fun addControll() {
         addPostViewModel= ViewModelProvider(requireActivity())[AddPostViewModel::class.java]
+        val apiService= RetrofitClient.cloudinaryApiService
+        cloudinaryRepository= CloudinaryRepository(apiService)
+        cloudinaryViewModelFactory= CloudinaryViewModelFactory(cloudinaryRepository)
+        cloudinaryViewModel= ViewModelProvider(requireActivity(),cloudinaryViewModelFactory)[CloudinaryViewModel::class.java]
+        cloudinaryViewModel.getCloudinarySignature()
+
     }
 
     private fun addNewImageToLayout(uri: Uri) {
@@ -99,6 +128,25 @@ class Step3ImageFragment : Fragment() {
         }
 
     }
+    //convert uri to MultipartBody
+    private fun uriToMultipart(context: Context,uri: Uri ): MultipartBody.Part{
+        val inputStream= context.contentResolver.openInputStream(uri)
+        val bitmap= android.graphics.BitmapFactory.decodeStream(inputStream)
+        inputStream?.close()
+        val outputStream= java.io.ByteArrayOutputStream()
+        // Nén ảnh
+        bitmap.compress(
+            android.graphics.Bitmap.CompressFormat.JPEG,
+            70,
+            outputStream
+        )
+        val compressByte= outputStream.toByteArray()
+        val requestFile= compressByte.toRequestBody("image/jpeg".toMediaTypeOrNull())
+        return MultipartBody.Part.createFormData("file","image.jpg", requestFile)
+    }
+    private fun String.toPlain(): RequestBody {
+        return this.toRequestBody("text/plain".toMediaType())
+    }
 
     private fun addEvent() {
         binding.ctAddImage.setOnClickListener {
@@ -115,6 +163,35 @@ class Step3ImageFragment : Fragment() {
             val countRoom= binding.layoutImageContainer.childCount
             if (countRoom<3)
                 Toast.makeText(requireContext(),"Vui lòng tải ít nhất 3 ảnh",Toast.LENGTH_SHORT).show()
+            else{
+                val uploadUrls= mutableListOf<String>()
+                val listUri= addPostViewModel.allImage.value
+                Log.d("List uri nhan duoc la: ","$listUri")
+                    val cloudinary= currentCloudinary
+                        viewLifecycleOwner.lifecycleScope.launch {
+                        if(listUri!=null){
+                            for(uri in listUri){
+                                val part= context?.let { uriToMultipart(it,uri) }
+                                Log.d("Part cua tung anh la","$part")
+                                if (part != null) {
+                                    val response = cloudinaryUploadService.uploadImage(
+                                        cloudName = cloudinary.cloudName,
+                                        file = part,
+                                        apiKey = cloudinary.apiKey.toPlain(),
+                                        signature = cloudinary.signature.toPlain(),
+                                        timestamp = cloudinary.timestamp.toString().toPlain()
+                                    )
+                                    uploadUrls.add(response.secure_url)
+                                }
+                            }
+                        }
+
+
+                        Log.d("STEP3","DS CAC LINK URL LA $uploadUrls")
+                }
+
+
+            }
         }
         binding.btnQuaylai.setOnClickListener {
             val parent= parentFragment as? ImplementAddPostFragment

@@ -5,9 +5,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
     private const val BASE_URL = "http://10.0.2.2:8080/"
+    private const val URL_CLOUDINARY="https://api.cloudinary.com/"
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+    private val retrofitCloudinary: Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(URL_CLOUDINARY)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -22,6 +29,9 @@ object RetrofitClient {
     }
     val cloudinaryApiService: CloudinaryApiService by lazy {
         retrofit.create(CloudinaryApiService::class.java)
+    }
+    val cloudinaryUploadService: CloudinaryUploadService by lazy {
+        retrofitCloudinary.create(CloudinaryUploadService::class.java)
     }
 }
 
