@@ -50,7 +50,7 @@ class Step1InforFragment : Fragment() {
             val area= areaStr.toDoubleOrNull()
             val price= priceStr.toDoubleOrNull()
 
-            val amenities= addPostViewModel.allAmenities.value.orEmpty()
+            val amenities= addPostViewModel.allAmenities.value.orEmpty().filter { it.isSelected }
             if (title.isBlank()|| description.isBlank()||area==null|| price==null) {
                 Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin và đúng định dang", Toast.LENGTH_SHORT)
                     .show()

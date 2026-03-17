@@ -82,6 +82,9 @@ class AddPostViewModel : ViewModel() {
         isLocationHandled= false
         _addPost.value= addPost.value!!.copy(address = address, lag = lag, lng = lng)
     }
+    fun updateStep2CityAndWard(city: String, ward: String){
+        _addPost.value=addPost.value!!.copy(city = city, ward = ward)
+    }
     fun markAsHandled(){
         isLocationHandled= true
     }

@@ -49,8 +49,11 @@ class Step2AddressFragment : Fragment() {
                 val addressArray= address.split(",")
                 val size = addressArray.size
                 if(size>=2) {
-                    addPostViewModel.updateSelectCity(addressArray.last().trim())
-                    addPostViewModel.updateSelectWard(addressArray[size-2].trim())
+                    val city=addressArray.last().trim()
+                    val ward= addressArray[size-2].trim()
+                    addPostViewModel.updateSelectCity(city)
+                    addPostViewModel.updateSelectWard(ward)
+                    addPostViewModel.updateStep2CityAndWard(city,ward)
                     if(size>2){
                         binding.edtAddress.setText(addressArray[0].trim())
                     }
