@@ -35,9 +35,8 @@ class ResultSearchAdapter : ListAdapter<RentalRoom,ResultSearchAdapter.SearchVie
             city.text=room.city
             price.text= FormatMoney().formatMoney(room.price)+"/tháng"
 
-            val imgJson= room.imagesJson
-            val listType= object : TypeToken<List<String>>(){}.type
-            val imageList:List<String> = Gson().fromJson(imgJson,listType)
+
+            val imageList:List<String> = room.imagesJson
 
             Glide.with(itemView.context)
                 .load(imageList[0])

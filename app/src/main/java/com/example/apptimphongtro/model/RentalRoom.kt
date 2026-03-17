@@ -7,7 +7,7 @@ data class  RentalRoom(
     val description: String="",
     val price: Double=0.0,
     val area: Double=0.0,
-    val imagesJson: String="",
+    val imagesJson: List<String> = emptyList(),
     val status: Int=0,
     val createdAt: String="",
     val address: String="",
