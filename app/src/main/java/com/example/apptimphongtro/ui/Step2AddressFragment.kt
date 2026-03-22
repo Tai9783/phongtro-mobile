@@ -44,7 +44,7 @@ class Step2AddressFragment : Fragment() {
         addPostViewModel= ViewModelProvider(requireActivity())[AddPostViewModel::class.java]
 
         addPostViewModel.addPost.observe(viewLifecycleOwner){post->
-            if(post.lag!=0.0 && post.lng!=0.0&&post.address!=""&&!addPostViewModel.isHandle()){
+            if(post.lat!=0.0 && post.lng!=0.0&&post.address!=""&&!addPostViewModel.isHandle()){
                 val address=post.address
                 val addressArray= address.split(",")
                 val size = addressArray.size

@@ -1,7 +1,6 @@
 package com.example.apptimphongtro.model
 
-data class  RentalRoom(
-    val roomId: String="",
+data class RentalRoomRequest(
     val landlordId: String="",
     val title: String="",
     val description: String="",
@@ -9,11 +8,10 @@ data class  RentalRoom(
     val area: Double=0.0,
     val imagesJson: List<String> = emptyList(),
     val status: Int=0,
-    val createdAt: String="",
     val address: String="",
     val city: String="",
     val ward: String="",
-    val amenities: List<Amenity> = emptyList(),
+    val amenities: List<String> = emptyList(),
     val lat: Double=0.0,
     val lng: Double=0.0
 )

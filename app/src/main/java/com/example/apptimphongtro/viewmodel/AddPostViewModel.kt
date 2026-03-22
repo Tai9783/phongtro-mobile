@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.apptimphongtro.model.Amenity
 import com.example.apptimphongtro.model.CityRoomCount
 import com.example.apptimphongtro.model.RentalRoom
+import com.example.apptimphongtro.model.RentalRoomRequest
 import com.example.apptimphongtro.model.Ward
 
 class AddPostViewModel : ViewModel() {
@@ -14,8 +15,8 @@ class AddPostViewModel : ViewModel() {
     val currentStep: LiveData<Int> get()=_currentStep
     private var isLocationHandled = false // biến đánh dấu xem sự kiện này đã được xử lý chưa
     //chứa thông tin bài đăng khi landlord đăng bài
-    private var _addPost= MutableLiveData(RentalRoom())
-    val addPost: LiveData<RentalRoom> get()=_addPost
+    private var _addPost= MutableLiveData(RentalRoomRequest())
+    val addPost: LiveData<RentalRoomRequest> get()=_addPost
 
     private val _allAmenities= MutableLiveData<List<Amenity>>()
     val allAmenities: MutableLiveData<List<Amenity>> get()= _allAmenities
@@ -54,7 +55,7 @@ class AddPostViewModel : ViewModel() {
     }
     fun updateSelectCity(cityName: String){
         val trimmedName = cityName.trim()
-        // 1. Thử tìm trong danh sách đã load (để lấy đúng ID 1, 2, 3)
+        //  Thử tìm trong danh sách đã load (để lấy đúng ID 1, 2, 3)
         val foundCity = _allCity.value?.find { it.city.equals(trimmedName, ignoreCase = true) }
 
         if (foundCity != null) {
@@ -75,16 +76,21 @@ class AddPostViewModel : ViewModel() {
         _allImage.value= currentList
     }
 
-    fun updateStep1Infor(title: String, decription: String,area: Double, price: Double, amenity: List<Amenity>){
+    fun updateStep1Infor(title: String, decription: String,area: Double, price: Double, amenity: List<String>){
         _addPost.value=_addPost.value!!.copy(title = title, description = decription, area = area, price = price, amenities = amenity)
     }
     fun updateStep2Address(address: String, lag: Double, lng: Double){
         isLocationHandled= false
-        _addPost.value= addPost.value!!.copy(address = address, lag = lag, lng = lng)
+        _addPost.value= addPost.value!!.copy(address = address, lat = lag, lng = lng)
     }
     fun updateStep2CityAndWard(city: String, ward: String){
         _addPost.value=addPost.value!!.copy(city = city, ward = ward)
     }
+    fun updateStep3(landlordId: String, listImage: List<String>){
+
+        _addPost.value=addPost.value!!.copy(landlordId = landlordId, imagesJson = listImage, status = 1)
+    }
+
     fun markAsHandled(){
         isLocationHandled= true
     }

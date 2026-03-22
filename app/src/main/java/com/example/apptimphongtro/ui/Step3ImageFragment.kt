@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -23,8 +24,10 @@ import com.example.apptimphongtro.data.api.RetrofitClient.cloudinaryUploadServic
 import com.example.apptimphongtro.data.repository.CloudinaryRepository
 import com.example.apptimphongtro.databinding.FragmentStep3ImageBinding
 import com.example.apptimphongtro.model.CloudinarySignatureResponse
+import com.example.apptimphongtro.util.InitUserViewModel
 import com.example.apptimphongtro.viewmodel.AddPostViewModel
 import com.example.apptimphongtro.viewmodel.CloudinaryViewModel
+import com.example.apptimphongtro.viewmodel.UserViewModel
 import com.example.apptimphongtro.viewmodel.factory.CloudinaryViewModelFactory
 import com.google.android.material.imageview.ShapeableImageView
 import kotlinx.coroutines.launch
@@ -43,6 +46,10 @@ class Step3ImageFragment : Fragment() {
     private lateinit var cloudinaryRepository: CloudinaryRepository
     private lateinit var cloudinaryViewModelFactory: CloudinaryViewModelFactory
     private lateinit var currentCloudinary: CloudinarySignatureResponse
+    private val userViewModel: UserViewModel by activityViewModels {
+        InitUserViewModel.factory
+    }
+    private lateinit var landlordId : String
 
     //Khai báo chọn bộ ảnh
     private var pickMedia= registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)){ uris->
@@ -78,7 +85,6 @@ class Step3ImageFragment : Fragment() {
         addEvent()
         refreshImage()
         cloudinaryViewModel.clodinary.observe(viewLifecycleOwner){cloudinary->
-            Log.d("STEP3","CHU KY LA $cloudinary")
             currentCloudinary= cloudinary
         }
 
@@ -166,13 +172,11 @@ class Step3ImageFragment : Fragment() {
             else{
                 val uploadUrls= mutableListOf<String>()
                 val listUri= addPostViewModel.allImage.value
-                Log.d("List uri nhan duoc la: ","$listUri")
                     val cloudinary= currentCloudinary
                         viewLifecycleOwner.lifecycleScope.launch {
                         if(listUri!=null){
                             for(uri in listUri){
                                 val part= context?.let { uriToMultipart(it,uri) }
-                                Log.d("Part cua tung anh la","$part")
                                 if (part != null) {
                                     val response = cloudinaryUploadService.uploadImage(
                                         cloudName = cloudinary.cloudName,
@@ -184,13 +188,15 @@ class Step3ImageFragment : Fragment() {
                                     uploadUrls.add(response.secure_url)
                                 }
                             }
+                            landlordId= userViewModel.user.value?.userId.toString()
+                            addPostViewModel.updateStep3(landlordId,uploadUrls)
+                            Log.d("HEHH","List url anh la: $uploadUrls")
+                            addPostViewModel.addPost.observe(viewLifecycleOwner){addPost->
+                                Log.d("HJLJHSBB","thong tin addPost laf $addPost")
+                            }
                         }
 
-
-                        Log.d("STEP3","DS CAC LINK URL LA $uploadUrls")
                 }
-
-
             }
         }
         binding.btnQuaylai.setOnClickListener {
