@@ -1,6 +1,6 @@
 package com.example.apptimphongtro.data.api
 
-import com.example.apptimphongtro.model.CloudinarySignatureResponse
+import com.example.apptimphongtro.model.dto.CloudinarySignatureResponse
 import retrofit2.http.GET
 
 interface CloudinaryApiService {

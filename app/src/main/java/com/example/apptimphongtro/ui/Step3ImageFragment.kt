@@ -23,7 +23,7 @@ import com.example.apptimphongtro.data.api.RetrofitClient
 import com.example.apptimphongtro.data.api.RetrofitClient.cloudinaryUploadService
 import com.example.apptimphongtro.data.repository.CloudinaryRepository
 import com.example.apptimphongtro.databinding.FragmentStep3ImageBinding
-import com.example.apptimphongtro.model.CloudinarySignatureResponse
+import com.example.apptimphongtro.model.dto.CloudinarySignatureResponse
 import com.example.apptimphongtro.util.InitUserViewModel
 import com.example.apptimphongtro.viewmodel.AddPostViewModel
 import com.example.apptimphongtro.viewmodel.CloudinaryViewModel

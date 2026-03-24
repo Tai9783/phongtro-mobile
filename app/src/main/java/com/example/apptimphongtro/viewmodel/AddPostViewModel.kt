@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.apptimphongtro.model.Amenity
 import com.example.apptimphongtro.model.CityRoomCount
 import com.example.apptimphongtro.model.RentalRoom
-import com.example.apptimphongtro.model.RentalRoomRequest
+import com.example.apptimphongtro.model.dto.RentalRoomRequest
 import com.example.apptimphongtro.model.Ward
 
 class AddPostViewModel : ViewModel() {

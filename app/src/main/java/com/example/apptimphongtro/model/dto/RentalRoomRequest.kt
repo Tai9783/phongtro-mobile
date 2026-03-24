@@ -1,4 +1,4 @@
-package com.example.apptimphongtro.model
+package com.example.apptimphongtro.model.dto
 
 data class RentalRoomRequest(
     val landlordId: String="",

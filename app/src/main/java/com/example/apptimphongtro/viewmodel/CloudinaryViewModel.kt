@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apptimphongtro.data.repository.CloudinaryRepository
-import com.example.apptimphongtro.model.CloudinarySignatureResponse
+import com.example.apptimphongtro.model.dto.CloudinarySignatureResponse
 import kotlinx.coroutines.launch
 
 class CloudinaryViewModel(private val repository: CloudinaryRepository): ViewModel() {

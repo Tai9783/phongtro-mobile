@@ -1,6 +1,6 @@
 package com.example.apptimphongtro.data.api
 
-import com.example.apptimphongtro.model.CloudinaryRespone
+import com.example.apptimphongtro.model.dto.CloudinaryRespone
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Multipart

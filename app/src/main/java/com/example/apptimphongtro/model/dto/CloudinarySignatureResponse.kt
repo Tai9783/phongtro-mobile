@@ -1,7 +1,4 @@
-package com.example.apptimphongtro.model
-
-import java.security.Signature
-import java.sql.Timestamp
+package com.example.apptimphongtro.model.dto
 
 data class CloudinarySignatureResponse(
     val timestamp: Long,

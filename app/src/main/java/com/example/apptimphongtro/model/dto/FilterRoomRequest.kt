@@ -1,4 +1,4 @@
-package com.example.apptimphongtro.model
+package com.example.apptimphongtro.model.dto
 
 import com.example.apptimphongtro.util.PriceRange
 
@@ -6,5 +6,5 @@ data class FilterRoomRequest(
     val nameCity: String,
     val nameWard: List<String>,
     val listPrice: List<PriceRange>,
-    val listAmenity: List<String>   
+    val listAmenity: List<String>
 )
