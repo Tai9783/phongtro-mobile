@@ -1,7 +1,7 @@
 package com.example.apptimphongtro.adapter.diffcallback
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.apptimphongtro.model.RentalRoom
+import com.example.apptimphongtro.model.entity.RentalRoom
 
 class DiffCallBackRoom: DiffUtil.ItemCallback<RentalRoom>() {
     override fun areItemsTheSame(oldItem: RentalRoom, newItem: RentalRoom): Boolean {

@@ -7,10 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apptimphongtro.data.repository.SearchRepository
-import com.example.apptimphongtro.model.CityRoomCount
-import com.example.apptimphongtro.model.FilterState
-import com.example.apptimphongtro.model.RentalRoom
-import com.example.apptimphongtro.model.Ward
+import com.example.apptimphongtro.model.entity.CityRoomCount
+import com.example.apptimphongtro.model.entity.FilterState
+import com.example.apptimphongtro.model.entity.RentalRoom
+import com.example.apptimphongtro.model.entity.Ward
 import com.example.apptimphongtro.util.PriceRange
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.launch

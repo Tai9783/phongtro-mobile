@@ -2,10 +2,10 @@ package com.example.apptimphongtro.data.repository
 
 import android.service.autofill.FillRequest
 import com.example.apptimphongtro.data.api.SearchApiService
-import com.example.apptimphongtro.model.CityRoomCount
+import com.example.apptimphongtro.model.entity.CityRoomCount
 import com.example.apptimphongtro.model.dto.FilterRoomRequest
-import com.example.apptimphongtro.model.RentalRoom
-import com.example.apptimphongtro.model.Ward
+import com.example.apptimphongtro.model.entity.RentalRoom
+import com.example.apptimphongtro.model.entity.Ward
 import com.example.apptimphongtro.util.PriceRange
 
 class SearchRepository(private val searchApiService: SearchApiService) {

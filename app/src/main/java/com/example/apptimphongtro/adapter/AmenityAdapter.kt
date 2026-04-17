@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apptimphongtro.R
 import com.example.apptimphongtro.adapter.diffcallback.DiffCallBackAmenityAddPost
-import com.example.apptimphongtro.model.Amenity
+import com.example.apptimphongtro.model.entity.Amenity
 
 class AmenityAdapter( private val onClickAmenity: OnClick) : ListAdapter<Amenity,AmenityAdapter.AmenityHolder>(
     DiffCallBackAmenityAddPost()

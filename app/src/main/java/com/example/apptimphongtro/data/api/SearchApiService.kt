@@ -1,8 +1,8 @@
 package com.example.apptimphongtro.data.api
 
-import com.example.apptimphongtro.model.CityRoomCount
+import com.example.apptimphongtro.model.entity.CityRoomCount
 import com.example.apptimphongtro.model.dto.FilterRoomRequest
-import com.example.apptimphongtro.model.RentalRoom
+import com.example.apptimphongtro.model.entity.RentalRoom
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apptimphongtro.R
 import com.example.apptimphongtro.adapter.diffcallback.DiffCallBackSearchWard
-import com.example.apptimphongtro.model.Ward
+import com.example.apptimphongtro.model.entity.Ward
 
 class AddPostAddressWardAdapter(private val onClick: OnClickItemWard): ListAdapter<Ward, AddPostAddressWardAdapter.AddressWardViewHolder>(
     DiffCallBackSearchWard()

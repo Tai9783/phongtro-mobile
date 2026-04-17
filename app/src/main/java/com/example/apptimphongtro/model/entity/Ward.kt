@@ -1,9 +1,9 @@
-package com.example.apptimphongtro.model
+package com.example.apptimphongtro.model.entity
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.serialization.Serializable
 import kotlinx.parcelize.Parcelize
+
 @Parcelize
 data class Ward(
 

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apptimphongtro.data.api.RoomApiService
 import com.example.apptimphongtro.data.repository.RoomRepository
-import com.example.apptimphongtro.model.RentalRoom
+import com.example.apptimphongtro.model.entity.RentalRoom
 import kotlinx.coroutines.launch
 import kotlin.math.min
 

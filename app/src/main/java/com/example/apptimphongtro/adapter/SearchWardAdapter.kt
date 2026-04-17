@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apptimphongtro.R
 import com.example.apptimphongtro.adapter.diffcallback.DiffCallBackSearchWard
-import com.example.apptimphongtro.model.Ward
+import com.example.apptimphongtro.model.entity.Ward
 import com.google.android.material.checkbox.MaterialCheckBox
 
 class SearchWardAdapter: ListAdapter<Ward,SearchWardAdapter.SearchWardHolder>(DiffCallBackSearchWard()) {

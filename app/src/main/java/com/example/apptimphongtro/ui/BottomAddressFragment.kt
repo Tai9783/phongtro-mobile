@@ -15,8 +15,8 @@ import com.example.apptimphongtro.adapter.AddPostAddressWardAdapter
 import com.example.apptimphongtro.adapter.AddPostAdressCityAdapter
 import com.example.apptimphongtro.adapter.OnClickItem
 import com.example.apptimphongtro.databinding.FragmentBottomAddressBinding
-import com.example.apptimphongtro.model.CityRoomCount
-import com.example.apptimphongtro.model.Ward
+import com.example.apptimphongtro.model.entity.CityRoomCount
+import com.example.apptimphongtro.model.entity.Ward
 import com.example.apptimphongtro.viewmodel.AddPostViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 

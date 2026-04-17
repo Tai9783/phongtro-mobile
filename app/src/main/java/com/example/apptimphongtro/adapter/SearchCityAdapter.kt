@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apptimphongtro.R
 import com.example.apptimphongtro.adapter.diffcallback.DiffCallSearchCity
-import com.example.apptimphongtro.model.CityRoomCount
+import com.example.apptimphongtro.model.entity.CityRoomCount
 
 class SearchCityAdapter(
     cityNameSelect: String,

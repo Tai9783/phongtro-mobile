@@ -16,7 +16,7 @@ import com.example.apptimphongtro.data.api.RetrofitClient
 import com.example.apptimphongtro.data.local.SharedPrefManager
 import com.example.apptimphongtro.data.repository.UserRepository
 import com.example.apptimphongtro.databinding.FragmentProfileBinding
-import com.example.apptimphongtro.model.User
+import com.example.apptimphongtro.model.entity.User
 import com.example.apptimphongtro.util.InitUserViewModel
 import com.example.apptimphongtro.viewmodel.UserViewModel
 import com.example.apptimphongtro.viewmodel.factory.UserViewModelFactory

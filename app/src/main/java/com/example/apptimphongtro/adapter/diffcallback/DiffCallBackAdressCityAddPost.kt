@@ -1,8 +1,8 @@
 package com.example.apptimphongtro.adapter.diffcallback
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.apptimphongtro.model.Amenity
-import com.example.apptimphongtro.model.CityRoomCount
+import com.example.apptimphongtro.model.entity.Amenity
+import com.example.apptimphongtro.model.entity.CityRoomCount
 
 class DiffCallBackAdressCityAddPost: DiffUtil.ItemCallback<CityRoomCount>() {
 

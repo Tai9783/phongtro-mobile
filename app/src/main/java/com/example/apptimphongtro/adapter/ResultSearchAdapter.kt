@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.apptimphongtro.R
 import com.example.apptimphongtro.adapter.diffcallback.DiffCallBackSearchRoom
-import com.example.apptimphongtro.model.RentalRoom
+import com.example.apptimphongtro.model.entity.RentalRoom
 import com.example.apptimphongtro.util.FormatMoney
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup

@@ -1,6 +1,6 @@
     package com.example.apptimphongtro.data.api
 
-    import com.example.apptimphongtro.model.RentalRoom
+    import com.example.apptimphongtro.model.entity.RentalRoom
     import retrofit2.http.GET
     import retrofit2.http.Query
 

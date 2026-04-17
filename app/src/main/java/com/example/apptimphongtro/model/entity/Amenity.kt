@@ -1,4 +1,4 @@
-package com.example.apptimphongtro.model
+package com.example.apptimphongtro.model.entity
 
 data class Amenity(
     val amenityId: String,

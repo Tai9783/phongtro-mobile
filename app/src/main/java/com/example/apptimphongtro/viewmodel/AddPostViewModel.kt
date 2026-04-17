@@ -4,11 +4,11 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.apptimphongtro.model.Amenity
-import com.example.apptimphongtro.model.CityRoomCount
-import com.example.apptimphongtro.model.RentalRoom
+import com.example.apptimphongtro.model.entity.Amenity
+import com.example.apptimphongtro.model.entity.CityRoomCount
+import com.example.apptimphongtro.model.entity.RentalRoom
 import com.example.apptimphongtro.model.dto.RentalRoomRequest
-import com.example.apptimphongtro.model.Ward
+import com.example.apptimphongtro.model.entity.Ward
 
 class AddPostViewModel : ViewModel() {
     private val _currentStep=MutableLiveData(0) // lưu vị trí hiện tại của viewpage2

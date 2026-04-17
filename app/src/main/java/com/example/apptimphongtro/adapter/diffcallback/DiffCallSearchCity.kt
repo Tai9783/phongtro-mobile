@@ -1,7 +1,7 @@
 package com.example.apptimphongtro.adapter.diffcallback
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.apptimphongtro.model.CityRoomCount
+import com.example.apptimphongtro.model.entity.CityRoomCount
 
 class DiffCallSearchCity: DiffUtil.ItemCallback<CityRoomCount>() {
     override fun areItemsTheSame(oldItem: CityRoomCount, newItem: CityRoomCount): Boolean {

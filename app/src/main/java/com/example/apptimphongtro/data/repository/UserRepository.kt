@@ -1,7 +1,7 @@
 package com.example.apptimphongtro.data.repository
 
 import com.example.apptimphongtro.data.api.UserApiService
-import com.example.apptimphongtro.model.User
+import com.example.apptimphongtro.model.entity.User
 
 class UserRepository(private val userApiService: UserApiService) {
     suspend fun getUser(taikhoan: String,pass: String): User {

@@ -1,6 +1,6 @@
 package com.example.apptimphongtro.data.api
 
-import com.example.apptimphongtro.model.User
+import com.example.apptimphongtro.model.entity.User
 import retrofit2.http.GET
 import retrofit2.http.Query
 

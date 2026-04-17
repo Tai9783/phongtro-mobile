@@ -16,7 +16,7 @@ import com.example.apptimphongtro.R
 import com.example.apptimphongtro.adapter.AmenityAdapter
 import com.example.apptimphongtro.adapter.OnClick
 import com.example.apptimphongtro.databinding.FragmentStep1InforBinding
-import com.example.apptimphongtro.model.Amenity
+import com.example.apptimphongtro.model.entity.Amenity
 import com.example.apptimphongtro.viewmodel.AddPostViewModel
 
 class Step1InforFragment : Fragment() {

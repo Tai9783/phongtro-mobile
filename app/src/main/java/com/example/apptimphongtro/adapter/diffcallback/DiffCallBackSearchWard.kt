@@ -1,7 +1,7 @@
 package com.example.apptimphongtro.adapter.diffcallback
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.apptimphongtro.model.Ward
+import com.example.apptimphongtro.model.entity.Ward
 
 class DiffCallBackSearchWard: DiffUtil.ItemCallback<Ward>()
 {
