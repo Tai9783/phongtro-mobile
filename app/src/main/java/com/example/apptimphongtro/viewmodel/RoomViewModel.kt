@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apptimphongtro.data.api.RoomApiService
 import com.example.apptimphongtro.data.repository.RoomRepository
+import com.example.apptimphongtro.model.dto.RentalRoomRequest
 import com.example.apptimphongtro.model.entity.RentalRoom
 import kotlinx.coroutines.launch
 import kotlin.math.min
@@ -17,6 +18,22 @@ class RoomViewModel(private val repository: RoomRepository): ViewModel() {
 
     private val _roomByPrice= MutableLiveData<List<RentalRoom>>()
     val roomByPrice : LiveData<List<RentalRoom>> get()=_roomByPrice
+
+    private val _createRoomId= MutableLiveData<String>()
+    val createRoomId: LiveData<String> get()= _createRoomId
+
+
+    fun insertOrPostRoom(room: RentalRoomRequest){
+        viewModelScope.launch {
+            val result= repository.insertOrPostRoom(room)
+            result.fold(
+                onSuccess = { _createRoomId.value = it.roomId },
+                onFailure = {
+                    Log.e("ROOMVIEWMODEL", "Lỗi lấy dữ liệu: ${it.message}")
+                }
+            )
+        }
+    }
 
     fun fetchPhongNoiBat(){
         viewModelScope.launch{

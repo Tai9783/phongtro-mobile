@@ -22,13 +22,16 @@ import com.example.apptimphongtro.data.api.CloudinaryUploadService
 import com.example.apptimphongtro.data.api.RetrofitClient
 import com.example.apptimphongtro.data.api.RetrofitClient.cloudinaryUploadService
 import com.example.apptimphongtro.data.repository.CloudinaryRepository
+import com.example.apptimphongtro.data.repository.RoomRepository
 import com.example.apptimphongtro.databinding.FragmentStep3ImageBinding
 import com.example.apptimphongtro.model.dto.CloudinarySignatureResponse
 import com.example.apptimphongtro.util.InitUserViewModel
 import com.example.apptimphongtro.viewmodel.AddPostViewModel
 import com.example.apptimphongtro.viewmodel.CloudinaryViewModel
+import com.example.apptimphongtro.viewmodel.RoomViewModel
 import com.example.apptimphongtro.viewmodel.UserViewModel
 import com.example.apptimphongtro.viewmodel.factory.CloudinaryViewModelFactory
+import com.example.apptimphongtro.viewmodel.factory.RoomViewModelFactory
 import com.google.android.material.imageview.ShapeableImageView
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -46,6 +49,9 @@ class Step3ImageFragment : Fragment() {
     private lateinit var cloudinaryRepository: CloudinaryRepository
     private lateinit var cloudinaryViewModelFactory: CloudinaryViewModelFactory
     private lateinit var currentCloudinary: CloudinarySignatureResponse
+    private lateinit var roomViewModel: RoomViewModel
+    private lateinit var roomViewModelFactory: ViewModelProvider.Factory
+    private lateinit var roomRepository: RoomRepository
     private val userViewModel: UserViewModel by activityViewModels {
         InitUserViewModel.factory
     }
@@ -88,6 +94,11 @@ class Step3ImageFragment : Fragment() {
             currentCloudinary= cloudinary
         }
 
+        roomViewModel.createRoomId.observe(viewLifecycleOwner){idRoom->
+            if(idRoom!=null)
+                Log.d("STEP3 BUOC CUOI","ĐĂNG BÀI THÀNH CÔNG VÀ ID LÀ $idRoom")
+        }
+
     }
 
     private fun addControll() {
@@ -97,6 +108,10 @@ class Step3ImageFragment : Fragment() {
         cloudinaryViewModelFactory= CloudinaryViewModelFactory(cloudinaryRepository)
         cloudinaryViewModel= ViewModelProvider(requireActivity(),cloudinaryViewModelFactory)[CloudinaryViewModel::class.java]
         cloudinaryViewModel.getCloudinarySignature()
+        val roomApi = RetrofitClient.roomApiService
+        roomRepository= RoomRepository(roomApi)
+        roomViewModelFactory= RoomViewModelFactory(roomRepository)
+        roomViewModel= ViewModelProvider(this,roomViewModelFactory)[RoomViewModel::class.java]
 
     }
 
@@ -190,15 +205,21 @@ class Step3ImageFragment : Fragment() {
                             }
                             landlordId= userViewModel.user.value?.userId.toString()
                             addPostViewModel.updateStep3(landlordId,uploadUrls)
-                            Log.d("HEHH","List url anh la: $uploadUrls")
-                            addPostViewModel.addPost.observe(viewLifecycleOwner){addPost->
+
+                           /* addPostViewModel.addPost.observe(viewLifecycleOwner){addPost->
                                 Log.d("HJLJHSBB","thong tin addPost laf $addPost")
+                            }*/
+                            val listImage= addPostViewModel.addPost.value
+                            val roomResquest= addPostViewModel.addPost.value
+                            if(roomResquest!=null && listImage!=null){
+                                roomViewModel.insertOrPostRoom(roomResquest)
                             }
                         }
 
                 }
             }
         }
+
         binding.btnQuaylai.setOnClickListener {
             val parent= parentFragment as? ImplementAddPostFragment
             parent?.preStep()

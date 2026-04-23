@@ -1,6 +1,7 @@
 package com.example.apptimphongtro.data.repository
 
 import com.example.apptimphongtro.data.api.RoomApiService
+import com.example.apptimphongtro.model.dto.RentalRoomRequest
 import com.example.apptimphongtro.model.entity.RentalRoom
 
 class RoomRepository(private val apiService: RoomApiService) {
@@ -18,6 +19,14 @@ class RoomRepository(private val apiService: RoomApiService) {
         }
     }
 
+    suspend fun insertOrPostRoom(room: RentalRoomRequest): Result<RentalRoom> {
+        return try {
+            val createdRoom = apiService.insertOrPostRoom(room)
+            Result.success(createdRoom)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 
 
 }
