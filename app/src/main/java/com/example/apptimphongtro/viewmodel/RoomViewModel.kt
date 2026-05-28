@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.apptimphongtro.common.RoomUIState
 import com.example.apptimphongtro.data.api.RoomApiService
 import com.example.apptimphongtro.data.repository.RoomRepository
 import com.example.apptimphongtro.model.dto.RentalRoomRequest
@@ -22,18 +23,30 @@ class RoomViewModel(private val repository: RoomRepository): ViewModel() {
     private val _createRoomId= MutableLiveData<String>()
     val createRoomId: LiveData<String> get()= _createRoomId
 
+    private val _uiState= MutableLiveData<RoomUIState>(RoomUIState.Idle)
+    val uiState: LiveData<RoomUIState> get()= _uiState
 
-    fun insertOrPostRoom(room: RentalRoomRequest){
+
+
+    fun saveRoom(rentalRoom: RentalRoomRequest){
+        _uiState.value= RoomUIState.Loading
         viewModelScope.launch {
-            val result= repository.insertOrPostRoom(room)
-            result.fold(
-                onSuccess = { _createRoomId.value = it.roomId },
-                onFailure = {
-                    Log.e("ROOMVIEWMODEL", "Lỗi lấy dữ liệu: ${it.message}")
-                }
-            )
+            val result= repository.insertOrPostRoom(rentalRoom)
+
+            result.onSuccess{room->
+                _uiState.value= RoomUIState.Success(room)
+                _createRoomId.value = room.roomId
+            }
+            result.onFailure{error->
+                _uiState.value= RoomUIState.Error(error.message ?: "Lỗi không xác định")
+            }
+
         }
     }
+    fun reSetState(){
+        _uiState.value= RoomUIState.Idle
+    }
+
 
     fun fetchPhongNoiBat(){
         viewModelScope.launch{

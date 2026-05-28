@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.apptimphongtro.R
+import com.example.apptimphongtro.common.RoomUIState
 import com.example.apptimphongtro.data.api.CloudinaryUploadService
 import com.example.apptimphongtro.data.api.RetrofitClient
 import com.example.apptimphongtro.data.api.RetrofitClient.cloudinaryUploadService
@@ -52,6 +53,7 @@ class Step3ImageFragment : Fragment() {
     private lateinit var roomViewModel: RoomViewModel
     private lateinit var roomViewModelFactory: ViewModelProvider.Factory
     private lateinit var roomRepository: RoomRepository
+    private  var loadingDialog: LoadingDialog?=null
     private val userViewModel: UserViewModel by activityViewModels {
         InitUserViewModel.factory
     }
@@ -185,37 +187,91 @@ class Step3ImageFragment : Fragment() {
             if (countRoom<3)
                 Toast.makeText(requireContext(),"Vui lòng tải ít nhất 3 ảnh",Toast.LENGTH_SHORT).show()
             else{
+                if(loadingDialog==null)
+                    loadingDialog= LoadingDialog()
+                loadingDialog?.show(parentFragmentManager,"loading")
+
                 val uploadUrls= mutableListOf<String>()
                 val listUri= addPostViewModel.allImage.value
                     val cloudinary= currentCloudinary
                         viewLifecycleOwner.lifecycleScope.launch {
-                        if(listUri!=null){
-                            for(uri in listUri){
-                                val part= context?.let { uriToMultipart(it,uri) }
-                                if (part != null) {
-                                    val response = cloudinaryUploadService.uploadImage(
-                                        cloudName = cloudinary.cloudName,
-                                        file = part,
-                                        apiKey = cloudinary.apiKey.toPlain(),
-                                        signature = cloudinary.signature.toPlain(),
-                                        timestamp = cloudinary.timestamp.toString().toPlain()
-                                    )
-                                    uploadUrls.add(response.secure_url)
+                            try{
+                                if(listUri!=null){
+                                    for(uri in listUri){
+                                        val part= context?.let { uriToMultipart(it,uri) }
+                                        if (part != null) {
+                                            val response = cloudinaryUploadService.uploadImage(
+                                                cloudName = cloudinary.cloudName,
+                                                file = part,
+                                                apiKey = cloudinary.apiKey.toPlain(),
+                                                signature = cloudinary.signature.toPlain(),
+                                                timestamp = cloudinary.timestamp.toString().toPlain()
+                                            )
+                                            uploadUrls.add(response.secure_url)
+                                        }
+                                    }
+                                    landlordId= userViewModel.user.value?.userId.toString()
+                                    addPostViewModel.updateStep3(landlordId,uploadUrls)
+
+                                    val listImage= addPostViewModel.addPost.value
+                                    val roomResquest= addPostViewModel.addPost.value
+                                    if(roomResquest!=null && listImage!=null){
+                                     //   roomViewModel.insertOrPostRoom(roomResquest)
+                                        roomViewModel.saveRoom(roomResquest)
+                                    }
                                 }
-                            }
-                            landlordId= userViewModel.user.value?.userId.toString()
-                            addPostViewModel.updateStep3(landlordId,uploadUrls)
+                            }catch (e: Exception){
+                                loadingDialog?.dismiss()
+                                loadingDialog=null
 
-                           /* addPostViewModel.addPost.observe(viewLifecycleOwner){addPost->
-                                Log.d("HJLJHSBB","thong tin addPost laf $addPost")
-                            }*/
-                            val listImage= addPostViewModel.addPost.value
-                            val roomResquest= addPostViewModel.addPost.value
-                            if(roomResquest!=null && listImage!=null){
-                                roomViewModel.insertOrPostRoom(roomResquest)
+                                val dialog= StatusDialog.newInstance(
+                                    isSuccess = false,
+                                    message = "Không có kết nối mạng. Vui lòng kiểm tra lại")
+                                dialog.show(parentFragmentManager,"error_net")
                             }
-                        }
+                }
+            }
+        }
+        roomViewModel.uiState.observe(viewLifecycleOwner){state->
+            when(state){
+                is RoomUIState.Idle->{
+                  //  hideLoading()
+                }
+                is RoomUIState.Loading->{
+                    if (loadingDialog?.isVisible==false)
+                            loadingDialog?.show(parentFragmentManager,"loading")
+                }
+                is RoomUIState.Success->{
+                    loadingDialog?.dismiss()
+                    loadingDialog=null
+                    val dialog= StatusDialog.newInstance(
+                        isSuccess = true,
+                        message = "Phòng đã lưu hệ thống thành công")
+                    dialog.show(parentFragmentManager,"success_dialog")
 
+                    dialog.onPrimaryClick={
+
+                    }
+                    dialog.onSecondaryClick={
+                        dialog.dismiss()
+                    }
+
+                }
+                is RoomUIState.Error->{
+                    loadingDialog?.dismiss()
+                    loadingDialog=null
+
+                    val dialog= StatusDialog.newInstance(
+                        isSuccess = false,
+                        message = state.message)
+                    dialog.show(parentFragmentManager,"error_dialog")
+
+                    dialog.onPrimaryClick={
+
+                    }
+                    dialog.onSecondaryClick={
+                        dialog.dismiss()
+                    }
                 }
             }
         }
@@ -225,6 +281,7 @@ class Step3ImageFragment : Fragment() {
             parent?.preStep()
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
