@@ -18,20 +18,24 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.apptimphongtro.R
+import com.example.apptimphongtro.common.RoomPostUiState
 import com.example.apptimphongtro.common.RoomUIState
 import com.example.apptimphongtro.data.api.CloudinaryUploadService
 import com.example.apptimphongtro.data.api.RetrofitClient
 import com.example.apptimphongtro.data.api.RetrofitClient.cloudinaryUploadService
 import com.example.apptimphongtro.data.repository.CloudinaryRepository
+import com.example.apptimphongtro.data.repository.RoomPostRepository
 import com.example.apptimphongtro.data.repository.RoomRepository
 import com.example.apptimphongtro.databinding.FragmentStep3ImageBinding
 import com.example.apptimphongtro.model.dto.CloudinarySignatureResponse
 import com.example.apptimphongtro.util.InitUserViewModel
 import com.example.apptimphongtro.viewmodel.AddPostViewModel
 import com.example.apptimphongtro.viewmodel.CloudinaryViewModel
+import com.example.apptimphongtro.viewmodel.RoomPostViewModel
 import com.example.apptimphongtro.viewmodel.RoomViewModel
 import com.example.apptimphongtro.viewmodel.UserViewModel
 import com.example.apptimphongtro.viewmodel.factory.CloudinaryViewModelFactory
+import com.example.apptimphongtro.viewmodel.factory.RoomPostViewModelFactory
 import com.example.apptimphongtro.viewmodel.factory.RoomViewModelFactory
 import com.google.android.material.imageview.ShapeableImageView
 import kotlinx.coroutines.launch
@@ -54,6 +58,9 @@ class Step3ImageFragment : Fragment() {
     private lateinit var roomViewModelFactory: ViewModelProvider.Factory
     private lateinit var roomRepository: RoomRepository
     private  var loadingDialog: LoadingDialog?=null
+    private lateinit var roomPostRepository: RoomPostRepository
+    private lateinit var roomPostViewModel: RoomPostViewModel
+    private lateinit var roomPostViewModelFactory: ViewModelProvider.Factory
     private val userViewModel: UserViewModel by activityViewModels {
         InitUserViewModel.factory
     }
@@ -114,6 +121,10 @@ class Step3ImageFragment : Fragment() {
         roomRepository= RoomRepository(roomApi)
         roomViewModelFactory= RoomViewModelFactory(roomRepository)
         roomViewModel= ViewModelProvider(this,roomViewModelFactory)[RoomViewModel::class.java]
+
+        roomPostRepository= RoomPostRepository(RetrofitClient.roomPostApiService)
+        roomPostViewModelFactory= RoomPostViewModelFactory(roomPostRepository)
+        roomPostViewModel= ViewModelProvider(this,roomPostViewModelFactory)[RoomPostViewModel::class.java]
 
     }
 
@@ -247,15 +258,17 @@ class Step3ImageFragment : Fragment() {
                     val dialog= StatusDialog.newInstance(
                         isSuccess = true,
                         message = "Phòng đã lưu hệ thống thành công")
-                    dialog.show(parentFragmentManager,"success_dialog")
 
                     dialog.onPrimaryClick={
-
+                        val roomId = state.room.roomId
+                        roomPostViewModel.saveRoomPost(roomId)
+                        //reset lại RoomUIState
+                        roomViewModel.reSetState()
                     }
                     dialog.onSecondaryClick={
                         dialog.dismiss()
                     }
-
+                    dialog.show(parentFragmentManager,"success_dialog")
                 }
                 is RoomUIState.Error->{
                     loadingDialog?.dismiss()
@@ -274,6 +287,40 @@ class Step3ImageFragment : Fragment() {
                     }
                 }
             }
+        }
+        roomPostViewModel.uiStateRoomPost.observe(viewLifecycleOwner){state ->
+            when(state){
+                is RoomPostUiState.Idle->{}
+                is RoomPostUiState.Loading->{
+                    if (loadingDialog?.isVisible==false)
+                            loadingDialog?.show(parentFragmentManager,"loading")
+
+                }
+                is RoomPostUiState.Success->{
+//                    loadingDialog?.dismiss()
+//                    loadingDialog=null
+//                    roomPostViewModel.resetStatePostRoom()
+//                    val dialog= StatusDialog.newInstance(
+//                        isSuccess = true,
+//                        message = "Đăng bài thành công, Vui lòng chờ xét duyệt!"
+//                    )
+//                    dialog.onPrimaryClick={
+//
+//                    }
+//                    dialog.onSecondaryClick={
+//
+//                    }
+//                    dialog.show(parentFragmentManager,"success_dialog")
+
+
+
+                }
+                is RoomPostUiState.Error->{
+                    Log.e("STEP3 BUOC CUOI","Lỗi đăng bài: ${state.message}")
+
+                }
+            }
+
         }
 
         binding.btnQuaylai.setOnClickListener {

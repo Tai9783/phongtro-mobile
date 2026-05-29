@@ -75,11 +75,11 @@ class StatusDialog : DialogFragment() {
             setupFailureUI(layoutIcon, igStatus, txtResult, txtDecription, btnPrimary, btnSecond)
         }
         btnSecond.setOnClickListener {
-            onSecondaryClick
+            onSecondaryClick?.invoke()
             dismiss()
         }
         btnPrimary.setOnClickListener {
-            onPrimaryClick
+            onPrimaryClick?.invoke()
             dismiss()
         }
     }
@@ -126,85 +126,3 @@ class StatusDialog : DialogFragment() {
 
 
 }
-
-
-
-//class StatusDialog(
-//    private val isSuccess: Boolean,
-//    private val message: String? = null,
-//    private val onPrimaryClick: () -> Unit,
-//    private val onSecondaryClick: () -> Unit
-//) : DialogFragment() {
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        // Bo góc cho Dialog (Làm cho nền bao quanh trở nên trong suốt)
-//        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//        return inflater.inflate(R.layout.layout_status_dialog, container, false) // Thay bằng tên file XML của Tài
-//    }
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        // Ánh xạ các View
-//        val layoutIcon = view.findViewById<FrameLayout>(R.id.layoutIcon)
-//        val igStatus = view.findViewById<ImageView>(R.id.igStatus)
-//        val txtResult = view.findViewById<TextView>(R.id.txtResult)
-//        val txtDecription = view.findViewById<TextView>(R.id.txtdecription)
-//        val btnPrimary = view.findViewById<Button>(R.id.btnPrimary)
-//        val btnSecond = view.findViewById<Button>(R.id.btnSecond)
-//
-//        // Phù phép dựa trên trạng thái isSuccess
-//        if (isSuccess) {
-//            setupSuccessUI(layoutIcon, igStatus, txtResult, txtDecription, btnPrimary, btnSecond)
-//        } else {
-//            setupFailureUI(layoutIcon, igStatus, txtResult, txtDecription, btnPrimary, btnSecond)
-//        }
-//
-//        // Xử lý sự kiện click
-//        btnPrimary.setOnClickListener {
-//            onPrimaryClick()
-//            dismiss()
-//        }
-//        btnSecond.setOnClickListener {
-//            onSecondaryClick()
-//            dismiss()
-//        }
-//    }
-//
-//    private fun setupSuccessUI(layoutIcon: FrameLayout, igStatus: ImageView, txtResult: TextView, txtDesc: TextView, btnP: Button, btnS: Button) {
-//        val colorXanh = Color.parseColor("#074EFF")
-//        val colorXanhNhat = Color.parseColor("#33074EFF")
-//
-//        val layerDrawable = layoutIcon.background as LayerDrawable
-//        layerDrawable.findDrawableByLayerId(R.id.outerCircle).setTint(colorXanhNhat)
-//        layerDrawable.findDrawableByLayerId(R.id.innerCircle).setTint(colorXanh)
-//
-//        igStatus.setImageResource(R.drawable.icon_check_24px)
-//        txtResult.text = "Lưu thành công!"
-//        txtDesc.text = "Bạn có muốn đăng tin để người thuê tìm thấy phòng không?"
-//        btnP.text = "Có, đăng tin ngay"
-//        btnS.text = "Để sau"
-//    }
-//
-//    private fun setupFailureUI(layoutIcon: FrameLayout, igStatus: ImageView, txtResult: TextView, txtDesc: TextView, btnP: Button, btnS: Button) {
-//        val colorDo = Color.parseColor("#FF4A4A")
-//        val colorDoNhat = Color.parseColor("#33FF4A4A")
-//
-//        val layerDrawable = layoutIcon.background as LayerDrawable
-//        layerDrawable.findDrawableByLayerId(R.id.outerCircle).setTint(colorDoNhat)
-//        layerDrawable.findDrawableByLayerId(R.id.innerCircle).setTint(colorDo)
-//
-//        igStatus.setImageResource(R.drawable.ic_close) // Nhớ thêm icon X vào drawable
-//        txtResult.text = "Lưu thất bại!"
-//        txtDesc.text = message ?: "Có lỗi xảy ra khi lưu thông tin phòng. Vui lòng thử lại."
-//        btnP.text = "Thử lại"
-//        btnS.text = "Quay lại chỉnh sửa"
-//
-//        // Đổi màu nút chính sang đỏ
-//        btnP.backgroundTintList = ColorStateList.valueOf(colorDo)
-//        btnS.setTextColor(colorDo)
-//    }
-//}

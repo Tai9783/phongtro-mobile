@@ -33,5 +33,8 @@ object RetrofitClient {
     val cloudinaryUploadService: CloudinaryUploadService by lazy {
         retrofitCloudinary.create(CloudinaryUploadService::class.java)
     }
+    val roomPostApiService: RoomPostApiSevice by lazy {
+        retrofit.create(RoomPostApiSevice::class.java)
+    }
 }
 
