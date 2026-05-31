@@ -249,6 +249,9 @@ class Step3ImageFragment : Fragment() {
                   //  hideLoading()
                 }
                 is RoomUIState.Loading->{
+                    if (loadingDialog == null) {
+                        loadingDialog = LoadingDialog()
+                    }
                     if (loadingDialog?.isVisible==false)
                             loadingDialog?.show(parentFragmentManager,"loading")
                 }
@@ -292,25 +295,34 @@ class Step3ImageFragment : Fragment() {
             when(state){
                 is RoomPostUiState.Idle->{}
                 is RoomPostUiState.Loading->{
-                    if (loadingDialog?.isVisible==false)
-                            loadingDialog?.show(parentFragmentManager,"loading")
+                    if (loadingDialog == null) {
+                        loadingDialog = LoadingDialog()
+                    }
+                    if (loadingDialog?.isVisible == false) {
+                        loadingDialog?.show(parentFragmentManager, "loading")
+                    }
 
                 }
                 is RoomPostUiState.Success->{
-//                    loadingDialog?.dismiss()
-//                    loadingDialog=null
-//                    roomPostViewModel.resetStatePostRoom()
-//                    val dialog= StatusDialog.newInstance(
-//                        isSuccess = true,
-//                        message = "Đăng bài thành công, Vui lòng chờ xét duyệt!"
-//                    )
-//                    dialog.onPrimaryClick={
-//
-//                    }
-//                    dialog.onSecondaryClick={
-//
-//                    }
-//                    dialog.show(parentFragmentManager,"success_dialog")
+                    roomPostViewModel.resetStatePostRoom()
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        kotlinx.coroutines.delay(700)
+                        loadingDialog?.dismiss()
+                        loadingDialog=null
+                        val dialog= StatusDialog.newInstance(
+                            isSuccess = true,
+                            message = "Đăng bài thành công, Vui lòng chờ xét duyệt!"
+                        )
+                        dialog.onPrimaryClick={
+
+                        }
+                        dialog.onSecondaryClick={
+
+                        }
+                        dialog.show(parentFragmentManager,"success_dialog")
+                    }
+
+
 
 
 

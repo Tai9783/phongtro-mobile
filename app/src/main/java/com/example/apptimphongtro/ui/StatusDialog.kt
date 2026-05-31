@@ -118,7 +118,7 @@ class StatusDialog : DialogFragment() {
         layerDrawable.findDrawableByLayerId(R.id.outerCircle).setTint(colorXanhNhat)
         layerDrawable.findDrawableByLayerId(R.id.innerCircle).setTint(colorXanh)
         igStatus?.setImageResource(R.drawable.icon_check_24px)
-        txtResult?.text= getString(R.string.dialogInformation_title)
+        txtResult?.text= message.toString()
         txtDecription?.text= getString(R.string.dialogInformation_decription)
         btnPrimary?.text=getString(R.string.dialogInformation_btnPrimary)
         btnSecond?.text=getString(R.string.dialogInformation_btnSecond)
