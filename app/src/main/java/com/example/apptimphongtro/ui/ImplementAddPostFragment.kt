@@ -84,4 +84,9 @@ class   ImplementAddPostFragment : Fragment() {
         binding.view3.setBackgroundColor(if (pos>=2) colorBacground else inactiveColor)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        addPostViewModel.resetAddPost()
+    }
+
 }

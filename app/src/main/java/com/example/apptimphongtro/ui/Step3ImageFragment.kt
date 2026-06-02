@@ -65,6 +65,7 @@ class Step3ImageFragment : Fragment() {
         InitUserViewModel.factory
     }
     private lateinit var landlordId : String
+    private var saveRoomId: String=""
 
     //Khai báo chọn bộ ảnh
     private var pickMedia= registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)){ uris->
@@ -263,6 +264,7 @@ class Step3ImageFragment : Fragment() {
 
                     dialog.onPrimaryClick={
                         val roomId = state.room.roomId
+                        saveRoomId= roomId
                         roomPostViewModel.saveRoomPost(roomId)
                         //reset lại RoomUIState
                         roomViewModel.reSetState()
@@ -316,10 +318,17 @@ class Step3ImageFragment : Fragment() {
                             message = "Vui lòng chờ xét duyệt!"
                         )
                         dialog.onPrimaryClick={
-
+                            //Xem bài đăng
                         }
                         dialog.onSecondaryClick={
-
+                            addPostViewModel.resetAddPost()
+                            dialog.dismiss()
+                            val parent= parentFragment as? ImplementAddPostFragment
+                            parent?.let {
+                                androidx.navigation.fragment.NavHostFragment
+                                    .findNavController(it)
+                                    .popBackStack(R.id.homeFragment,false)
+                            }
                         }
                         dialog.show(parentFragmentManager,"success_dialog")
                     }
@@ -335,10 +344,10 @@ class Step3ImageFragment : Fragment() {
                             message = "Lỗi đăng bài"
                         )
                         dialog.onPrimaryClick={
-
+                            roomPostViewModel.saveRoomPost(saveRoomId)
                         }
                         dialog.onSecondaryClick={
-
+                            dialog.dismiss()
                         }
                         dialog.show(parentFragmentManager,"error_dialog")
                     }
