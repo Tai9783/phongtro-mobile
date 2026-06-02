@@ -98,10 +98,18 @@ class StatusDialog : DialogFragment() {
         layerDrawable.findDrawableByLayerId(R.id.outerCircle).setTint(colorDo)
         layerDrawable.findDrawableByLayerId(R.id.innerCircle).setTint(colorDoNhat)
         igStatus?.setImageResource(R.drawable.close)
-        txtResult?.text= getString(R.string.dialogInformation_title2)
-        txtDecription?.text = message ?: "Có lỗi xảy ra khi lưu thông tin phòng. Vui lòng thử lại."
-        btnPrimary?.text=getString(R.string.dialogInformation_btnPrimary2)
-        btnSecond?.text=getString(R.string.dialogInformation_btnSecond2)
+        if(message?.contains("Lỗi đăng bài")== true){
+            txtResult?.text= getString(R.string.dialogInformation_titlePostRoomFail)
+            txtDecription?.text = getString(R.string.dialogInformation_decripPostRoomFail)
+            btnPrimary?.text=getString(R.string.dialogInformation_btnPrimary2)
+            btnSecond?.text=getString(R.string.dialogInformation_btnPrimary4)
+        }
+        else {
+            txtResult?.text = getString(R.string.dialogInformation_title2)
+            txtDecription?.text = getString(R.string.dialogInformation_decripSaveRoomFail)
+            btnPrimary?.text = getString(R.string.dialogInformation_btnPrimary2)
+            btnSecond?.text = getString(R.string.dialogInformation_btnSecond2)
+        }
     }
 
     private fun setupSuccessUI(
@@ -118,10 +126,19 @@ class StatusDialog : DialogFragment() {
         layerDrawable.findDrawableByLayerId(R.id.outerCircle).setTint(colorXanhNhat)
         layerDrawable.findDrawableByLayerId(R.id.innerCircle).setTint(colorXanh)
         igStatus?.setImageResource(R.drawable.icon_check_24px)
-        txtResult?.text= message.toString()
-        txtDecription?.text= getString(R.string.dialogInformation_decription)
-        btnPrimary?.text=getString(R.string.dialogInformation_btnPrimary)
-        btnSecond?.text=getString(R.string.dialogInformation_btnSecond)
+        if(message?.contains("Vui lòng chờ xét duyệt!")== true)
+        {
+            txtResult?.text= getString(R.string.dialogInformation_titlePostRoom)
+            txtDecription?.text= message.toString()
+            btnPrimary?.text=getString(R.string.dialogInformation_btnPrimary3)
+            btnSecond?.text=getString(R.string.dialogInformation_btnSecond3)
+        }
+        else {
+            txtResult?.text = message.toString()
+            txtDecription?.text = getString(R.string.dialogInformation_decription)
+            btnPrimary?.text = getString(R.string.dialogInformation_btnPrimary)
+            btnSecond?.text = getString(R.string.dialogInformation_btnSecond)
+        }
     }
 
 

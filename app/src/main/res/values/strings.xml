@@ -199,11 +199,19 @@
 
     <string name="dialogInformation_title">Lưu thành công</string>
     <string name="dialogInformation_title2">Lưu thất bại</string>
+    <string name="dialogInformation_decripSaveRoomFail">Có lỗi trong quá trình lưu phòng. Vui lòng thử lại.</string>
+    <string name="dialogInformation_titlePostRoomFail">Đăng bài thất bại</string>
+    <string name="dialogInformation_decripPostRoomFail">Có lỗi trong quá trình đăng bài. Vui lòng thử lại sau!</string>
+    <string name="dialogInformation_btnPrimary4">Hủy bỏ</string>
+
     <string name="dialogInformation_btnPrimary">Có, đăng tin ngay</string>
     <string name="dialogInformation_btnPrimary2">Thử lại</string>
     <string name="dialogInformation_btnSecond">Để sau</string>
     <string name="dialogInformation_btnSecond2">Quay lại chỉnh sửa</string>
     <string name="dialogInformation_decription">Bạn có muốn đăng tin để người thuê tìm thấy phòng không?</string>
+    <string name="dialogInformation_titlePostRoom">Đăng bài thành công</string>
+    <string name="dialogInformation_btnPrimary3">Xem bài đăng</string>
+    <string name="dialogInformation_btnSecond3">Về trang chủ</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

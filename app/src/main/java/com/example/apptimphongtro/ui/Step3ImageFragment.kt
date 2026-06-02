@@ -311,7 +311,7 @@ class Step3ImageFragment : Fragment() {
                         loadingDialog=null
                         val dialog= StatusDialog.newInstance(
                             isSuccess = true,
-                            message = "Đăng bài thành công, Vui lòng chờ xét duyệt!"
+                            message = "Vui lòng chờ xét duyệt!"
                         )
                         dialog.onPrimaryClick={
 
@@ -328,6 +328,24 @@ class Step3ImageFragment : Fragment() {
 
                 }
                 is RoomPostUiState.Error->{
+                    roomPostViewModel.resetStatePostRoom()
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        kotlinx.coroutines.delay(700)
+                        loadingDialog?.dismiss()
+                        loadingDialog=null
+                        val dialog= StatusDialog.newInstance(
+                            isSuccess = false,
+                            message = "Lỗi đăng bài"
+                        )
+                        dialog.onPrimaryClick={
+
+                        }
+                        dialog.onSecondaryClick={
+
+                        }
+                        dialog.show(parentFragmentManager,"error_dialog")
+                    }
+
                     Log.e("STEP3 BUOC CUOI","Lỗi đăng bài: ${state.message}")
 
                 }
