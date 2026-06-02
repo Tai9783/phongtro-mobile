@@ -82,6 +82,12 @@ class   ImplementAddPostFragment : Fragment() {
         binding.view1.setBackgroundColor(colorBacground)
         binding.view2.setBackgroundColor(if(pos>=1) colorBacground else inactiveColor)
         binding.view3.setBackgroundColor(if (pos>=2) colorBacground else inactiveColor)
+        binding.txtContentStep.text= when(pos){
+            0-> getString(R.string.add_post_header_step1)
+            1->getString(R.string.add_post_header_step2)
+            2->getString(R.string.add_post_header_step3)
+            else -> getString(R.string.add_post_header_step1)
+        }
     }
 
     override fun onDestroy() {
