@@ -90,7 +90,9 @@ class AddPostViewModel : ViewModel() {
 
         _addPost.value=addPost.value!!.copy(landlordId = landlordId, imagesJson = listImage, status = 1)
     }
-
+    fun resetAddPost(){
+        _addPost.value= RentalRoomRequest()
+    }
     fun markAsHandled(){
         isLocationHandled= true
     }

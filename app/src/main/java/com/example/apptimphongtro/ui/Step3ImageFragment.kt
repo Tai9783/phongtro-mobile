@@ -227,7 +227,6 @@ class Step3ImageFragment : Fragment() {
                                     val listImage= addPostViewModel.addPost.value
                                     val roomResquest= addPostViewModel.addPost.value
                                     if(roomResquest!=null && listImage!=null){
-                                     //   roomViewModel.insertOrPostRoom(roomResquest)
                                         roomViewModel.saveRoom(roomResquest)
                                     }
                                 }
@@ -269,7 +268,10 @@ class Step3ImageFragment : Fragment() {
                         roomViewModel.reSetState()
                     }
                     dialog.onSecondaryClick={
+                        addPostViewModel.resetAddPost()
                         dialog.dismiss()
+                        roomViewModel.reSetState()
+                        //chuyển qua màn hình quản lý phòng trọ của chủ trọ
                     }
                     dialog.show(parentFragmentManager,"success_dialog")
                 }
@@ -283,7 +285,7 @@ class Step3ImageFragment : Fragment() {
                     dialog.show(parentFragmentManager,"error_dialog")
 
                     dialog.onPrimaryClick={
-
+                        binding.btnContinue.performClick()
                     }
                     dialog.onSecondaryClick={
                         dialog.dismiss()
@@ -321,11 +323,6 @@ class Step3ImageFragment : Fragment() {
                         }
                         dialog.show(parentFragmentManager,"success_dialog")
                     }
-
-
-
-
-
                 }
                 is RoomPostUiState.Error->{
                     roomPostViewModel.resetStatePostRoom()
