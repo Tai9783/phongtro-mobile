@@ -236,7 +236,7 @@ class Step3ImageFragment : Fragment() {
                                 loadingDialog=null
 
                                 val dialog= StatusDialog.newInstance(
-                                    isSuccess = false,
+                                    dialogType = StatusDialog.TYPE_FAILURE,
                                     message = "Không có kết nối mạng. Vui lòng kiểm tra lại")
                                 dialog.show(parentFragmentManager,"error_net")
                             }
@@ -259,7 +259,7 @@ class Step3ImageFragment : Fragment() {
                     loadingDialog?.dismiss()
                     loadingDialog=null
                     val dialog= StatusDialog.newInstance(
-                        isSuccess = true,
+                        dialogType = StatusDialog.TYPE_SUCCESS,
                         message = "Phòng đã lưu hệ thống thành công")
 
                     dialog.onPrimaryClick={
@@ -282,7 +282,7 @@ class Step3ImageFragment : Fragment() {
                     loadingDialog=null
 
                     val dialog= StatusDialog.newInstance(
-                        isSuccess = false,
+                        dialogType = StatusDialog.TYPE_FAILURE,
                         message = state.message)
                     dialog.show(parentFragmentManager,"error_dialog")
 
@@ -314,7 +314,7 @@ class Step3ImageFragment : Fragment() {
                         loadingDialog?.dismiss()
                         loadingDialog=null
                         val dialog= StatusDialog.newInstance(
-                            isSuccess = true,
+                            dialogType = StatusDialog.TYPE_SUCCESS,
                             message = "Vui lòng chờ xét duyệt!"
                         )
                         dialog.onPrimaryClick={
@@ -340,7 +340,7 @@ class Step3ImageFragment : Fragment() {
                         loadingDialog?.dismiss()
                         loadingDialog=null
                         val dialog= StatusDialog.newInstance(
-                            isSuccess = false,
+                            dialogType = StatusDialog.TYPE_FAILURE,
                             message = "Lỗi đăng bài"
                         )
                         dialog.onPrimaryClick={

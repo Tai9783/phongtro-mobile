@@ -17,18 +17,21 @@ import com.example.apptimphongtro.R
 
 
 class StatusDialog : DialogFragment() {
-    private var isSuccess: Boolean= true
+    private var dialogType: Int= TYPE_SUCCESS
     private var message: String? = null
     var onPrimaryClick: (() -> Unit)? = null
     var onSecondaryClick: (() -> Unit)? = null
 
     companion object{
-        private const val ARG_IS_SUCCESS= "is_success"
+        private const val ARG_IS_SUCCESS= "dialog_type"
         private const val ARG_MESSAGE="message"
-        fun newInstance(isSuccess: Boolean, message: String? = null): StatusDialog {
+        const val TYPE_SUCCESS=1
+        const val TYPE_FAILURE=2
+        const val TYPE_WARNING=3
+        fun newInstance(dialogType: Int, message: String? = null): StatusDialog {
             val fragment= StatusDialog()
             val args= Bundle()
-            args.putBoolean(ARG_IS_SUCCESS, isSuccess)
+            args.putInt(ARG_IS_SUCCESS, dialogType)
             args.putString(ARG_MESSAGE, message)
             fragment.arguments= args
             return fragment
@@ -38,7 +41,7 @@ class StatusDialog : DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            isSuccess= it.getBoolean(ARG_IS_SUCCESS)
+            dialogType= it.getInt(ARG_IS_SUCCESS)
             message= it.getString(ARG_MESSAGE)
         }
     }
@@ -68,12 +71,12 @@ class StatusDialog : DialogFragment() {
         val btnPrimary= view.findViewById<Button>(R.id.btnPrimary)
         val btnSecond= view.findViewById<Button>(R.id.btnSecond)
 
-        if(isSuccess){
-            setupSuccessUI(layoutIcon, igStatus, txtResult, txtDecription, btnPrimary, btnSecond)
+        when(dialogType){
+            TYPE_SUCCESS->setupSuccessUI(layoutIcon, igStatus, txtResult, txtDecription, btnPrimary, btnSecond)
+            TYPE_FAILURE->setupFailureUI(layoutIcon, igStatus, txtResult, txtDecription, btnPrimary, btnSecond)
+            TYPE_WARNING->setupUIWarning(layoutIcon, igStatus, txtResult, txtDecription, btnPrimary, btnSecond)
         }
-        else{
-            setupFailureUI(layoutIcon, igStatus, txtResult, txtDecription, btnPrimary, btnSecond)
-        }
+
         btnSecond.setOnClickListener {
             onSecondaryClick?.invoke()
             dismiss()
@@ -139,6 +142,28 @@ class StatusDialog : DialogFragment() {
             btnPrimary?.text = getString(R.string.dialogInformation_btnPrimary)
             btnSecond?.text = getString(R.string.dialogInformation_btnSecond)
         }
+    }
+
+    fun setupUIWarning(
+        layoutIcon: FrameLayout?,
+        igStatus: ImageView?,
+        txtResult: TextView?,
+        txtDecription: TextView?,
+        btnPrimary: Button?,
+        btnSecond: Button?
+    ){
+        val colorCam = Color.parseColor("#FF9800")
+        val colorCamNhat = Color.parseColor("#33FF9800")
+
+        val layerDrawable = layoutIcon?.background as LayerDrawable
+        layerDrawable.findDrawableByLayerId(R.id.outerCircle).setTint(colorCamNhat)
+        layerDrawable.findDrawableByLayerId(R.id.innerCircle).setTint(colorCam)
+        igStatus?.setImageResource(R.drawable.iconwarning)
+        txtResult?.text = getString(R.string.dialogWarning_title)
+        txtDecription?.text = getString(R.string.dialogWarning_decription)
+        btnPrimary?.text = getString(R.string.dialogWarning_btnPrimary)
+        btnSecond?.text = getString(R.string.dialogWarning_btnSecond)
+
     }
 
 

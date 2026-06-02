@@ -215,6 +215,13 @@
     <string name="dialogInformation_titlePostRoom">Đăng bài thành công</string>
     <string name="dialogInformation_btnPrimary3">Xem bài đăng</string>
     <string name="dialogInformation_btnSecond3">Về trang chủ</string>
+
+    <string name="dialogWarning_title">0</string>
+    <string name="dialogWarning_decription">0</string>
+    <string name="dialogWarning_btnPrimary">Hủy</string>
+    <string name="dialogWarning_btnSecond">Thoát ra</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
