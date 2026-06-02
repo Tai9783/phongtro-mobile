@@ -216,10 +216,10 @@
     <string name="dialogInformation_btnPrimary3">Xem bài đăng</string>
     <string name="dialogInformation_btnSecond3">Về trang chủ</string>
 
-    <string name="dialogWarning_title">0</string>
-    <string name="dialogWarning_decription">0</string>
-    <string name="dialogWarning_btnPrimary">Hủy</string>
-    <string name="dialogWarning_btnSecond">Thoát ra</string>
+    <string name="dialogWarning_title">Rời khỏi trang này</string>
+    <string name="dialogWarning_decription">Toàn bộ thông tin phòng trọ bạn đã nhập ở các bước trước sẽ bị xóa sạch và không thể khôi phục.</string>
+    <string name="dialogWarning_btnPrimary">Tiếp tục nhập</string>
+    <string name="dialogWarning_btnSecond">Hủy đăng tin</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
