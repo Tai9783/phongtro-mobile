@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.apptimphongtro.R
 import com.example.apptimphongtro.adapter.AddPostAdapter
@@ -58,6 +60,35 @@ class   ImplementAddPostFragment : Fragment() {
                 addPostViewModel.setCurrentStep(position)//lưu lại vị trí trang môi khi đổi trang
             }
         })
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    val dialog= StatusDialog.newInstance(
+                        dialogType = StatusDialog.TYPE_WARNING,
+                        message = "Bạn có muốn rời khỏi trang này?"
+                    )
+                    val currentPos= binding.viewPager.currentItem
+                    if(currentPos>0){
+                        preStep()
+                    }
+                    else {
+                        dialog.onPrimaryClick = {
+                            dialog.dismiss()
+                        }
+                        dialog.onSecondaryClick = {
+                            dialog.dismiss()
+                            addPostViewModel.resetAddPost()
+
+                            findNavController().popBackStack()
+                        }
+
+                        dialog.show(parentFragmentManager, "exit_warning_dialog")
+                    }
+                }
+            }
+        )
 
     }
     fun nextStep(){

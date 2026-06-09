@@ -148,8 +148,7 @@ class Step2AddressFragment : Fragment() {
 
 
         binding.btnQuaylai.setOnClickListener {
-            val parent = parentFragment as? ImplementAddPostFragment
-            parent?.preStep()
+           requireActivity().onBackPressedDispatcher.onBackPressed()
         }
     }
 }

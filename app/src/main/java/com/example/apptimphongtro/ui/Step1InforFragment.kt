@@ -72,20 +72,7 @@ class Step1InforFragment : Fragment() {
             parent?.nextStep()
         }
         binding.btnQuaylai.setOnClickListener {
-            val dialog= StatusDialog.newInstance(
-                dialogType = StatusDialog.TYPE_WARNING,
-                message = "Bạn có muốn rời khỏi trang này?"
-            )
-            dialog.onPrimaryClick={
-                //Tiếp tục nhập
-                dialog.dismiss()
-            }
-            dialog.onSecondaryClick={
-                //thoát
-                requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_to_addPostFrgament)
-
-            }
-            dialog.show(parentFragmentManager,"dialogWarning")
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
     }

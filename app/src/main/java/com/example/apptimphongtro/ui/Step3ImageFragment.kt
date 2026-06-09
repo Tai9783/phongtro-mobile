@@ -103,6 +103,7 @@ class Step3ImageFragment : Fragment() {
         cloudinaryViewModel.clodinary.observe(viewLifecycleOwner){cloudinary->
             currentCloudinary= cloudinary
         }
+        checkAndReloadSavedImage()
 
         roomViewModel.createRoomId.observe(viewLifecycleOwner){idRoom->
             if(idRoom!=null)
@@ -146,7 +147,14 @@ class Step3ImageFragment : Fragment() {
             addPostViewModel.removeImage(uri)
         }
     }
-
+    private fun checkAndReloadSavedImage(){
+        val saveUris= addPostViewModel.allImage.value
+        if(!saveUris.isNullOrEmpty()){
+            saveUris.forEach {uri->
+                addNewImageToLayout(uri)
+            }
+        }
+    }
     private fun refreshImage() {
         val countRoom= binding.layoutImageContainer.childCount// đếm số ảnh hiện tại trong layout
         binding.txtCountRoom.text= getString(R.string.step3Image_txtCountImage,countRoom)
@@ -360,8 +368,7 @@ class Step3ImageFragment : Fragment() {
         }
 
         binding.btnQuaylai.setOnClickListener {
-            val parent= parentFragment as? ImplementAddPostFragment
-            parent?.preStep()
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
     }
 
