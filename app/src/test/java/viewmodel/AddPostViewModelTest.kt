@@ -1,0 +1,79 @@
+package com.example.apptimphongtro.viewmodel
+
+import android.net.Uri
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.example.apptimphongtro.model.entity.CityRoomCount
+import io.mockk.mockk
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+
+class AddPostViewModelTest {
+
+    @Rule //
+    @JvmField
+    val instantTaskExecutorRule= InstantTaskExecutorRule() //bẻ gãy cơ chế bất đồng bộ của livedata và ép chạy trên 1 luồng duy nhất
+    private lateinit var addPostViewModel: AddPostViewModel
+
+    @Before
+    fun setup(){
+      addPostViewModel= AddPostViewModel()
+    }
+
+    @Test
+    fun resetAddPost_cleansAllDataSuccessfully(){
+        addPostViewModel.setCurrentStep(2)
+        addPostViewModel.updateSelectCity("Hồ Chí Minh")
+        addPostViewModel.updateSelectWard("Bình Thạnh")
+        val fakeUri= mockk<Uri>(relaxed = true)
+        addPostViewModel.addImage(listOf(fakeUri))
+        addPostViewModel.updateStep1Infor("Test Title", "Test Description", 100.0, 200.0, listOf("1","2"))
+        addPostViewModel.updateStep2Address("Test Address", 123.456, 789.012)
+        addPostViewModel.updateStep3("LandlordId", listOf("Image1", "Image2"))
+
+        addPostViewModel.resetAddPost()// gọi hàm chính cần test
+
+        assertEquals(0,addPostViewModel.currentStep.value)
+        assertNull(addPostViewModel.selectedCity.value)
+        assertNull(addPostViewModel.selectedWard.value)
+        assertEquals(emptyList<Uri>(),addPostViewModel.allImage.value)
+        val amenities= addPostViewModel.allAmenities.value
+        if(amenities !=null){
+            amenities.forEach {
+                assertEquals(false,it.isSelected)
+            }
+        }
+
+        val currentRequest= addPostViewModel.addPost.value
+            assertEquals("",currentRequest?.title)
+            assertEquals("",currentRequest?.description)
+            assertEquals(0.0,currentRequest?.area?:0.0,0.0)
+    }
+
+    @Test
+    fun updateItemClick_in_addPostViewModel(){
+        val city1= CityRoomCount(1, "Hồ Chí Minh", 10, isSelected = false)
+        val city2= CityRoomCount(2, "Hà Nội", 5, isSelected = false)
+        val city3= CityRoomCount(3, "Đà Nẵng", 8, isSelected = true)
+        val listCity= listOf(city1,city2,city3)
+
+        addPostViewModel.initCityList(listCity)
+        addPostViewModel.updateSelectWard("Bình Thạnh")
+
+        addPostViewModel.updateItemClick(1)
+        val currentList= addPostViewModel.allCity.value
+
+        assertTrue(currentList?.find { it.idCity==1 }?.isSelected?:false)
+        assertFalse(currentList?.find { it.idCity==2 }?.isSelected?:true)
+        assertFalse(currentList?.find { it.idCity==3 }?.isSelected?:true)
+
+        assertEquals("Hồ Chí Minh",addPostViewModel.selectedCity.value?.city)
+        assertNull(addPostViewModel.selectedWard.value)
+    }
+
+
+}
