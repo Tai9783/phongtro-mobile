@@ -109,7 +109,24 @@ class AddPostViewModelTest {
 
         assertEquals(1,currentListImage?.size)
         assertEquals(fakeUri2, currentListImage?.first())
+    }
 
+    @Test
+    fun initCityList_addPostViewModel(){
+        addPostViewModel.updateSelectCity("Hà Nội")
 
+        val city1= CityRoomCount(1, "Hồ Chí Minh", 10, isSelected = false)
+        val city2= CityRoomCount(2, "Hà Nội", 5, isSelected = false)
+        val city3= CityRoomCount(3, "Đà Nẵng", 8, isSelected = false)
+        val listCity= listOf(city1,city2,city3)
+
+        addPostViewModel.initCityList(listCity)
+
+        val currrentList= addPostViewModel.allCity.value
+        val resultHaNoi= currrentList?.find { it.idCity==2 }
+        assertEquals(true, resultHaNoi?.isSelected)
+
+        val resultDaNang= currrentList?.find { it.idCity ==3 }
+        assertEquals(false, resultDaNang?.isSelected)
     }
 }
