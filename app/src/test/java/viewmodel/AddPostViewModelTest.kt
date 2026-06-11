@@ -6,6 +6,7 @@ import com.example.apptimphongtro.model.entity.CityRoomCount
 import io.mockk.mockk
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -75,5 +76,40 @@ class AddPostViewModelTest {
         assertNull(addPostViewModel.selectedWard.value)
     }
 
+    @Test
+    fun updateStep1Infor_inputsValidate(){
+        addPostViewModel.updateStep1Infor(
+            "Test Title",
+            "Test Description",
+            100.0,
+            200.0,
+            listOf("1","2"))
 
+        val currentRequest= addPostViewModel.addPost.value
+
+        assertNotNull(currentRequest)
+
+        assertEquals("Test Title",currentRequest?.title)
+        assertEquals("Test Description",currentRequest?.description)
+        assertEquals(100.0,currentRequest?.area ?: 0.0,0.0)
+        assertEquals(200.0,currentRequest?.price ?: 0.0,0.0)
+        assertEquals(listOf("1","2"),currentRequest?.amenities)
+
+    }
+    @Test
+    fun removeImage_removesImageSuccessfully(){
+        val fakeUri1= mockk<Uri>(relaxed = true)
+        val fakeUri2= mockk<Uri>(relaxed = true)
+
+        val listUri= listOf(fakeUri1,fakeUri2)
+        addPostViewModel.addImage(listUri)
+        addPostViewModel.removeImage(fakeUri1)
+
+        val currentListImage= addPostViewModel.allImage.value
+
+        assertEquals(1,currentListImage?.size)
+        assertEquals(fakeUri2, currentListImage?.first())
+
+
+    }
 }
