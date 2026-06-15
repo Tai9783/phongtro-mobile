@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.apptimphongtro.R
 import com.example.apptimphongtro.adapter.AddPostAdapter
@@ -59,6 +61,35 @@ class   ImplementAddPostFragment : Fragment() {
             }
         })
 
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    val dialog= StatusDialog.newInstance(
+                        dialogType = StatusDialog.TYPE_WARNING,
+                        message = "Bạn có muốn rời khỏi trang này?"
+                    )
+                    val currentPos= binding.viewPager.currentItem
+                    if(currentPos>0){
+                        preStep()
+                    }
+                    else {
+                        dialog.onPrimaryClick = {
+                            dialog.dismiss()
+                        }
+                        dialog.onSecondaryClick = {
+                            dialog.dismiss()
+                            addPostViewModel.resetAddPost()
+
+                            findNavController().popBackStack()
+                        }
+
+                        dialog.show(parentFragmentManager, "exit_warning_dialog")
+                    }
+                }
+            }
+        )
+
     }
     fun nextStep(){
         val next=  binding.viewPager.currentItem +1
@@ -82,6 +113,17 @@ class   ImplementAddPostFragment : Fragment() {
         binding.view1.setBackgroundColor(colorBacground)
         binding.view2.setBackgroundColor(if(pos>=1) colorBacground else inactiveColor)
         binding.view3.setBackgroundColor(if (pos>=2) colorBacground else inactiveColor)
+        binding.txtContentStep.text= when(pos){
+            0-> getString(R.string.add_post_header_step1)
+            1->getString(R.string.add_post_header_step2)
+            2->getString(R.string.add_post_header_step3)
+            else -> getString(R.string.add_post_header_step1)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        addPostViewModel.resetAddPost()
     }
 
 }

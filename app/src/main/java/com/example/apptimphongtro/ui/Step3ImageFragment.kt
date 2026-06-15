@@ -65,6 +65,7 @@ class Step3ImageFragment : Fragment() {
         InitUserViewModel.factory
     }
     private lateinit var landlordId : String
+    private var saveRoomId: String=""
 
     //Khai báo chọn bộ ảnh
     private var pickMedia= registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)){ uris->
@@ -102,6 +103,7 @@ class Step3ImageFragment : Fragment() {
         cloudinaryViewModel.clodinary.observe(viewLifecycleOwner){cloudinary->
             currentCloudinary= cloudinary
         }
+        checkAndReloadSavedImage()
 
         roomViewModel.createRoomId.observe(viewLifecycleOwner){idRoom->
             if(idRoom!=null)
@@ -145,7 +147,14 @@ class Step3ImageFragment : Fragment() {
             addPostViewModel.removeImage(uri)
         }
     }
-
+    private fun checkAndReloadSavedImage(){
+        val saveUris= addPostViewModel.allImage.value
+        if(!saveUris.isNullOrEmpty()){
+            saveUris.forEach {uri->
+                addNewImageToLayout(uri)
+            }
+        }
+    }
     private fun refreshImage() {
         val countRoom= binding.layoutImageContainer.childCount// đếm số ảnh hiện tại trong layout
         binding.txtCountRoom.text= getString(R.string.step3Image_txtCountImage,countRoom)
@@ -227,7 +236,6 @@ class Step3ImageFragment : Fragment() {
                                     val listImage= addPostViewModel.addPost.value
                                     val roomResquest= addPostViewModel.addPost.value
                                     if(roomResquest!=null && listImage!=null){
-                                     //   roomViewModel.insertOrPostRoom(roomResquest)
                                         roomViewModel.saveRoom(roomResquest)
                                     }
                                 }
@@ -236,7 +244,7 @@ class Step3ImageFragment : Fragment() {
                                 loadingDialog=null
 
                                 val dialog= StatusDialog.newInstance(
-                                    isSuccess = false,
+                                    dialogType = StatusDialog.TYPE_FAILURE,
                                     message = "Không có kết nối mạng. Vui lòng kiểm tra lại")
                                 dialog.show(parentFragmentManager,"error_net")
                             }
@@ -249,6 +257,9 @@ class Step3ImageFragment : Fragment() {
                   //  hideLoading()
                 }
                 is RoomUIState.Loading->{
+                    if (loadingDialog == null) {
+                        loadingDialog = LoadingDialog()
+                    }
                     if (loadingDialog?.isVisible==false)
                             loadingDialog?.show(parentFragmentManager,"loading")
                 }
@@ -256,17 +267,21 @@ class Step3ImageFragment : Fragment() {
                     loadingDialog?.dismiss()
                     loadingDialog=null
                     val dialog= StatusDialog.newInstance(
-                        isSuccess = true,
+                        dialogType = StatusDialog.TYPE_SUCCESS,
                         message = "Phòng đã lưu hệ thống thành công")
 
                     dialog.onPrimaryClick={
                         val roomId = state.room.roomId
+                        saveRoomId= roomId
                         roomPostViewModel.saveRoomPost(roomId)
                         //reset lại RoomUIState
                         roomViewModel.reSetState()
                     }
                     dialog.onSecondaryClick={
+                        addPostViewModel.resetAddPost()
                         dialog.dismiss()
+                        roomViewModel.reSetState()
+                        //chuyển qua màn hình quản lý phòng trọ của chủ trọ
                     }
                     dialog.show(parentFragmentManager,"success_dialog")
                 }
@@ -275,12 +290,12 @@ class Step3ImageFragment : Fragment() {
                     loadingDialog=null
 
                     val dialog= StatusDialog.newInstance(
-                        isSuccess = false,
+                        dialogType = StatusDialog.TYPE_FAILURE,
                         message = state.message)
                     dialog.show(parentFragmentManager,"error_dialog")
 
                     dialog.onPrimaryClick={
-
+                        binding.btnContinue.performClick()
                     }
                     dialog.onSecondaryClick={
                         dialog.dismiss()
@@ -292,30 +307,59 @@ class Step3ImageFragment : Fragment() {
             when(state){
                 is RoomPostUiState.Idle->{}
                 is RoomPostUiState.Loading->{
-                    if (loadingDialog?.isVisible==false)
-                            loadingDialog?.show(parentFragmentManager,"loading")
+                    if (loadingDialog == null) {
+                        loadingDialog = LoadingDialog()
+                    }
+                    if (loadingDialog?.isVisible == false) {
+                        loadingDialog?.show(parentFragmentManager, "loading")
+                    }
 
                 }
                 is RoomPostUiState.Success->{
-//                    loadingDialog?.dismiss()
-//                    loadingDialog=null
-//                    roomPostViewModel.resetStatePostRoom()
-//                    val dialog= StatusDialog.newInstance(
-//                        isSuccess = true,
-//                        message = "Đăng bài thành công, Vui lòng chờ xét duyệt!"
-//                    )
-//                    dialog.onPrimaryClick={
-//
-//                    }
-//                    dialog.onSecondaryClick={
-//
-//                    }
-//                    dialog.show(parentFragmentManager,"success_dialog")
-
-
-
+                    roomPostViewModel.resetStatePostRoom()
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        kotlinx.coroutines.delay(700)
+                        loadingDialog?.dismiss()
+                        loadingDialog=null
+                        val dialog= StatusDialog.newInstance(
+                            dialogType = StatusDialog.TYPE_SUCCESS,
+                            message = "Vui lòng chờ xét duyệt!"
+                        )
+                        dialog.onPrimaryClick={
+                            //Xem bài đăng
+                        }
+                        dialog.onSecondaryClick={
+                            addPostViewModel.resetAddPost()
+                            dialog.dismiss()
+                            val parent= parentFragment as? ImplementAddPostFragment
+                            parent?.let {
+                                androidx.navigation.fragment.NavHostFragment
+                                    .findNavController(it)
+                                    .popBackStack(R.id.homeFragment,false)
+                            }
+                        }
+                        dialog.show(parentFragmentManager,"success_dialog")
+                    }
                 }
                 is RoomPostUiState.Error->{
+                    roomPostViewModel.resetStatePostRoom()
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        kotlinx.coroutines.delay(700)
+                        loadingDialog?.dismiss()
+                        loadingDialog=null
+                        val dialog= StatusDialog.newInstance(
+                            dialogType = StatusDialog.TYPE_FAILURE,
+                            message = "Lỗi đăng bài"
+                        )
+                        dialog.onPrimaryClick={
+                            roomPostViewModel.saveRoomPost(saveRoomId)
+                        }
+                        dialog.onSecondaryClick={
+                            dialog.dismiss()
+                        }
+                        dialog.show(parentFragmentManager,"error_dialog")
+                    }
+
                     Log.e("STEP3 BUOC CUOI","Lỗi đăng bài: ${state.message}")
 
                 }
@@ -324,8 +368,7 @@ class Step3ImageFragment : Fragment() {
         }
 
         binding.btnQuaylai.setOnClickListener {
-            val parent= parentFragment as? ImplementAddPostFragment
-            parent?.preStep()
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
     }
 

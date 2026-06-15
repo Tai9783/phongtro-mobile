@@ -72,7 +72,7 @@ class Step1InforFragment : Fragment() {
             parent?.nextStep()
         }
         binding.btnQuaylai.setOnClickListener {
-            requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_to_addPostFrgament)
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
     }

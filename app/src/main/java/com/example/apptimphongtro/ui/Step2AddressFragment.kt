@@ -114,42 +114,49 @@ class Step2AddressFragment : Fragment() {
         }
 
         binding.btnContinue.setOnClickListener {
-            val cityName = addPostViewModel.selectedCity.value?.city
-            val wardName = addPostViewModel.selectedWard.value?.wardName
-            val address = binding.edtAddress.text.toString()
+            val cityName = addPostViewModel.selectedCity.value?.city?.trim()
+            val wardName = addPostViewModel.selectedWard.value?.wardName?.trim()
+            val address = binding.edtAddress.text.toString().trim()
 
             if (cityName == null || wardName == null || address.isEmpty()) {
                 Toast.makeText(requireContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Thêm "Việt Nam" để Geocoder tìm chính xác hơn
-            val addressFull = "$address, $wardName, $cityName, Việt Nam"
-            val geocoder = Geocoder(requireContext(), Locale.getDefault())
+            val addressCurrent= addPostViewModel.addPost.value?.address?.trim()
 
-            try {
-                val addresses = geocoder.getFromLocationName(addressFull, 1)
-                if (!addresses.isNullOrEmpty()) {
-                    val location = addresses[0]
-                    val bundle = Bundle().apply {
-                        putString("LAT", location.latitude.toString())
-                        putString("LNG", location.longitude.toString())
-                    }
-                    // Sử dụng Global Action để thoát khỏi ViewPager2
-                    requireActivity().findNavController(R.id.nav_host_fragment)
-                        .navigate(R.id.action_global_to_CofirmMapFragment, bundle)
-                } else {
-                    Toast.makeText(context, "Không tìm thấy địa chỉ này trên bản đồ", Toast.LENGTH_SHORT).show()
-                }
-            } catch (e: Exception) {
-                Log.e("GEO_ERROR", e.message.toString())
+            // Thêm "Việt Nam" để Geocoder tìm chính xác hơn
+            val addressFull = "$address, $wardName, $cityName"
+            if(addressCurrent.equals(addressFull, ignoreCase = true)){
+                (parentFragment as? ImplementAddPostFragment)?.nextStep()
             }
+            else{
+                val geocoder = Geocoder(requireContext(), Locale.getDefault())
+
+                try {
+                    val addresses = geocoder.getFromLocationName(addressFull, 1)
+                    if (!addresses.isNullOrEmpty()) {
+                        val location = addresses[0]
+                        val bundle = Bundle().apply {
+                            putString("LAT", location.latitude.toString())
+                            putString("LNG", location.longitude.toString())
+                        }
+                        // Sử dụng Global Action để thoát khỏi ViewPager2
+                        requireActivity().findNavController(R.id.nav_host_fragment)
+                            .navigate(R.id.action_global_to_CofirmMapFragment, bundle)
+                    } else {
+                        Toast.makeText(context, "Không tìm thấy địa chỉ này trên bản đồ", Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: Exception) {
+                    Log.e("GEO_ERROR", e.message.toString())
+                }
+            }
+
         }
 
 
         binding.btnQuaylai.setOnClickListener {
-            val parent = parentFragment as? ImplementAddPostFragment
-            parent?.preStep()
+           requireActivity().onBackPressedDispatcher.onBackPressed()
         }
     }
 }

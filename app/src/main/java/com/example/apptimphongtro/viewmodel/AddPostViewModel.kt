@@ -53,6 +53,9 @@ class AddPostViewModel : ViewModel() {
             _selectedWard.value = Ward(wardName = trimmedWard, isCheck = true)
         }
     }
+    fun resetSelectCity(){
+        _selectedCity.value= null
+    }
     fun updateSelectCity(cityName: String){
         val trimmedName = cityName.trim()
         //  Thử tìm trong danh sách đã load (để lấy đúng ID 1, 2, 3)
@@ -66,7 +69,9 @@ class AddPostViewModel : ViewModel() {
             _selectedCity.value = CityRoomCount(idCity = -1, city = trimmedName, isSelected = true)
         }
     }
-
+    fun resetSelectWard(){
+        _selectedWard.value= null
+    }
     fun addImage(uris: List<Uri>){
         _allImage.value= uris
     }
@@ -90,7 +95,15 @@ class AddPostViewModel : ViewModel() {
 
         _addPost.value=addPost.value!!.copy(landlordId = landlordId, imagesJson = listImage, status = 1)
     }
-
+    fun resetAddPost(){
+        resetListAmenity()
+        resetSelectCity()
+        resetSelectWard()
+        _allImage.value= emptyList()
+        _currentStep.value=0
+        isLocationHandled= false
+        _addPost.value= RentalRoomRequest()
+    }
     fun markAsHandled(){
         isLocationHandled= true
     }
@@ -118,7 +131,11 @@ class AddPostViewModel : ViewModel() {
         _allAmenities.value = newList
     }
 
-
+    fun resetListAmenity(){
+        val currentList= _allAmenities.value ?: return
+        val newList= currentList.map { it.copy(isSelected = false)}
+        _allAmenities.value= newList
+    }
 
 
 
