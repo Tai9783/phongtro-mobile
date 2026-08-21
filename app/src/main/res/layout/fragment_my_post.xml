@@ -36,6 +36,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layoutEmptyMyPost"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -43,7 +44,7 @@
         android:gravity="center"
         android:padding="24dp"
         android:visibility="gone">
-        
+
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -80,6 +81,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvMyPost"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

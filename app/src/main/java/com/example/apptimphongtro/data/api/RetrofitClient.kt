@@ -36,5 +36,9 @@ object RetrofitClient {
     val roomPostApiService: RoomPostApiSevice by lazy {
         retrofit.create(RoomPostApiSevice::class.java)
     }
+
+    val myPostApiService: MyPostApiService by lazy {
+        retrofit.create(MyPostApiService::class.java)
+    }
 }
 
