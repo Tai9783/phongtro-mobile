@@ -222,8 +222,16 @@
     <string name="dialogWarning_btnSecond">Hủy đăng tin</string>
 
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="MyPost_Title">Tin đăng của tôi</string>
+    <string name="MyPost_content_tilte">Bạn chưa có bài đăng nào</string>
+    <string name="MyPost_content">Hãy đăng tin phòng trọ của bạn ngay</string>
+    <string name="MyPost_content_Button">Đăng tin mới</string>
+
+    <string name="MyPost_item_time">Hết hạn:</string>
+    <string name="MyPost_item_timee">20/03/2026</string>
+    <string name="MyPost_status_active">Còn hạn</string>
+    <string name="MyPost_status_expired">Hết hạn</string>
 
 </resources>

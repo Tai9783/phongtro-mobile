@@ -96,6 +96,9 @@ class ProfileFragment : Fragment() {
             }
 
         }
+        binding.layoutQuanLyTin.ctHotro.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_MyPostFragment)
+        }
     }
     private fun hideAndShowViews(){
         binding.layoutQuanLyTin.root.visibility = View.GONE

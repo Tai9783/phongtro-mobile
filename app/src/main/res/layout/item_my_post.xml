@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/bo4goc_vien"
+    android:padding="10dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imgMyPost"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/decriptionImage"
+        app:shapeAppearanceOverlay="@style/bo4goc"
+        android:src="@drawable/anhdefault"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtItemTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        tools:text="Phòng trọ gần Đại học Bách Khoa"
+        app:layout_constraintStart_toEndOf="@id/imgMyPost"
+        app:layout_constraintEnd_toStartOf="@id/txtItemStatus"
+        app:layout_constraintTop_toTopOf="@id/imgMyPost" />
+
+    <TextView
+        android:id="@+id/txtItemStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:textSize="12sp"
+        android:background="@drawable/bo4goc_vienxanhla"
+        tools:text="Còn hạn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imgMyPost" />
+
+    <TextView
+        android:id="@+id/txtItemPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:textColor="#074EFF"
+        tools:text="2.500.000đ/tháng"
+        app:layout_constraintStart_toEndOf="@id/imgMyPost"
+        app:layout_constraintTop_toBottomOf="@id/txtItemTitle" />
+
+    <TextView
+        android:id="@+id/txtItemArea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textSize="14sp"
+        android:textColor="#6B7280"
+        tools:text="20m²"
+        app:layout_constraintStart_toEndOf="@id/txtItemPrice"
+        app:layout_constraintTop_toTopOf="@id/txtItemPrice"
+        app:layout_constraintBottom_toBottomOf="@id/txtItemPrice" />
+
+    <TextView
+        android:id="@+id/txtItemExpireAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:textSize="13sp"
+        android:textColor="#9CA3AF"
+        tools:text="Hết hạn: 20/03/2026"
+        app:layout_constraintStart_toEndOf="@id/imgMyPost"
+        app:layout_constraintTop_toBottomOf="@id/txtItemPrice" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

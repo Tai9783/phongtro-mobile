@@ -38,7 +38,10 @@
             app:enterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
-
+    <fragment android:id="@+id/MyPostFragment"
+        android:name="com.example.apptimphongtro.ui.MyPostFragment"
+        android:label="Bài đăng của tôi"
+        tools:layout="@layout/fragment_my_post"/>
 
     <fragment
         android:id="@+id/favotiteFragment"
@@ -53,6 +56,9 @@
         <action
             android:id="@+id/action_profileFragment_to_LoginFragment"
             app:destination="@+id/LoginFragment"/>
+        <action
+            android:id="@+id/action_profileFragment_to_MyPostFragment"
+            app:destination="@+id/MyPostFragment"/>
     </fragment>
     <fragment
         android:id="@+id/resultSearchFragment"
