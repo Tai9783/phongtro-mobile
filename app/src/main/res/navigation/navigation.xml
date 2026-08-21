@@ -13,12 +13,12 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.apptimphongtro.ui.HomeFragment"
+        android:name="com.example.apptimphongtro.feature.home.ui.HomeFragment"
         android:label="Trang chủ"
         tools:layout="@layout/fragment_home"/>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.apptimphongtro.ui.SearchFragment"
+        android:name="com.example.apptimphongtro.feature.search.ui.SearchFragment"
         android:label="Tìm kiếm"
         tools:layout="@layout/fragment_search">
         <action
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/addPostFrgament"
-        android:name="com.example.apptimphongtro.ui.AddPostFragment"
+        android:name="com.example.apptimphongtro.feature.addpost.ui.AddPostFragment"
         android:label="Đăng tin"
         tools:layout="@layout/fragment_add_post">
         <action
@@ -39,18 +39,18 @@
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment android:id="@+id/MyPostFragment"
-        android:name="com.example.apptimphongtro.ui.MyPostFragment"
+        android:name="com.example.apptimphongtro.feature.mypost.ui.MyPostFragment"
         android:label="Bài đăng của tôi"
         tools:layout="@layout/fragment_my_post"/>
 
     <fragment
         android:id="@+id/favotiteFragment"
-        android:name="com.example.apptimphongtro.ui.FavoriteFragment"
+        android:name="com.example.apptimphongtro.feature.favorite.ui.FavoriteFragment"
         android:label="Yêu thích"
         tools:layout="@layout/fragment_favorite"/>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.apptimphongtro.ui.ProfileFragment"
+        android:name="com.example.apptimphongtro.feature.profile.ui.ProfileFragment"
         tools:layout="@layout/fragment_profile"
         android:label="Cá nhân">
         <action
@@ -62,17 +62,17 @@
     </fragment>
     <fragment
         android:id="@+id/resultSearchFragment"
-        android:name="com.example.apptimphongtro.ui.ResultSearchFragment"
+        android:name="com.example.apptimphongtro.feature.search.ui.ResultSearchFragment"
         tools:layout="@layout/fragment_result_search"
         android:label="Kết quả tìm kiếm"/>
     <fragment
         android:id="@+id/LoginFragment"
-        android:name="com.example.apptimphongtro.ui.LoginFragment"
+        android:name="com.example.apptimphongtro.feature.profile.ui.LoginFragment"
         tools:layout="@layout/fragment_login"
         android:label="Màn hình login"/>
     <fragment
         android:id="@+id/CofirmMapFragment"
-        android:name="com.example.apptimphongtro.ui.ConfirmMapFragment"
+        android:name="com.example.apptimphongtro.feature.addpost.ui.ConfirmMapFragment"
         tools:layout="@layout/fragment_confirm_map"
         android:label="Man hinh xac nhan dia chi">
         <argument android:name="LAT"
@@ -84,13 +84,13 @@
     </fragment>
     <fragment
         android:id="@+id/Step1InforFragment"
-        android:name="com.example.apptimphongtro.ui.Step1InforFragment"
+        android:name="com.example.apptimphongtro.feature.addpost.ui.Step1InforFragment"
         tools:layout="@layout/fragment_step1_infor"
         android:label="Nhập thôn tin cơ bản"
         />
     <fragment
         android:id="@+id/Step2AddressFragment"
-        android:name="com.example.apptimphongtro.ui.Step2AddressFragment"
+        android:name="com.example.apptimphongtro.feature.addpost.ui.Step2AddressFragment"
         tools:layout="@layout/fragment_step2_address"
         android:label="man hinh nhap dia chi cho phong tro">
         <action android:id="@+id/action_Step2AddressFragment_to_CofirmMapFragment"
@@ -100,7 +100,7 @@
 
     <fragment
         android:id="@+id/ImplementAddPostFragment"
-        android:name="com.example.apptimphongtro.ui.ImplementAddPostFragment"
+        android:name="com.example.apptimphongtro.feature.addpost.ui.ImplementAddPostFragment"
        tools:layout="@layout/fragment_implement_add_post"
         android:label="trang gioi thieu dang tin">
         <action

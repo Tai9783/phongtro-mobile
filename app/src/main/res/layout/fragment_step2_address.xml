@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.Step2AddressFragment"
+    tools:context=".feature.addpost.ui.Step2AddressFragment"
     android:background="@drawable/bo4goc_nenxam"
     android:backgroundTint="#FFFFFF"
     android:elevation="10dp">

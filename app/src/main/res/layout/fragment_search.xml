@@ -7,7 +7,7 @@
     android:background="#FFFFFF"
     android:scrollbars="none"
     android:orientation="vertical"
-    tools:context=".ui.SearchFragment">
+    tools:context=".feature.search.ui.SearchFragment">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="60dp"

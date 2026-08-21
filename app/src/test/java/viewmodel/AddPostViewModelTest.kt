@@ -2,7 +2,8 @@ package com.example.apptimphongtro.viewmodel
 
 import android.net.Uri
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.apptimphongtro.model.entity.CityRoomCount
+import com.example.apptimphongtro.core.model.CityRoomCount
+import com.example.apptimphongtro.feature.addpost.viewmodel.AddPostViewModel
 import io.mockk.mockk
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

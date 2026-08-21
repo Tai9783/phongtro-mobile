@@ -7,7 +7,7 @@
     android:background="#FFFFFF"
     android:fillViewport="true"
     android:scrollbars="none"
-    tools:context=".ui.ProfileFragment">
+    tools:context=".feature.profile.ui.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

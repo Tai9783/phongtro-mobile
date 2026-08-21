@@ -1,7 +1,6 @@
 package com.example.apptimphongtro.common
 
-import com.example.apptimphongtro.model.entity.RentalRoom
-import com.example.apptimphongtro.viewmodel.RoomViewModel
+import com.example.apptimphongtro.core.model.RentalRoom
 
 sealed class RoomUIState {
     object Idle : RoomUIState()

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.ConfirmMapFragment">
+    tools:context=".feature.addpost.ui.ConfirmMapFragment">
 
     <com.trackasia.android.maps.MapView
         android:id="@+id/map"
