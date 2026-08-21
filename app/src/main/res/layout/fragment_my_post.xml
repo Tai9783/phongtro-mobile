@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".feature.mypost.ui.MyPostFragment"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#074EFF"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/iconExit"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/decriptionImage"
+            android:src="@drawable/icon_exit"
+            app:tint="@color/white"
+            android:scaleType="centerInside"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/MyPost_Title"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginStart="7dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutEmptyMyPost"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/icon_add_post"
+            android:contentDescription="@string/decriptionImage"
+            app:tint="#D1D5DB"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/MyPost_content_tilte"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#4B5563"
+            android:layout_marginBottom="8dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/MyPost_content"
+            android:textSize="18sp"
+            android:textColor="#9CA3AF"
+            android:layout_marginBottom="24dp"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnDangTin"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="@string/MyPost_content_Button"
+            android:textAllCaps="false"
+            android:background="@drawable/button_xanh"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvMyPost"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="12dp"
+        android:clipToPadding="false"/>
+
+</LinearLayout>

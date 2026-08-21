@@ -149,6 +149,9 @@
     <string name="addpostfragment_txtTilte">Đăng tin mới</string>
     <string name="addpostfragment_txtStep">Bước 1/3:</string>
     <string name="addpostfragment_txtContenStep">Thông tin cơ bản</string>
+    <string name="add_post_header_step1">Bước 1/3: Thông tin cơ bản</string>
+    <string name="add_post_header_step2">Bước 2/3: Vị trí phòng trọ</string>
+    <string name="add_post_header_step3">Bước 3/3: Hình ảnh phòng trọ</string>
     <string name="addpostfragment_txtTiltePost">Đăng tin cho thuê phòng trọ</string>
     <string name="addpostfragment_txtContentPost">Tiếp cận hàng ngàn người thuê trọ mỗi ngày. Quy trình đơn giản, nhanh chóng chỉ trong vài bước.</string>
     <string name="addpostfragment_txtTilteNotication1">Xác minh chủ trọ</string>
@@ -199,13 +202,36 @@
 
     <string name="dialogInformation_title">Lưu thành công</string>
     <string name="dialogInformation_title2">Lưu thất bại</string>
+    <string name="dialogInformation_decripSaveRoomFail">Có lỗi trong quá trình lưu phòng. Vui lòng thử lại.</string>
+    <string name="dialogInformation_titlePostRoomFail">Đăng bài thất bại</string>
+    <string name="dialogInformation_decripPostRoomFail">Có lỗi trong quá trình đăng bài. Vui lòng thử lại sau!</string>
+    <string name="dialogInformation_btnPrimary4">Hủy bỏ</string>
+
     <string name="dialogInformation_btnPrimary">Có, đăng tin ngay</string>
     <string name="dialogInformation_btnPrimary2">Thử lại</string>
     <string name="dialogInformation_btnSecond">Để sau</string>
     <string name="dialogInformation_btnSecond2">Quay lại chỉnh sửa</string>
     <string name="dialogInformation_decription">Bạn có muốn đăng tin để người thuê tìm thấy phòng không?</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dialogInformation_titlePostRoom">Đăng bài thành công</string>
+    <string name="dialogInformation_btnPrimary3">Xem bài đăng</string>
+    <string name="dialogInformation_btnSecond3">Về trang chủ</string>
 
+    <string name="dialogWarning_title">Rời khỏi trang này</string>
+    <string name="dialogWarning_decription">Toàn bộ thông tin phòng trọ bạn đã nhập ở các bước trước sẽ bị xóa sạch và không thể khôi phục.</string>
+    <string name="dialogWarning_btnPrimary">Tiếp tục nhập</string>
+    <string name="dialogWarning_btnSecond">Hủy đăng tin</string>
+
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="MyPost_Title">Tin đăng của tôi</string>
+    <string name="MyPost_content_tilte">Bạn chưa có bài đăng nào</string>
+    <string name="MyPost_content">Hãy đăng tin phòng trọ của bạn ngay</string>
+    <string name="MyPost_content_Button">Đăng tin mới</string>
+
+    <string name="MyPost_item_time">Hết hạn:</string>
+    <string name="MyPost_item_timee">20/03/2026</string>
+    <string name="MyPost_status_active">Còn hạn</string>
+    <string name="MyPost_status_expired">Hết hạn</string>
 
 </resources>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bo2goctren_nentrang"
     android:orientation="vertical"
-    tools:context=".ui.BottomSortFragment">
+    tools:context=".feature.search.ui.BottomSortFragment">
 
     <TextView
         android:id="@+id/title"
