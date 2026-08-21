@@ -1,7 +1,7 @@
 package repository
-import com.example.apptimphongtro.data.api.RoomPostApiSevice
-import com.example.apptimphongtro.data.repository.RoomPostRepository
-import com.example.apptimphongtro.model.dto.RoomPostRepsonse
+import com.example.apptimphongtro.feature.addpost.data.RoomPostApiSevice
+import com.example.apptimphongtro.feature.addpost.data.RoomPostRepository
+import com.example.apptimphongtro.feature.addpost.data.RoomPostRepsonse
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

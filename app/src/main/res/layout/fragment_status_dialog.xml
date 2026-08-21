@@ -4,7 +4,7 @@
     android:layout_width="320dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.StatusDialog"
+    tools:context=".feature.addpost.ui.StatusDialog"
     android:padding="15dp"
     android:background="@drawable/bo4goc_nentrang">
 

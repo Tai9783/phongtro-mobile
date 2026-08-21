@@ -8,9 +8,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.apptimphongtro.core.user.InitUserViewModel
+import com.example.apptimphongtro.core.user.viewmodel.UserViewModel
 import com.example.apptimphongtro.data.local.SharedPrefManager
-import com.example.apptimphongtro.util.InitUserViewModel
-import com.example.apptimphongtro.viewmodel.UserViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
     class   MainActivity : AppCompatActivity() {

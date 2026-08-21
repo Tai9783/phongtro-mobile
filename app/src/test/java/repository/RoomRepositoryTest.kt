@@ -1,9 +1,9 @@
 package repository
 
-import com.example.apptimphongtro.data.api.RoomApiService
-import com.example.apptimphongtro.data.repository.RoomRepository
-import com.example.apptimphongtro.model.dto.RentalRoomRequest
-import com.example.apptimphongtro.model.entity.RentalRoom
+import com.example.apptimphongtro.core.room.data.RoomApiService
+import com.example.apptimphongtro.core.room.data.RoomRepository
+import com.example.apptimphongtro.core.model.RentalRoomRequest
+import com.example.apptimphongtro.core.model.RentalRoom
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
