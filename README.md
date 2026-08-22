@@ -45,31 +45,33 @@
 
 ## Kiến trúc thư mục
 
+Dự án tổ chức theo **MVVM + package-by-feature**: mỗi tính năng có thư mục riêng chứa đủ tầng UI/ViewModel/Data của chính nó, thay vì gom chung theo loại code như trước. Phần dùng chung từ 2 tính năng trở lên được tách ra `core/`.
+
 ```text
 app/src/main/java/com/example/apptimphongtro/
-├── adapter/
-│   └── Các RecyclerView Adapter và DiffUtil Callback
+├── feature/
+│   ├── home/ui/                 Danh sách phòng nổi bật (Fragment, Adapter)
+│   ├── search/{ui,viewmodel,data}/    Tìm kiếm, lọc theo tỉnh/phường/giá, sắp xếp
+│   ├── addpost/{ui,viewmodel,data}/   Quy trình đăng tin, tải ảnh Cloudinary, RoomPost
+│   ├── mypost/{ui,viewmodel,data}/    Danh sách tin đăng của chủ trọ
+│   ├── profile/ui/              Đăng nhập và trang cá nhân
+│   └── favorite/ui/             Màn hình yêu thích
+├── core/
+│   ├── model/                   Entity/DTO dùng chung nhiều feature (User, RentalRoom, Ward, CityRoomCount, Amenity...)
+│   ├── room/{viewmodel,data}/   Logic phòng trọ dùng chung giữa Home và AddPost
+│   └── user/{viewmodel,data}/   Logic tài khoản/phiên đăng nhập dùng chung toàn app
 ├── common/
-│   └── Các trạng thái giao diện dùng chung
+│   └── Sealed class trạng thái giao diện dùng chung (RoomUIState, RoomPostUiState)
 ├── data/
 │   ├── api/
-│   │   └── Retrofit Service
-│   ├── local/
-│   │   └── SharedPreferences
-│   └── repository/
-│       └── Repository xử lý dữ liệu
-├── model/
-│   ├── dto/
-│   │   └── Request và Response Model
-│   └── entity/
-│       └── Các đối tượng dữ liệu của ứng dụng
-├── ui/
-│   └── Fragment, Dialog và Bottom Sheet
-├── util/
-│   └── Các hàm tiện ích và khởi tạo ViewModel
-└── viewmodel/
-    └── ViewModel và ViewModel Factory
+│   │   └── RetrofitClient — điểm khởi tạo Retrofit dùng chung cho mọi feature
+│   └── local/
+│       └── SharedPreferences
+└── util/
+    └── Các hàm tiện ích dùng chung (FormatMoney...)
 ```
+
+Bên trong mỗi `feature/<tên>/` theo đúng 3 lớp MVVM: `ui/` (Fragment, Adapter, DiffUtil Callback), `viewmodel/` (ViewModel, ViewModel Factory), `data/` (Repository, ApiService, DTO). Feature nào chỉ có UI thuần, không có state/data riêng (`home`, `profile`, `favorite`) thì dùng lại ViewModel/Repository từ `core/`.
 
 ## Yêu cầu môi trường
 
