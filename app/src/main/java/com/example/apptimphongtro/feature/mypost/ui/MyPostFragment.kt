@@ -16,7 +16,7 @@ import com.example.apptimphongtro.feature.mypost.InitMyPostViewModel
 import com.example.apptimphongtro.feature.mypost.viewmodel.MyPostViewModel
 
 class MyPostFragment : Fragment() {
-    private lateinit var _binding: FragmentMyPostBinding
+    private var _binding: FragmentMyPostBinding?= null
     private lateinit var sharedPrefManager: SharedPrefManager
     private val myPostAdapter = MyPostAdapter()
     private val myPostViewModel: MyPostViewModel by viewModels{
@@ -25,11 +25,11 @@ class MyPostFragment : Fragment() {
     private val userViewModel: UserViewModel by viewModels{
         InitUserViewModel.factory
     }
-    private val binding get() = _binding
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View {FragmentMyPostBinding.inflate(inflater, container, false)
         _binding = FragmentMyPostBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -70,4 +70,8 @@ class MyPostFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding= null
+    }
 }
