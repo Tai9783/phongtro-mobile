@@ -3,6 +3,7 @@ package com.example.apptimphongtro.feature.addpost.viewmodel
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.apptimphongtro.core.model.Amenity
 import com.example.apptimphongtro.core.model.CityRoomCount
@@ -10,12 +11,13 @@ import com.example.apptimphongtro.core.model.RentalRoom
 import com.example.apptimphongtro.core.model.RentalRoomRequest
 import com.example.apptimphongtro.core.model.Ward
 
-class AddPostViewModel : ViewModel() {
-    private val _currentStep=MutableLiveData(0) // lưu vị trí hiện tại của viewpage2
+class AddPostViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
+    // currentStep và addPost sống qua cả process death nhờ SavedStateHandle,
+    private val _currentStep= savedStateHandle.getLiveData("currentStep", 0) // lưu vị trí hiện tại của viewpage2
     val currentStep: LiveData<Int> get()=_currentStep
     private var isLocationHandled = false // biến đánh dấu xem sự kiện này đã được xử lý chưa
     //chứa thông tin bài đăng khi landlord đăng bài
-    private var _addPost= MutableLiveData(RentalRoomRequest())
+    private var _addPost= savedStateHandle.getLiveData("addPost", RentalRoomRequest())
     val addPost: LiveData<RentalRoomRequest> get()=_addPost
 
     private val _allAmenities= MutableLiveData<List<Amenity>>()
@@ -25,16 +27,15 @@ class AddPostViewModel : ViewModel() {
     private var _allCity= MutableLiveData<List<CityRoomCount>>()
     val allCity: MutableLiveData<List<CityRoomCount>> get()= _allCity
     //ds chỉ chứa city được chọn
-    private var _selectedCity= MutableLiveData<CityRoomCount?>(null)
+    private var _selectedCity= savedStateHandle.getLiveData<CityRoomCount?>("selectedCity", null)
     val selectedCity : LiveData<CityRoomCount?> get()= _selectedCity
     //ds chứa tất các ward
     private var _allWard= MutableLiveData<List<Ward>>()
     val allWard: MutableLiveData<List<Ward>> get()= _allWard
     //ds chứa các uri ảnh do người dùng đưa chọn từ điện thoại đưa lên
-    private var _allImage= MutableLiveData<List<Uri>>()
+    private var _allImage= savedStateHandle.getLiveData("listImage", emptyList<Uri>())
     val allImage: LiveData<List<Uri>> get()= _allImage
-
-    private var _selectedWard= MutableLiveData<Ward?>(null)
+    private var _selectedWard= savedStateHandle.getLiveData<Ward?>("selectedWard", null)
     val selectedWard : LiveData<Ward?> get()= _selectedWard
 
     var wardScrollPos: Int = 0

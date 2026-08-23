@@ -2,6 +2,7 @@ package com.example.apptimphongtro.viewmodel
 
 import android.net.Uri
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.SavedStateHandle
 import com.example.apptimphongtro.core.model.CityRoomCount
 import com.example.apptimphongtro.feature.addpost.viewmodel.AddPostViewModel
 import io.mockk.mockk
@@ -23,7 +24,7 @@ class AddPostViewModelTest {
 
     @Before
     fun setup(){
-      addPostViewModel= AddPostViewModel()
+      addPostViewModel= AddPostViewModel(SavedStateHandle())
     }
 
     @Test
