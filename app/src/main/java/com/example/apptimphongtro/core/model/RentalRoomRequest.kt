@@ -1,5 +1,9 @@
 package com.example.apptimphongtro.core.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class RentalRoomRequest(
     val landlordId: String="",
     val title: String="",
@@ -14,4 +18,4 @@ data class RentalRoomRequest(
     val amenities: List<String> = emptyList(),
     val lat: Double=0.0,
     val lng: Double=0.0
-)
+): Parcelable
