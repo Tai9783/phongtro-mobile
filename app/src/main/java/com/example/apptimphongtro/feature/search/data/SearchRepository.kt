@@ -3,8 +3,9 @@ package com.example.apptimphongtro.feature.search.data
 import com.example.apptimphongtro.core.model.CityRoomCount
 import com.example.apptimphongtro.core.model.RentalRoom
 import com.example.apptimphongtro.core.model.Ward
+import javax.inject.Inject
 
-class SearchRepository(private val searchApiService: SearchApiService) {
+class SearchRepository @Inject constructor (private val searchApiService: SearchApiService) {
     suspend fun getListCityRoomCout(): List<CityRoomCount>{
         return searchApiService.getListCityAndCountRoom()
     }

@@ -1,31 +1,25 @@
 package com.example.apptimphongtro.feature.search.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.apptimphongtro.R
-import com.example.apptimphongtro.data.api.RetrofitClient
-import com.example.apptimphongtro.feature.search.data.SearchRepository
 import com.example.apptimphongtro.feature.search.viewmodel.SearchViewModel
-import com.example.apptimphongtro.feature.search.viewmodel.SearchViewModelFactory
 import com.google.android.material.chip.Chip
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
     private lateinit var txtCity: TextView
     private lateinit var txtWard: TextView
     private lateinit var selectedCity: String
-    private lateinit var repository: SearchRepository
-    private lateinit var searchViewModelFactory: SearchViewModelFactory
-    private lateinit var viewModel: SearchViewModel
+    private val viewModel: SearchViewModel by viewModels()
     private lateinit var chip1: Chip
     private lateinit var chip2: Chip
     private lateinit var chip3: Chip
@@ -189,10 +183,6 @@ class SearchFragment : Fragment() {
         listAmenity= mutableListOf(chip10,chip11,chip12,chip13,chip14,chip15,chip16,chip17,chip18)
         btnApDung= view.findViewById(R.id.btnApDung)
 
-        val apiServer= RetrofitClient.searchApiService
-        repository= SearchRepository(apiServer)
-        searchViewModelFactory= SearchViewModelFactory(repository)
-        viewModel= ViewModelProvider(requireActivity(),searchViewModelFactory)[SearchViewModel::class.java]
 
     }
 

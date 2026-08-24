@@ -9,26 +9,18 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.apptimphongtro.R
-import com.example.apptimphongtro.core.model.User
-import com.example.apptimphongtro.core.user.InitUserViewModel
-import com.example.apptimphongtro.core.user.data.UserRepository
 import com.example.apptimphongtro.core.user.viewmodel.UserViewModel
-import com.example.apptimphongtro.core.user.viewmodel.UserViewModelFactory
-import com.example.apptimphongtro.data.api.RetrofitClient
 import com.example.apptimphongtro.data.local.SharedPrefManager
 import com.example.apptimphongtro.databinding.FragmentProfileBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding?=null
     private val binding get()= _binding!!
-
-    private val userViewModel: UserViewModel by activityViewModels {
-        InitUserViewModel.factory
-    }
+    private val userViewModel: UserViewModel by activityViewModels()
     private lateinit var sharedPrefManager: SharedPrefManager
 
 

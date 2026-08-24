@@ -6,9 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apptimphongtro.feature.mypost.data.MyPostRepository
 import com.example.apptimphongtro.feature.mypost.data.MyPostRespone
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MyPostViewModel(private val repository: MyPostRepository): ViewModel() {
+@HiltViewModel
+class MyPostViewModel @Inject constructor(private val repository: MyPostRepository): ViewModel() {
     private val _listMyPost= MutableLiveData<List<MyPostRespone>>()
     val listMyPost: MutableLiveData<List<MyPostRespone>> get()= _listMyPost
 

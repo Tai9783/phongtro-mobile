@@ -11,10 +11,12 @@ import com.example.apptimphongtro.core.model.CityRoomCount
 import com.example.apptimphongtro.core.model.RentalRoom
 import com.example.apptimphongtro.core.model.Ward
 import com.example.apptimphongtro.feature.search.data.PriceRange
-import com.google.android.material.chip.Chip
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchViewModel(private val searchRepository: SearchRepository): ViewModel() {
+@HiltViewModel
+class SearchViewModel @Inject constructor (private val searchRepository: SearchRepository): ViewModel() {
     private val _listCityRoomCount= MutableLiveData<List<CityRoomCount>>()
     val listCityRoomCount: LiveData<List<CityRoomCount>> get()= _listCityRoomCount
 

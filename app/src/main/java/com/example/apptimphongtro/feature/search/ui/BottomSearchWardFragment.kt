@@ -8,24 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatButton
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apptimphongtro.R
-import com.example.apptimphongtro.data.api.RetrofitClient
-import com.example.apptimphongtro.feature.search.InitSearchViewModel
-import com.example.apptimphongtro.feature.search.data.SearchRepository
 import com.example.apptimphongtro.feature.search.viewmodel.SearchViewModel
-import com.example.apptimphongtro.feature.search.viewmodel.SearchViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class   BottomSearchWardFragment : BottomSheetDialogFragment() {
     private lateinit var rvWard: RecyclerView
     private lateinit var searchWardAdapter: SearchWardAdapter
-    private val searchViewModel: SearchViewModel  by activityViewModels {
-        InitSearchViewModel.factory
-    }
+    private val searchViewModel: SearchViewModel  by viewModels()
     private lateinit var imgThoat: ImageView
     private lateinit var btnXacNhan: AppCompatButton
 

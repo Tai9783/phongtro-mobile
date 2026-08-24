@@ -8,28 +8,24 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.apptimphongtro.core.user.InitUserViewModel
 import com.example.apptimphongtro.core.user.viewmodel.UserViewModel
 import com.example.apptimphongtro.data.local.SharedPrefManager
 import com.example.apptimphongtro.databinding.FragmentMyPostBinding
-import com.example.apptimphongtro.feature.mypost.InitMyPostViewModel
 import com.example.apptimphongtro.feature.mypost.viewmodel.MyPostViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MyPostFragment : Fragment() {
     private var _binding: FragmentMyPostBinding?= null
     private lateinit var sharedPrefManager: SharedPrefManager
     private val myPostAdapter = MyPostAdapter()
-    private val myPostViewModel: MyPostViewModel by viewModels{
-        InitMyPostViewModel.factory
-    }
-    private val userViewModel: UserViewModel by viewModels{
-        InitUserViewModel.factory
-    }
+    private val myPostViewModel: MyPostViewModel by viewModels()
+    private val userViewModel: UserViewModel by viewModels()
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {FragmentMyPostBinding.inflate(inflater, container, false)
+    ): View {
         _binding = FragmentMyPostBinding.inflate(inflater, container, false)
         return binding.root
     }

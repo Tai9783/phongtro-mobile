@@ -20,7 +20,6 @@ import com.bumptech.glide.Glide
 import com.example.apptimphongtro.R
 import com.example.apptimphongtro.common.RoomPostUiState
 import com.example.apptimphongtro.common.RoomUIState
-import com.example.apptimphongtro.core.user.InitUserViewModel
 import com.example.apptimphongtro.core.user.viewmodel.UserViewModel
 import com.example.apptimphongtro.data.api.RetrofitClient
 import com.example.apptimphongtro.data.api.RetrofitClient.cloudinaryUploadService
@@ -38,6 +37,7 @@ import com.example.apptimphongtro.feature.addpost.viewmodel.RoomPostViewModelFac
 import com.example.apptimphongtro.core.room.viewmodel.RoomViewModel
 import com.example.apptimphongtro.core.room.viewmodel.RoomViewModelFactory
 import com.google.android.material.imageview.ShapeableImageView
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -45,7 +45,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
 
-
+@AndroidEntryPoint
 class Step3ImageFragment : Fragment() {
     private var _binding: FragmentStep3ImageBinding?=null
     private val binding get()= _binding!!
@@ -61,9 +61,7 @@ class Step3ImageFragment : Fragment() {
     private lateinit var roomPostRepository: RoomPostRepository
     private lateinit var roomPostViewModel: RoomPostViewModel
     private lateinit var roomPostViewModelFactory: ViewModelProvider.Factory
-    private val userViewModel: UserViewModel by activityViewModels {
-        InitUserViewModel.factory
-    }
+    private val userViewModel: UserViewModel by activityViewModels()
     private lateinit var landlordId : String
     private var saveRoomId: String=""
 
