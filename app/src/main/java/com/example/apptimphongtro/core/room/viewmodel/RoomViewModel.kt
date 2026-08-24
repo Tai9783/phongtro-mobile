@@ -9,10 +9,12 @@ import com.example.apptimphongtro.common.RoomUIState
 import com.example.apptimphongtro.core.model.RentalRoom
 import com.example.apptimphongtro.core.model.RentalRoomRequest
 import com.example.apptimphongtro.core.room.data.RoomRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.math.min
-
-class RoomViewModel(private val repository: RoomRepository): ViewModel() {
+@HiltViewModel
+class RoomViewModel @Inject constructor (private val repository: RoomRepository): ViewModel() {
     private val phongNoiBat= MutableLiveData<List<RentalRoom>>()
     val _phongNoiBat: LiveData<List<RentalRoom>> get()= phongNoiBat;
 

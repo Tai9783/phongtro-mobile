@@ -8,18 +8,17 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.example.apptimphongtro.core.user.InitUserViewModel
 import com.example.apptimphongtro.core.user.viewmodel.UserViewModel
 import com.example.apptimphongtro.data.local.SharedPrefManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
-    class   MainActivity : AppCompatActivity() {
+    @AndroidEntryPoint
+    class MainActivity : AppCompatActivity() {
         private lateinit var navHostFragment: NavHostFragment
         private lateinit var bottomNav:BottomNavigationView
         private lateinit var sharedPrefManager: SharedPrefManager
-        private val userViewModel: UserViewModel by viewModels{
-            InitUserViewModel.factory
-        }
+        private val userViewModel: UserViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

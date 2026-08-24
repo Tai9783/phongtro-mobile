@@ -32,6 +32,7 @@
 - Java 11
 - XML Layout và ViewBinding
 - MVVM và Repository Pattern
+- Hilt (Dependency Injection)
 - Kotlin Coroutines
 - LiveData và ViewModel
 - Retrofit 2 và Gson
@@ -57,6 +58,8 @@ app/src/main/java/com/example/apptimphongtro/
 │   ├── profile/ui/              Đăng nhập và trang cá nhân
 │   └── favorite/ui/             Màn hình yêu thích
 ├── core/
+│   ├── di/
+│   │   └── NetworkModule — khai báo Hilt Module cung cấp các ApiService dùng chung
 │   ├── model/                   Entity/DTO dùng chung nhiều feature (User, RentalRoom, Ward, CityRoomCount, Amenity...)
 │   ├── room/{viewmodel,data}/   Logic phòng trọ dùng chung giữa Home và AddPost
 │   └── user/{viewmodel,data}/   Logic tài khoản/phiên đăng nhập dùng chung toàn app
@@ -71,7 +74,9 @@ app/src/main/java/com/example/apptimphongtro/
     └── Các hàm tiện ích dùng chung (FormatMoney...)
 ```
 
-Bên trong mỗi `feature/<tên>/` theo đúng 3 lớp MVVM: `ui/` (Fragment, Adapter, DiffUtil Callback), `viewmodel/` (ViewModel, ViewModel Factory), `data/` (Repository, ApiService, DTO). Feature nào chỉ có UI thuần, không có state/data riêng (`home`, `profile`, `favorite`) thì dùng lại ViewModel/Repository từ `core/`.
+Bên trong mỗi `feature/<tên>/` theo đúng 3 lớp MVVM: `ui/` (Fragment, Adapter, DiffUtil Callback), `viewmodel/` (ViewModel), `data/` (Repository, ApiService, DTO). Feature nào chỉ có UI thuần, không có state/data riêng (`home`, `profile`, `favorite`) thì dùng lại ViewModel/Repository từ `core/`.
+
+Dependency injection dùng **Hilt**: Repository khai báo `@Inject constructor`, ViewModel dùng `@HiltViewModel`, Fragment/Activity cần `@AndroidEntryPoint` để nhận ViewModel qua `by viewModels()`/`by activityViewModels()`. Các `ApiService` (interface, không tự khởi tạo được bằng `@Inject`) được cung cấp qua `core/di/NetworkModule`, ủy quyền lại cho `RetrofitClient` sẵn có.
 
 ## Yêu cầu môi trường
 

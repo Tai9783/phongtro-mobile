@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("kotlin-parcelize")
     alias(libs.plugins.navigation.safe.args)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.kotlin.kapt)
 
 }
 val localProps = Properties().apply {
@@ -85,4 +87,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     testImplementation(libs.androidx.core.testing)
     testImplementation(libs.mockk)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 }

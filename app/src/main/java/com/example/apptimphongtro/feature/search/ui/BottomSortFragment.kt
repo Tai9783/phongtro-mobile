@@ -9,11 +9,13 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.example.apptimphongtro.R
-import com.example.apptimphongtro.feature.search.InitSearchViewModel
 import com.example.apptimphongtro.feature.search.viewmodel.SearchViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BottomSortFragment : BottomSheetDialogFragment() {
     private lateinit var sortByNearest: ConstraintLayout
     private lateinit var sortByPriceAsc: ConstraintLayout
@@ -24,9 +26,7 @@ class BottomSortFragment : BottomSheetDialogFragment() {
     private lateinit var iconCheck2: ImageView
     private lateinit var iconCheck3: ImageView
     private lateinit var iconCheck4: ImageView
-    private val searchViewModel: SearchViewModel by activityViewModels {
-        InitSearchViewModel.factory
-    }
+    private val searchViewModel: SearchViewModel by viewModels()
 
     private data class SortItem(
         val type: SortType,

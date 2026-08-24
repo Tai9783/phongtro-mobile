@@ -7,9 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apptimphongtro.feature.addpost.data.CloudinaryRepository
 import com.example.apptimphongtro.feature.addpost.data.CloudinarySignatureResponse
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CloudinaryViewModel(private val repository: CloudinaryRepository): ViewModel() {
+@HiltViewModel
+class CloudinaryViewModel @Inject constructor (private val repository: CloudinaryRepository): ViewModel() {
     private val _cloudinary= MutableLiveData<CloudinarySignatureResponse>()
     val clodinary: LiveData<CloudinarySignatureResponse> get()=_cloudinary
 

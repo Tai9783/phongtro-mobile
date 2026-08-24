@@ -9,25 +9,19 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.apptimphongtro.R
-import com.example.apptimphongtro.core.user.InitUserViewModel
-import com.example.apptimphongtro.core.user.data.UserRepository
 import com.example.apptimphongtro.core.user.viewmodel.UserViewModel
-import com.example.apptimphongtro.core.user.viewmodel.UserViewModelFactory
-import com.example.apptimphongtro.data.api.RetrofitClient
 import com.example.apptimphongtro.data.local.SharedPrefManager
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
     private lateinit var edtSdtorEmail : EditText
     private lateinit var edtPass : EditText
     private lateinit var btnApDung : AppCompatButton
 
-    private val userViewModel: UserViewModel by activityViewModels {
-        InitUserViewModel.factory
-    }
+    private val userViewModel: UserViewModel by activityViewModels()
 
 
 
