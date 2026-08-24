@@ -13,18 +13,18 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apptimphongtro.R
-import com.example.apptimphongtro.feature.search.InitSearchViewModel
 import com.example.apptimphongtro.feature.search.data.PriceRange
 import com.example.apptimphongtro.feature.search.data.parsePriceLabel
 import com.example.apptimphongtro.feature.search.viewmodel.SearchViewModel
 import com.google.android.material.chip.Chip
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ResultSearchFragment : Fragment() {
     private lateinit var txtNameCity: TextView
     private lateinit var lienket: View
@@ -41,9 +41,7 @@ class ResultSearchFragment : Fragment() {
     private lateinit var chipFilter: Chip
     private lateinit var chipSort: Chip
     //khởi tạo searchViewModel
-    private val searchViewModel: SearchViewModel  by activityViewModels {
-        InitSearchViewModel.factory
-    }
+    private val searchViewModel: SearchViewModel  by viewModels()
 
 
     override fun onCreateView(

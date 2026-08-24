@@ -2,8 +2,9 @@ package com.example.apptimphongtro.core.room.data
 
 import com.example.apptimphongtro.core.model.RentalRoom
 import com.example.apptimphongtro.core.model.RentalRoomRequest
+import javax.inject.Inject
 
-class RoomRepository(private val apiService: RoomApiService) {
+class RoomRepository @Inject constructor (private val apiService: RoomApiService) {
     suspend fun getFeaturedRooms(): List<RentalRoom> {
         // Gọi hàm từ service
         return apiService.getPhongNoiBat()

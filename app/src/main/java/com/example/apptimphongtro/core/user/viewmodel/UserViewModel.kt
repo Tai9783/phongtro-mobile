@@ -6,9 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apptimphongtro.core.user.data.UserRepository
 import com.example.apptimphongtro.core.model.User
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class UserViewModel(private val userRepository: UserRepository): ViewModel() {
+@HiltViewModel
+class UserViewModel @Inject constructor (private val userRepository: UserRepository): ViewModel() {
 
 
     private val _user= MutableLiveData<User?>()

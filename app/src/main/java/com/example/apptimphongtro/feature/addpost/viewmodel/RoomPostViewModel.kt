@@ -6,9 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apptimphongtro.common.RoomPostUiState
 import com.example.apptimphongtro.feature.addpost.data.RoomPostRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RoomPostViewModel(private val repository: RoomPostRepository): ViewModel() {
+@HiltViewModel
+class RoomPostViewModel @Inject constructor  (private val repository: RoomPostRepository): ViewModel() {
 
     private val _uiStateRoomPost= MutableLiveData<RoomPostUiState>(RoomPostUiState.Idle)
     val uiStateRoomPost: MutableLiveData<RoomPostUiState> get()= _uiStateRoomPost

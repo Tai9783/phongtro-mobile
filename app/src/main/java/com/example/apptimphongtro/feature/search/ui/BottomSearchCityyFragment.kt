@@ -8,22 +8,21 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apptimphongtro.R
-import com.example.apptimphongtro.feature.search.InitSearchViewModel
 import com.example.apptimphongtro.feature.search.viewmodel.SearchViewModel
 import com.google.android.material.R as MaterialR
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class BottomSearchCityyFragment : BottomSheetDialogFragment() {
   private lateinit var rvCity: RecyclerView
   private lateinit var searchCityAdapter: SearchCityAdapter
   //khởi tạo searchViewModel
-  private val searchViewModel: SearchViewModel  by activityViewModels {
-      InitSearchViewModel.factory
-  }
+  private val searchViewModel: SearchViewModel  by viewModels()
   private lateinit var imgThoat: ImageView
   private lateinit var btnXacNhan: Button
 

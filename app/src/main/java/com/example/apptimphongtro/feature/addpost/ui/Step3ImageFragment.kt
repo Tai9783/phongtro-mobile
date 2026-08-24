@@ -14,30 +14,24 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.apptimphongtro.R
 import com.example.apptimphongtro.common.RoomPostUiState
 import com.example.apptimphongtro.common.RoomUIState
-import com.example.apptimphongtro.core.user.InitUserViewModel
 import com.example.apptimphongtro.core.user.viewmodel.UserViewModel
-import com.example.apptimphongtro.data.api.RetrofitClient
 import com.example.apptimphongtro.data.api.RetrofitClient.cloudinaryUploadService
-import com.example.apptimphongtro.core.room.data.RoomRepository
 import com.example.apptimphongtro.databinding.FragmentStep3ImageBinding
-import com.example.apptimphongtro.feature.addpost.data.CloudinaryRepository
 import com.example.apptimphongtro.feature.addpost.data.CloudinarySignatureResponse
-import com.example.apptimphongtro.feature.addpost.data.CloudinaryUploadService
 import com.example.apptimphongtro.feature.addpost.data.RoomPostRepository
 import com.example.apptimphongtro.feature.addpost.viewmodel.AddPostViewModel
 import com.example.apptimphongtro.feature.addpost.viewmodel.CloudinaryViewModel
-import com.example.apptimphongtro.feature.addpost.viewmodel.CloudinaryViewModelFactory
 import com.example.apptimphongtro.feature.addpost.viewmodel.RoomPostViewModel
-import com.example.apptimphongtro.feature.addpost.viewmodel.RoomPostViewModelFactory
 import com.example.apptimphongtro.core.room.viewmodel.RoomViewModel
-import com.example.apptimphongtro.core.room.viewmodel.RoomViewModelFactory
 import com.google.android.material.imageview.ShapeableImageView
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -45,25 +39,17 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
 
-
+@AndroidEntryPoint
 class Step3ImageFragment : Fragment() {
     private var _binding: FragmentStep3ImageBinding?=null
     private val binding get()= _binding!!
     private lateinit var addPostViewModel: AddPostViewModel
-    private lateinit var cloudinaryViewModel: CloudinaryViewModel
-    private lateinit var cloudinaryRepository: CloudinaryRepository
-    private lateinit var cloudinaryViewModelFactory: CloudinaryViewModelFactory
+    private val cloudinaryViewModel: CloudinaryViewModel by viewModels()
     private lateinit var currentCloudinary: CloudinarySignatureResponse
-    private lateinit var roomViewModel: RoomViewModel
-    private lateinit var roomViewModelFactory: ViewModelProvider.Factory
-    private lateinit var roomRepository: RoomRepository
+    private val roomViewModel: RoomViewModel by viewModels()
     private  var loadingDialog: LoadingDialog?=null
-    private lateinit var roomPostRepository: RoomPostRepository
-    private lateinit var roomPostViewModel: RoomPostViewModel
-    private lateinit var roomPostViewModelFactory: ViewModelProvider.Factory
-    private val userViewModel: UserViewModel by activityViewModels {
-        InitUserViewModel.factory
-    }
+    private val roomPostViewModel: RoomPostViewModel by viewModels()
+    private val userViewModel: UserViewModel by activityViewModels()
     private lateinit var landlordId : String
     private var saveRoomId: String=""
 
@@ -114,20 +100,7 @@ class Step3ImageFragment : Fragment() {
 
     private fun addControll() {
         addPostViewModel= ViewModelProvider(requireActivity())[AddPostViewModel::class.java]
-        val apiService= RetrofitClient.cloudinaryApiService
-        cloudinaryRepository= CloudinaryRepository(apiService)
-        cloudinaryViewModelFactory= CloudinaryViewModelFactory(cloudinaryRepository)
-        cloudinaryViewModel= ViewModelProvider(requireActivity(),cloudinaryViewModelFactory)[CloudinaryViewModel::class.java]
         cloudinaryViewModel.getCloudinarySignature()
-        val roomApi = RetrofitClient.roomApiService
-        roomRepository= RoomRepository(roomApi)
-        roomViewModelFactory= RoomViewModelFactory(roomRepository)
-        roomViewModel= ViewModelProvider(this,roomViewModelFactory)[RoomViewModel::class.java]
-
-        roomPostRepository= RoomPostRepository(RetrofitClient.roomPostApiService)
-        roomPostViewModelFactory= RoomPostViewModelFactory(roomPostRepository)
-        roomPostViewModel= ViewModelProvider(this,roomPostViewModelFactory)[RoomPostViewModel::class.java]
-
     }
 
     private fun addNewImageToLayout(uri: Uri) {
