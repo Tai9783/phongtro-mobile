@@ -2,8 +2,6 @@ package com.example.apptimphongtro.feature.home.ui
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,23 +9,19 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.apptimphongtro.MainActivity
 import com.example.apptimphongtro.R
-import com.example.apptimphongtro.core.room.data.RoomRepository
 import com.example.apptimphongtro.core.room.viewmodel.RoomViewModel
-import com.example.apptimphongtro.core.room.viewmodel.RoomViewModelFactory
-import com.example.apptimphongtro.data.api.RetrofitClient
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : BottomSheetDialogFragment() {
     private lateinit var roomAdapter: RoomAdapter
-    private lateinit var roomViewModel: RoomViewModel
+    private val roomViewModel: RoomViewModel by viewModels()
     private lateinit var rvPhong: RecyclerView
-    private lateinit var repository: RoomRepository
-    private lateinit var roomViewModelFactory: RoomViewModelFactory
     private lateinit var filterPrice: TextView
     private lateinit var filterLocal: TextView
     override fun onCreateView(
@@ -206,12 +200,7 @@ class HomeFragment : BottomSheetDialogFragment() {
             filterLocal = view.findViewById(R.id.filter_Local)
         }
         roomAdapter = RoomAdapter()
-        val apiServer = RetrofitClient.roomApiService
-        repository = RoomRepository(apiServer)
-        roomViewModelFactory = RoomViewModelFactory(repository)
-        roomViewModel = ViewModelProvider(this, roomViewModelFactory)[RoomViewModel::class.java]
         roomViewModel.fetchPhongNoiBat()
-
     }
 
 
